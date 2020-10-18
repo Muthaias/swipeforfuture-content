@@ -1,14 +1,18 @@
 import * as Market from './market'
 import * as SocialFoundation from "./social-foundation"
 import * as EcologicalCeiling from "./ecological-ceiling"
-import { STATS } from "./stats";
+import * as Stats from "./stats";
 
-import { ScenarioBuilder, Scenario } from '../../content-utils'
+import {
+    ScenarioBuilder,
+    Scenario,
+    stateFromDefaultStates,
+} from '../../content-utils'
 export const builder: ScenarioBuilder = {
     run() {
         const scenario: Scenario = {
-            id: 'default',
-            stats: Object.values(STATS),
+            id: 'donuts',
+            stats: Object.values(Stats.definitions),
             cards: [
                 ...Market.cards,
                 ...SocialFoundation.cards,
@@ -25,8 +29,11 @@ export const builder: ScenarioBuilder = {
                 ...EcologicalCeiling.eventCards,
             },
             defaultState: {
-                state: {
-                },
+                state: stateFromDefaultStates([
+                    ...Stats.defaultStates,
+                    ...SocialFoundation.defaultStates,
+                    ...EcologicalCeiling.defaultStates,
+                ]),
                 flags: {
                 },
             },
