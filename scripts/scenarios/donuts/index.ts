@@ -1,12 +1,13 @@
 import * as Market from './market'
 import * as SocialFoundation from "./social-foundation"
 import * as EcologicalCeiling from "./ecological-ceiling"
+import * as Administration from "./administration"
 import * as Stats from "./stats";
 
 import {
     ScenarioBuilder,
     Scenario,
-    stateFromDefaultStates,
+    combineDefaultEntries,
 } from '../../content-utils'
 export const builder: ScenarioBuilder = {
     run() {
@@ -16,26 +17,33 @@ export const builder: ScenarioBuilder = {
             cards: [
                 ...Market.cards,
                 ...SocialFoundation.cards,
-                ...EcologicalCeiling.cards
+                ...EcologicalCeiling.cards,
+                ...Administration.cards,
             ],
             events: [
                 ...Market.events,
                 ...SocialFoundation.events,
-                ...EcologicalCeiling.events
+                ...EcologicalCeiling.events,
+                ...Administration.events,
             ],
             eventCards: {
                 ...Market.eventCards,
                 ...SocialFoundation.eventCards,
                 ...EcologicalCeiling.eventCards,
+                ...Administration.eventCards,
             },
             defaultState: {
-                state: stateFromDefaultStates([
+                state: combineDefaultEntries([
                     ...Stats.defaultStates,
                     ...SocialFoundation.defaultStates,
                     ...EcologicalCeiling.defaultStates,
+                    ...Administration.defaultStates,
                 ]),
-                flags: {
-                },
+                flags: combineDefaultEntries([
+                    ...SocialFoundation.defaultFlags,
+                    ...EcologicalCeiling.defaultFlags,
+                    ...Administration.defaultFlags,
+                ]),
             },
             worldStateModifiers: [
                 {

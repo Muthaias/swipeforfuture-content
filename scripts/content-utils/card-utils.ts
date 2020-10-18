@@ -1,10 +1,13 @@
 import {
     CardData,
+    EventCard,
     CardActionData,
     WorldQuery,
     addAction,
 } from '.'
+import { EventCardActionData } from '../../swipeforfuture.com/src/game/ContentTypes';
 
+export type GenericCard = Omit<CardData, 'type' | 'isAvailableWhen'>
 
 /**
  * Creates a complete card given only the artistic content
@@ -21,35 +24,33 @@ export function cardContent(
     text: string,
     location: string,
     [left, right]: [string, string],
-): CardData {
+): GenericCard {
     return {
-        type: "card",
-        isAvailableWhen: [{}],
         image: image,
         title: title,
         text: text,
         location: location,
-        weight: 1,
         actions: {
             left: addAction({}, {}, left),
             right: addAction({}, {}, right),
-        }
+        },
+        weight: 1,
     };
 }
 
 /**
- * Given a template card this creates a new card with updated logic content.
+ * Given a generic card this creates a new card with updated logic content.
  * 
  * @param card A card template that contains artistic content
  * @param isAvailableWhen The worldqueries for when the card is availables
  * @param [left, right] The left and right world actions
  * @param weight The weight of the card
  */
-export function cardGameProperties(
-    card: CardData,
+export function cardLogic(
+    card: GenericCard,
     isAvailableWhen: WorldQuery[],
     [left, right]: [CardActionData, CardActionData],
-    weight: number,
+    weight: number = 1,
 ): CardData {
     return {
         ...card,
@@ -64,6 +65,34 @@ export function cardGameProperties(
                 ...right,
                 description: card.actions.right.description,
             }
-        }
+        },
+        type: 'card',
+    }
+}
+
+/**
+ * Given a generic card this creates a new event card with updated logic content.
+ * 
+ * @param card A card template that contains artistic content
+ * @param [left, right] The left and right world actions
+ */
+export function eventCardLogic(
+    card: GenericCard,
+    [left, right]: [EventCardActionData, EventCardActionData],
+    weight: CardData['weight'] = 1,
+): EventCard {
+    return {
+        ...card,
+        actions: {
+            left: {
+                ...left,
+                description: card.actions.left.description
+            },
+            right: {
+                ...right,
+                description: card.actions.right.description,
+            }
+        },
+        type: 'event',
     }
 }

@@ -27,3 +27,5 @@ export const defaultStates = [
     defaultState(energy, 50),
     defaultState(water, 50),
 ]
+
+export const defaultFlags = []

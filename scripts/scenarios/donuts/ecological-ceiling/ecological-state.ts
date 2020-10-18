@@ -21,3 +21,5 @@ export const defaultStates = [
     defaultState(airPollution, 50),
     defaultState(ozoneLayerDepletion, 50),
 ]
+
+export const defaultFlags = []

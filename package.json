@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "ts-node scripts/build-scenario.ts",
-    "serve": "serve dist/default -p 5000 -C"
+    "serve": "serve dist -p 5000 -C"
   },
   "author": "Mattias Nyberg",
   "license": "MIT",
