@@ -1,7 +1,3 @@
-import {
-    WorldState,
-} from "./external"
-
 type ValueId<T> = {
     id: string
     value: T
