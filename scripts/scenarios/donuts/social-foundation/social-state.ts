@@ -6,7 +6,7 @@ export const education = propRef('Education')
 export const incomeAndWork = propRef('Income And Work')
 export const peaceAndJustice = propRef('Peace And Justice')
 export const politicalVoice = propRef('Political Voice')
-export const socialEquality = propRef('Social Equality')
+export const socialEquity = propRef('Social Equity')
 export const genderEquality = propRef('Gender Equality')
 export const housing = propRef('Housing')
 export const networks = propRef('Networks')
@@ -20,7 +20,7 @@ export const defaultStates = [
     defaultState(incomeAndWork, 50),
     defaultState(peaceAndJustice, 50),
     defaultState(politicalVoice, 50),
-    defaultState(socialEquality, 50),
+    defaultState(socialEquity, 50),
     defaultState(genderEquality, 50),
     defaultState(housing, 50),
     defaultState(networks, 50),
