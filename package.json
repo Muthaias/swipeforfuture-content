@@ -1,0 +1,15 @@
+{
+  "name": "swipeforfuture-content",
+  "version": "0.1.0",
+  "description": "Utilities to work with content for swipeforfuture",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mattias Nyberg",
+  "license": "MIT",
+  "dependencies": {
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  }
+}
