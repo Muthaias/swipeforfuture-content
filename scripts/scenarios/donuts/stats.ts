@@ -1,4 +1,8 @@
-import { stat, defaultState } from '../../content-utils'
+import {
+    stat,
+    defaultState,
+    propRef,
+} from '../../content-utils'
 
 export const definitions = {
     environment: stat('Environment', 'GiWheat', '70%'),
@@ -12,6 +16,7 @@ export const people = definitions.people.id
 export const security = definitions.security.id
 export const money = definitions.money.id
 export const popularity = definitions.popularity.id
+export const workHour = propRef('Work Hour')
 
 export const defaultStates = [
     defaultState(environment, 50),
@@ -19,4 +24,5 @@ export const defaultStates = [
     defaultState(security, 50),
     defaultState(money, 50),
     defaultState(popularity, 50),
+    defaultState(workHour, 0),
 ]

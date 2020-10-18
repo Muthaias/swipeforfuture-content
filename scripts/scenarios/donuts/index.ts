@@ -51,8 +51,8 @@ export const builder: ScenarioBuilder = {
                 },
                 {
                     type: "cycle",
-                    id: "hourOfDay",
-                    length: 24,
+                    id: Stats.workHour,
+                    length: 8,
                 },
                 {
                     type: "debug"
