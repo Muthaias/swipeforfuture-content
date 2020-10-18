@@ -23,7 +23,7 @@ const dailyHelloCard = cardContent(
     getImage('maria'),
     'Good morning',
     'Nice to see you today. I hope your morning has been efficient.',
-    'In parilament',
+    'In parliament',
     [
         "Not really",
         "Yes! Thank you"
@@ -34,7 +34,7 @@ const anytimeGreeting = cardContent(
     getImage('maria'),
     'Always good to see you',
     "It's always a pleasure to see you. It fills me with joy to see you performing on the job.",
-    'In parilament',
+    'In parliament',
     [
         "Oh... yes",
         "Thank you"
@@ -45,7 +45,7 @@ const corridorChatCard = cardContent(
     getImage('maria'),
     'Looking good',
     'You seem sharp today. Keep up the good work',
-    'In the parilament corridors',
+    'In the parliament corridors',
     [
         "*shrug*",
         "Thanks"
@@ -56,7 +56,7 @@ const afternoonChatCard = cardContent(
     getImage('maria'),
     'Nice lunch?',
     'You seem happy. Did you have a good lunch?',
-    'In the parilament corridors',
+    'In the parliament corridors',
     [
         "*shrug*",
         "Indeed I did"
