@@ -7,7 +7,7 @@ import {
 } from '.'
 import { EventCardActionData } from '../../swipeforfuture.com/src/game/ContentTypes';
 
-export type GenericCard = Omit<CardData, 'type' | 'isAvailableWhen'>
+export type BaseCard = Omit<CardData, 'type' | 'isAvailableWhen'>
 
 /**
  * Creates a complete card given only the artistic content
@@ -24,7 +24,7 @@ export function cardContent(
     text: string,
     location: string,
     [left, right]: [string, string],
-): GenericCard {
+): BaseCard {
     return {
         image: image,
         title: title,
@@ -47,7 +47,7 @@ export function cardContent(
  * @param weight The weight of the card
  */
 export function cardLogic(
-    card: GenericCard,
+    card: BaseCard,
     isAvailableWhen: WorldQuery[],
     [left, right]: [CardActionData, CardActionData],
     weight: number = 1,
@@ -77,7 +77,7 @@ export function cardLogic(
  * @param [left, right] The left and right world actions
  */
 export function eventCardLogic(
-    card: GenericCard,
+    card: BaseCard,
     [left, right]: [EventCardActionData, EventCardActionData],
     weight: CardData['weight'] = 1,
 ): EventCard {
