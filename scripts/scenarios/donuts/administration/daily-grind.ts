@@ -6,28 +6,21 @@ import {
     cardLogic,
     addAction,
 } from '../../../content-utils'
-import {
-    getImage,
-} from '../image'
-import {
-    staffPatience,
-} from "./admin-state"
+import { getImage } from '../image'
+import { staffPatience } from './admin-state'
 import * as Stats from '../stats'
 
-const morningState: WorldQuery['state'] = {[Stats.workHour]: [0, 2]}
-const noonState: WorldQuery['state'] = {[Stats.workHour]: [3, 4]}
-const afterNoonState: WorldQuery['state'] = {[Stats.workHour]: [5, 7]}
-const alwaysState: WorldQuery['state'] = {[Stats.workHour]: [0, 100]}
+const morningState: WorldQuery['state'] = { [Stats.workHour]: [0, 2] }
+const noonState: WorldQuery['state'] = { [Stats.workHour]: [3, 4] }
+const afterNoonState: WorldQuery['state'] = { [Stats.workHour]: [5, 7] }
+const alwaysState: WorldQuery['state'] = { [Stats.workHour]: [0, 100] }
 
 const dailyHelloCard = cardContent(
     getImage('maria'),
     'Good morning',
     'Nice to see you today. I hope your morning has been efficient.',
     'In parliament',
-    [
-        "Not really",
-        "Yes! Thank you"
-    ]
+    ['Not really', 'Yes! Thank you'],
 )
 
 const anytimeGreeting = cardContent(
@@ -35,10 +28,7 @@ const anytimeGreeting = cardContent(
     'Always good to see you',
     "It's always a pleasure to see you. It fills me with joy to see you performing on the job.",
     'In parliament',
-    [
-        "Oh... yes",
-        "Thank you"
-    ]
+    ['Oh... yes', 'Thank you'],
 )
 
 const corridorChatCard = cardContent(
@@ -46,10 +36,7 @@ const corridorChatCard = cardContent(
     'Looking good',
     'You seem sharp today. Keep up the good work',
     'In the parliament corridors',
-    [
-        "*shrug*",
-        "Thanks"
-    ]
+    ['*shrug*', 'Thanks'],
 )
 
 const afternoonChatCard = cardContent(
@@ -57,10 +44,7 @@ const afternoonChatCard = cardContent(
     'Nice lunch?',
     'You seem happy. Did you have a good lunch?',
     'In the parliament corridors',
-    [
-        "*shrug*",
-        "Indeed I did"
-    ]
+    ['*shrug*', 'Indeed I did'],
 )
 
 export const cards: CardData[] = [
@@ -68,52 +52,40 @@ export const cards: CardData[] = [
         anytimeGreeting,
         [
             worldQuery({
-                ...alwaysState
-            })
+                ...alwaysState,
+            }),
         ],
-        [
-            addAction(),
-            addAction(),
-        ],
+        [addAction(), addAction()],
         1,
     ),
     cardLogic(
         dailyHelloCard,
         [
             worldQuery({
-                ...morningState
-            })
+                ...morningState,
+            }),
         ],
-        [
-            addAction(),
-            addAction(),
-        ],
+        [addAction(), addAction()],
         1,
     ),
     cardLogic(
         corridorChatCard,
         [
             worldQuery({
-                ...noonState
-            })
+                ...noonState,
+            }),
         ],
-        [
-            addAction({[staffPatience]: -1}),
-            addAction(),
-        ],
+        [addAction({ [staffPatience]: -1 }), addAction()],
         1,
     ),
     cardLogic(
         afternoonChatCard,
         [
             worldQuery({
-                ...afterNoonState
-            })
+                ...afterNoonState,
+            }),
         ],
-        [
-            addAction({[staffPatience]: -1}),
-            addAction(),
-        ],
+        [addAction({ [staffPatience]: -1 }), addAction()],
         1,
-    )
-];
+    ),
+]

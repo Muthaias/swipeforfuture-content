@@ -9,13 +9,8 @@ import {
     setAction,
     addAction,
 } from '../../../content-utils'
-import {
-    introductionComplete,
-    staffPatience,
-} from "./admin-state"
-import {
-    getImage,
-} from '../image'
+import { introductionComplete, staffPatience } from './admin-state'
+import { getImage } from '../image'
 import * as Stats from '../stats'
 
 const welcome = cardRef('welcome')
@@ -25,12 +20,10 @@ const welcomeLunch = cardRef('welcome-lunch')
 export const events: WorldEvent[] = [
     {
         initialEventCardId: welcome,
-        isAvailableWhen: [
-            worldQuery({}, { [introductionComplete]: false }),
-        ],
+        isAvailableWhen: [worldQuery({}, { [introductionComplete]: false })],
         probability: 1,
-    }
-];
+    },
+]
 
 const welcomeCard = cardContent(
     getImage('maria'),
@@ -39,8 +32,8 @@ const welcomeCard = cardContent(
     'In parliament',
     [
         "Nah. I'm good. I think I can handle things on my own.",
-        "That sounds great. Let's do it ASAP"
-    ]
+        "That sounds great. Let's do it ASAP",
+    ],
 )
 
 const enforceLunchCard = cardContent(
@@ -48,10 +41,7 @@ const enforceLunchCard = cardContent(
     'Seriously!',
     'We need to talk! Get your head in the game. Do you want to take a lunch to get up to speed with your new duties?',
     'In parliament',
-    [
-        "Get off my back.",
-        "Alright. Let's do this."
-    ]
+    ['Get off my back.', "Alright. Let's do this."],
 )
 
 const welcomeLunchCard = cardContent(
@@ -60,41 +50,32 @@ const welcomeLunchCard = cardContent(
     'Really nice lunch! Now your first big decision has come. Should you prioritize the economy or environment?',
     'In parliament',
     [
-        "Nice talk. Love the economy!",
-        "Nice talk. We should think about our future."
-    ]
+        'Nice talk. Love the economy!',
+        'Nice talk. We should think about our future.',
+    ],
 )
 
-export const eventCards: {[x: string]: EventCard} = {
-    [welcome]: eventCardLogic(
-        welcomeCard,
-        [
-            eventCardAction(setAction(), welcomeLoop),
-            eventCardAction(setAction(), welcomeLunch)
-        ]
-    ),
-    [welcomeLoop]: eventCardLogic(
-        enforceLunchCard,
-        [
-            eventCardAction(addAction({[staffPatience]: -1}), welcomeLoop),
-            eventCardAction(setAction(), welcomeLunch)
-        ]
-    ),
-    [welcomeLunch]: eventCardLogic(
-        welcomeLunchCard,
-        [
-            eventCardAction(
-                setAction(
-                    { [Stats.money]: 70, [Stats.popularity]: 52 },
-                    { [introductionComplete]: true },
-                ),
+export const eventCards: { [x: string]: EventCard } = {
+    [welcome]: eventCardLogic(welcomeCard, [
+        eventCardAction(setAction(), welcomeLoop),
+        eventCardAction(setAction(), welcomeLunch),
+    ]),
+    [welcomeLoop]: eventCardLogic(enforceLunchCard, [
+        eventCardAction(addAction({ [staffPatience]: -1 }), welcomeLoop),
+        eventCardAction(setAction(), welcomeLunch),
+    ]),
+    [welcomeLunch]: eventCardLogic(welcomeLunchCard, [
+        eventCardAction(
+            setAction(
+                { [Stats.money]: 70, [Stats.popularity]: 52 },
+                { [introductionComplete]: true },
             ),
-            eventCardAction(
-                setAction(
-                    { [Stats.environment]: 70, [Stats.popularity]: 65 },
-                    { [introductionComplete]: true },
-                ),
-            )
-        ]
-    )
-};
+        ),
+        eventCardAction(
+            setAction(
+                { [Stats.environment]: 70, [Stats.popularity]: 65 },
+                { [introductionComplete]: true },
+            ),
+        ),
+    ]),
+}

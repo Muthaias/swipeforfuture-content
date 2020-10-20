@@ -61,17 +61,17 @@ export const builder: ScenarioBuilder = {
             },
             worldStateModifiers: [
                 {
-                    type: "round"
+                    type: 'round',
                 },
                 {
-                    type: "cycle",
-                    id: "hourOfDay",
+                    type: 'cycle',
+                    id: 'hourOfDay',
                     length: 24,
                 },
                 {
-                    type: "debug"
-                }
-            ]
+                    type: 'debug',
+                },
+            ],
         }
         return scenario
     },

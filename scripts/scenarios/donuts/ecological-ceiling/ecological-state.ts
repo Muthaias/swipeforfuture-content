@@ -3,7 +3,9 @@ import { propRef, defaultState } from '../../../content-utils'
 export const climateChange = propRef('Climate Change')
 export const oceanAcidification = propRef('Ocean Acidification')
 export const chemicalPollution = propRef('Chemical Pollution')
-export const nitrogenAndPhosphorusLoading = propRef('Nitrogen And Phosphorus Loading')
+export const nitrogenAndPhosphorusLoading = propRef(
+    'Nitrogen And Phosphorus Loading',
+)
 export const freshwaterWithdrawals = propRef('Freshwater Withdrawals')
 export const landConversion = propRef('Land Conversion')
 export const biodiversityLoss = propRef('Biodiversity Loss')

@@ -1,8 +1,8 @@
 import * as Market from './market'
-import * as SocialFoundation from "./social-foundation"
-import * as EcologicalCeiling from "./ecological-ceiling"
-import * as Administration from "./administration"
-import * as Stats from "./stats";
+import * as SocialFoundation from './social-foundation'
+import * as EcologicalCeiling from './ecological-ceiling'
+import * as Administration from './administration'
+import * as Stats from './stats'
 
 import {
     ScenarioBuilder,
@@ -47,17 +47,17 @@ export const builder: ScenarioBuilder = {
             },
             worldStateModifiers: [
                 {
-                    type: "round"
+                    type: 'round',
                 },
                 {
-                    type: "cycle",
+                    type: 'cycle',
                     id: Stats.workHour,
                     length: 8,
                 },
                 {
-                    type: "debug"
-                }
-            ]
+                    type: 'debug',
+                },
+            ],
         }
         return scenario
     },

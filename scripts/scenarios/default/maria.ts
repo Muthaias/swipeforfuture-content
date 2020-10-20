@@ -39,11 +39,11 @@ export const mariaEventCards = {
         actions: {
             left: eventCardAction(
                 "Nah. I'm good. I think I can handle things on my own.",
-                welcomeLoop
+                welcomeLoop,
             ),
             right: eventCardAction(
                 "That sounds great. Let's do it ASAP",
-                welcomeLunch
+                welcomeLunch,
             ),
         },
     }),
@@ -52,7 +52,7 @@ export const mariaEventCards = {
         text:
             'We need to talk! Get your head in the game. Do you want to take a lunch to get up to speed with your new duties?',
         actions: {
-            left: eventCardAction("Get off my back.", welcomeLoop),
+            left: eventCardAction('Get off my back.', welcomeLoop),
             right: eventCardAction("Alright. Let's do this.", welcomeLunch),
         },
     }),
@@ -65,14 +65,14 @@ export const mariaEventCards = {
                 setAction(
                     { [MONEY]: 70, [POPULARITY]: 52 },
                     { [FLAGS.LUNCH_MEETING_COMPLETED]: true },
-                    "Nice talk. Love the economy!"
+                    'Nice talk. Love the economy!',
                 ),
             ),
             right: eventCardAction(
                 setAction(
                     { [ENVIRONMENT]: 70, [POPULARITY]: 65 },
                     { [FLAGS.LUNCH_MEETING_COMPLETED]: true },
-                    "Nice talk. We should think about our future."
+                    'Nice talk. We should think about our future.',
                 ),
             ),
         },

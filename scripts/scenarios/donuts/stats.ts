@@ -1,8 +1,4 @@
-import {
-    stat,
-    defaultState,
-    propRef,
-} from '../../content-utils'
+import { stat, defaultState, propRef } from '../../content-utils'
 
 export const definitions = {
     environment: stat('Environment', 'GiWheat', '70%'),
