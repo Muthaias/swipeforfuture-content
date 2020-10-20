@@ -1,7 +1,7 @@
-import { propRef, defaultFlag, defaultState } from '../../../content-utils'
+import { propRef, defaultFlag, defaultState } from "../../../content-utils"
 
-export const introductionComplete = propRef('Introduction Complete')
-export const staffPatience = propRef('Staff Patience')
+export const introductionComplete = propRef("Introduction Complete")
+export const staffPatience = propRef("Staff Patience")
 
 export const defaultStates = [defaultState(staffPatience, 100)]
 

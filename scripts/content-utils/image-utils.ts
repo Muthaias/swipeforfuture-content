@@ -14,7 +14,7 @@ export type ImageDBEntry = {
 export function imageEntry(
     url: string,
     id: string,
-    variant: number | string = 'default',
+    variant: number | string = "default",
 ) {
     return {
         id,
@@ -35,14 +35,14 @@ export function imageEntry(
  */
 export function imageDB(
     initialEntries: ImageDBEntry[] = [],
-    defaultImage: string = '',
+    defaultImage: string = "",
 ) {
     const entries: ImageDBEntry[] = [...initialEntries]
     return {
         addImage: (
             url: string,
             id: string,
-            variant: number | string = 'default',
+            variant: number | string = "default",
         ) => {
             entries.push({
                 id,
@@ -50,19 +50,19 @@ export function imageDB(
                 variant,
             })
         },
-        getImage: (id: string, variant: number | string = 'default') => {
+        getImage: (id: string, variant: number | string = "default") => {
             const entriesWithId = entries.filter((entry) => entry.id === id)
             if (entriesWithId.length > 0) {
                 const entryWithVariant = entriesWithId.find(
                     (entry) => entry.variant === variant,
                 )
                 if (!entryWithVariant)
-                    console.warn('Variant not found: ', id, variant)
+                    console.warn("Variant not found: ", id, variant)
                 return entryWithVariant
                     ? entryWithVariant.url
                     : entriesWithId[0].url
             }
-            console.warn('Image not found: ', id, variant)
+            console.warn("Image not found: ", id, variant)
             return defaultImage
         },
     }

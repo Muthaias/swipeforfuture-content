@@ -10,25 +10,25 @@ import {
     eventCardAction,
     addAction,
     createCardFromTemplate,
-} from '../../content-utils'
-import { FLAGS } from './flags'
-import { POPULARITY, MONEY, ENVIRONMENT, PEOPLE } from './stats'
-import { VARS } from './vars'
+} from "../../content-utils"
+import { FLAGS } from "./flags"
+import { POPULARITY, MONEY, ENVIRONMENT, PEOPLE } from "./stats"
+import { VARS } from "./vars"
 
 export const infranTemplate = createCardTemplate({
-    image: unsplashImage('1529088746738-c4c0a152fb2c'),
-    location: 'On the phone',
+    image: unsplashImage("1529088746738-c4c0a152fb2c"),
+    location: "On the phone",
     weight: 1000,
 })
 
-const infranIntro = cardRef('infran-intro')
+const infranIntro = cardRef("infran-intro")
 
 export const infranCards: CardData[] = [
     createCardFromTemplate(infranTemplate, {
-        title: 'Invest in solar?',
-        location: 'In the bathroom',
+        title: "Invest in solar?",
+        location: "In the bathroom",
         text:
-            'The Germans are on to us!! We need to invest in solar power. Yay (right) or nay (left)?',
+            "The Germans are on to us!! We need to invest in solar power. Yay (right) or nay (left)?",
         isAvailableWhen: [
             worldQuery(
                 {
@@ -47,9 +47,9 @@ export const infranCards: CardData[] = [
         },
     }),
     createCardFromTemplate(infranTemplate, {
-        title: 'Road expansion',
+        title: "Road expansion",
         text:
-            'The people needs roads to support future market growth. Let me take charge and make this happen.',
+            "The people needs roads to support future market growth. Let me take charge and make this happen.",
         isAvailableWhen: [
             worldQuery(
                 { [PEOPLE]: [50, 100], [VARS.ROADS_SUGGESTED]: [0, 0] },
@@ -99,7 +99,7 @@ export const infranEvents: WorldEvent[] = [
 
 export const infranEventCards: EventCards = {
     [infranIntro]: createEventCardFromTemplate(infranTemplate, {
-        title: 'The constructor',
+        title: "The constructor",
         text:
             "Hello sir! I'm Infran. I'll be sure to keep you updated on the nation's infrastructure. Should we get started right away?",
         actions: {

@@ -10,26 +10,26 @@ import {
     createEventCardFromTemplate,
     worldQuery,
     createCardFromTemplate,
-} from '../../content-utils'
-import { ENVIRONMENT, PEOPLE, SECURITY, MONEY } from './stats'
-import { FLAGS } from './flags'
-import { VARS } from './vars'
+} from "../../content-utils"
+import { ENVIRONMENT, PEOPLE, SECURITY, MONEY } from "./stats"
+import { FLAGS } from "./flags"
+import { VARS } from "./vars"
 
 export const enviraTemplate = createCardTemplate({
-    image: unsplashImage('1546541612-82d19b258cd5'),
-    location: 'Outside parliament',
+    image: unsplashImage("1546541612-82d19b258cd5"),
+    location: "Outside parliament",
     weight: 100,
 })
 
 // NOTE: These card refs might be hard to track. Could be nice to group them together in an object, to easily know that they are card refs.
 // Compare `CARDS.enviraIntro` vs `enviraIntro`
-const enviraIntro = cardRef('envira-intro')
+const enviraIntro = cardRef("envira-intro")
 
 export const enviraCards: CardData[] = [
     createCardFromTemplate(enviraTemplate, {
-        title: 'Keep it in the ground!',
+        title: "Keep it in the ground!",
         text:
-            'This is insane! Are you really investing in this brown coal plant and prioritizing short-term profits over the future of the planet - and your people!?',
+            "This is insane! Are you really investing in this brown coal plant and prioritizing short-term profits over the future of the planet - and your people!?",
         isAvailableWhen: [
             worldQuery(
                 { [VARS.BROWN_COAL_PLANTS]: [1, 1] },
@@ -75,7 +75,7 @@ export const enviraEvents: WorldEvent[] = [
 
 export const enviraEventCards: EventCards = {
     [enviraIntro]: createEventCardFromTemplate(enviraTemplate, {
-        title: 'The activist',
+        title: "The activist",
         text:
             "Hi! My name is Envira and I'm a climate lobbyist. You'll see me from time to time. I wish you good luck and I hope we'll have constructive meetings in the future.",
         actions: {

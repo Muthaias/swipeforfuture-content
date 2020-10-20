@@ -30,7 +30,7 @@
     "prettier": {
         "tabWidth": 4,
         "semi": false,
-        "singleQuote": true,
+        "singleQuote": false,
         "trailingComma": "all"
     }
 }

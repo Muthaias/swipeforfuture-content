@@ -1,18 +1,18 @@
-import * as Market from './market'
-import * as SocialFoundation from './social-foundation'
-import * as EcologicalCeiling from './ecological-ceiling'
-import * as Administration from './administration'
-import * as Stats from './stats'
+import * as Market from "./market"
+import * as SocialFoundation from "./social-foundation"
+import * as EcologicalCeiling from "./ecological-ceiling"
+import * as Administration from "./administration"
+import * as Stats from "./stats"
 
 import {
     ScenarioBuilder,
     Scenario,
     combineDefaultEntries,
-} from '../../content-utils'
+} from "../../content-utils"
 export const builder: ScenarioBuilder = {
     run() {
         const scenario: Scenario = {
-            id: 'donuts',
+            id: "donuts",
             stats: Object.values(Stats.definitions),
             cards: [
                 ...Market.cards,
@@ -47,15 +47,15 @@ export const builder: ScenarioBuilder = {
             },
             worldStateModifiers: [
                 {
-                    type: 'round',
+                    type: "round",
                 },
                 {
-                    type: 'cycle',
+                    type: "cycle",
                     id: Stats.workHour,
                     length: 8,
                 },
                 {
-                    type: 'debug',
+                    type: "debug",
                 },
             ],
         }

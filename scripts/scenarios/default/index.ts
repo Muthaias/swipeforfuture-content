@@ -1,4 +1,4 @@
-import { ScenarioBuilder, Scenario } from '../../content-utils'
+import { ScenarioBuilder, Scenario } from "../../content-utils"
 import {
     ENVIRONMENT,
     PEOPLE,
@@ -6,22 +6,22 @@ import {
     MONEY,
     POPULARITY,
     STATS,
-} from './stats'
+} from "./stats"
 
-import { VARS } from './vars'
-import { FLAGS } from './flags'
+import { VARS } from "./vars"
+import { FLAGS } from "./flags"
 
-import { catastrophicCards } from './cat'
-import { enviraCards, enviraEventCards, enviraEvents } from './envira'
-import { infranCards, infranEventCards, infranEvents } from './infran'
-import { otherCards } from './cards'
-import { endGameEventCards, endGameEvents } from './endgame'
-import { mariaEventCards, mariaEvents } from './maria'
+import { catastrophicCards } from "./cat"
+import { enviraCards, enviraEventCards, enviraEvents } from "./envira"
+import { infranCards, infranEventCards, infranEvents } from "./infran"
+import { otherCards } from "./cards"
+import { endGameEventCards, endGameEvents } from "./endgame"
+import { mariaEventCards, mariaEvents } from "./maria"
 
 export const builder: ScenarioBuilder = {
     run() {
         const scenario: Scenario = {
-            id: 'default',
+            id: "default",
             stats: Object.values(STATS),
             cards: [
                 ...catastrophicCards,
@@ -61,15 +61,15 @@ export const builder: ScenarioBuilder = {
             },
             worldStateModifiers: [
                 {
-                    type: 'round',
+                    type: "round",
                 },
                 {
-                    type: 'cycle',
-                    id: 'hourOfDay',
+                    type: "cycle",
+                    id: "hourOfDay",
                     length: 24,
                 },
                 {
-                    type: 'debug',
+                    type: "debug",
                 },
             ],
         }

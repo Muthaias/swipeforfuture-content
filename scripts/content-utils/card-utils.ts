@@ -1,7 +1,7 @@
-import { CardData, EventCard, CardActionData, WorldQuery, addAction } from '.'
-import { EventCardActionData } from '../../swipeforfuture.com/src/game/ContentTypes'
+import { CardData, EventCard, CardActionData, WorldQuery, addAction } from "."
+import { EventCardActionData } from "../../swipeforfuture.com/src/game/ContentTypes"
 
-export type BaseCard = Omit<CardData, 'type' | 'isAvailableWhen'>
+export type BaseCard = Omit<CardData, "type" | "isAvailableWhen">
 
 /**
  * Creates a complete card given only the artistic content
@@ -60,7 +60,7 @@ export function cardLogic(
                 description: card.actions.right.description,
             },
         },
-        type: 'card',
+        type: "card",
     }
 }
 
@@ -73,7 +73,7 @@ export function cardLogic(
 export function eventCardLogic(
     card: BaseCard,
     [left, right]: [EventCardActionData, EventCardActionData],
-    weight: CardData['weight'] = 1,
+    weight: CardData["weight"] = 1,
 ): EventCard {
     return {
         ...card,
@@ -87,6 +87,6 @@ export function eventCardLogic(
                 description: card.actions.right.description,
             },
         },
-        type: 'event',
+        type: "event",
     }
 }

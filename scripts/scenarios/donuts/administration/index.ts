@@ -1,6 +1,6 @@
-import * as Introduction from './introduction'
-import * as DailyGrind from './daily-grind'
-export * from './admin-state'
+import * as Introduction from "./introduction"
+import * as DailyGrind from "./daily-grind"
+export * from "./admin-state"
 
 export const cards = [...DailyGrind.cards]
 

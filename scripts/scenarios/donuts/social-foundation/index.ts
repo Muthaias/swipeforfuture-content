@@ -1,5 +1,5 @@
-import { CardData, EventCard, WorldEvent } from '../../../content-utils'
-export * from './social-state'
+import { CardData, EventCard, WorldEvent } from "../../../content-utils"
+export * from "./social-state"
 
 export const cards: CardData[] = []
 export const events: WorldEvent[] = []
