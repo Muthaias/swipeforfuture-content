@@ -1,17 +1,17 @@
-import { propRef, defaultState } from '../../../content-utils'
+import { propRef, defaultState } from "../../../content-utils"
 
-export const foodSecurity = propRef('Food Security')
-export const health = propRef('Health')
-export const education = propRef('Education')
-export const incomeAndWork = propRef('Income And Work')
-export const peaceAndJustice = propRef('Peace And Justice')
-export const politicalVoice = propRef('Political Voice')
-export const socialEquity = propRef('Social Equity')
-export const genderEquality = propRef('Gender Equality')
-export const housing = propRef('Housing')
-export const networks = propRef('Networks')
-export const energy = propRef('Energy')
-export const water = propRef('Water')
+export const foodSecurity = propRef("Food Security")
+export const health = propRef("Health")
+export const education = propRef("Education")
+export const incomeAndWork = propRef("Income And Work")
+export const peaceAndJustice = propRef("Peace And Justice")
+export const politicalVoice = propRef("Political Voice")
+export const socialEquity = propRef("Social Equity")
+export const genderEquality = propRef("Gender Equality")
+export const housing = propRef("Housing")
+export const networks = propRef("Networks")
+export const energy = propRef("Energy")
+export const water = propRef("Water")
 
 export const defaultStates = [
     defaultState(foodSecurity, 50),

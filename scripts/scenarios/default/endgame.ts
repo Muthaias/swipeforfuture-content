@@ -6,10 +6,10 @@ import {
     unsplashImage,
     replaceAction,
     eventCardAction,
-} from '../../content-utils'
-import { ENVIRONMENT, PEOPLE, MONEY, POPULARITY, SECURITY } from './stats'
+} from "../../content-utils"
+import { ENVIRONMENT, PEOPLE, MONEY, POPULARITY, SECURITY } from "./stats"
 
-const endGame = cardRef('end-game')
+const endGame = cardRef("end-game")
 
 // IDEA: split end game events into multiple different ones depending on what triggers them.
 export const endGameEvents: WorldEvent[] = [
@@ -38,16 +38,16 @@ export const endGameEvents: WorldEvent[] = [
 
 export const endGameEventCards: EventCards = {
     [endGame]: {
-        image: unsplashImage('1497039465987-61d305728610'),
-        title: 'The World Has Ended.',
-        location: '',
+        image: unsplashImage("1497039465987-61d305728610"),
+        title: "The World Has Ended.",
+        location: "",
         text:
-            'Please find a new planet to destroy, if you want to proceed. And do not try to swipe. Please.',
+            "Please find a new planet to destroy, if you want to proceed. And do not try to swipe. Please.",
         weight: 1000,
         actions: {
             left: eventCardAction(replaceAction({}, {})),
             right: eventCardAction(replaceAction({}, {})),
         },
-        type: 'event',
+        type: "event",
     },
 }

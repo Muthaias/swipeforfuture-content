@@ -1,12 +1,8 @@
-import { resolve, join } from 'path'
-import { promises } from 'fs'
+import { resolve, join } from "path"
+import { promises } from "fs"
 const { writeFile, mkdir } = promises
 
-import {
-    GameWorld,
-    ScenarioBuilder,
-    Scenario
-} from './content-utils'
+import { GameWorld, ScenarioBuilder, Scenario } from "./content-utils"
 
 async function buildScenario(id: string) {
     try {
@@ -29,12 +25,12 @@ async function exportScenario(outputDir: string, scenario: Scenario) {
     }
 
     const scenarioParts: Parts = {
-        cards: 'cards',
-        eventCards: 'event-cards',
-        events: 'events',
-        defaultState: 'default-state',
-        stats: 'stats',
-        worldStateModifiers: 'modifiers',
+        cards: "cards",
+        eventCards: "event-cards",
+        events: "events",
+        defaultState: "default-state",
+        stats: "stats",
+        worldStateModifiers: "modifiers",
     }
 
     await mkdir(outputDir, { recursive: true })
@@ -48,16 +44,17 @@ async function exportScenario(outputDir: string, scenario: Scenario) {
         ),
     )
 
-    console.log(`✅ Sucessfully exported scenario "${scenario.id}" to ${outputDir}`)
+    console.log(
+        `✅ Sucessfully exported scenario "${scenario.id}" to ${outputDir}`,
+    )
 }
 
 if (require.main === module) {
-    const id = process.argv.length >= 3 ? process.argv[2] : 'default'
-    const basePath = process.argv.length >= 4 ? process.argv[3] : 'dist'
-    
+    const id = process.argv.length >= 3 ? process.argv[2] : "default"
+    const basePath = process.argv.length >= 4 ? process.argv[3] : "dist"
+
     buildScenario(id).then((scenario: Scenario) => {
         const path = resolve(join(basePath, id))
         exportScenario(path, scenario)
     })
 }
-  
