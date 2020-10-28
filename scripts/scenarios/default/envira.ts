@@ -25,37 +25,7 @@ export const enviraTemplate = createCardTemplate({
 // Compare `CARDS.enviraIntro` vs `enviraIntro`
 const enviraIntro = cardRef("envira-intro")
 
-export const enviraCards: CardData[] = [
-    createCardFromTemplate(enviraTemplate, {
-        title: "Keep it in the ground!",
-        text:
-            "This is insane! Are you really investing in this brown coal plant and prioritizing short-term profits over the future of the planet - and your people!?",
-        isAvailableWhen: [
-            worldQuery(
-                { [VARS.BROWN_COAL_PLANTS]: [1, 1] },
-                { [FLAGS.ENVIRA_INIT]: true },
-            ),
-        ],
-        actions: {
-            // TODO: improve how this works.
-            // Instead of disabling the brown coal power plant cards from appearing again using the state 100,
-            // consider using a flag to disable it in a clearer way. Booleans are much better on/off switches than arbitrary numbers that could be misinterpreted
-            left: addAction({
-                [ENVIRONMENT]: 10,
-                [PEOPLE]: 10,
-                [SECURITY]: 5,
-                [VARS.BROWN_COAL_PLANTS]: 100,
-            }),
-            right: addAction({
-                [ENVIRONMENT]: -15,
-                [PEOPLE]: -15,
-                [SECURITY]: -5,
-                [MONEY]: 35,
-                [VARS.BROWN_COAL_PLANTS]: 0,
-            }),
-        },
-    }),
-]
+export const enviraCards: CardData[] = []
 
 export const enviraEvents: WorldEvent[] = [
     {

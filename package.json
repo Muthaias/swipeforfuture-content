@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "npm run build",
         "build": "ts-node scripts/build-scenario.ts",
         "serve": "serve dist -p 5000 -C",
         "prettify": "npx prettier \"scripts/**/*\" --write"

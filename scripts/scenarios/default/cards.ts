@@ -16,7 +16,7 @@ export const otherCards: CardData[] = [
         title: "Our solar project is ready!",
         location: "The greener other side",
         text:
-            "Congratulations! We beat the initial German energy expansion ⚡️",
+            "Congratulations! We beat the initial German energy expansion. Would you like to take the opportunity to make further investments?",
         weight: 100,
         isAvailableWhen: [
             worldQuery(
@@ -29,56 +29,30 @@ export const otherCards: CardData[] = [
             ),
         ],
         actions: {
-            left: addAction({
-                [ENVIRONMENT]: 30,
-                [PEOPLE]: 15,
-                [SECURITY]: 15,
-                [MONEY]: 5,
-                [POPULARITY]: 20,
-                [VARS.SOLAR_INVESTMENTS]: 100,
-            }),
-            right: addAction({
-                [ENVIRONMENT]: 30,
-                [PEOPLE]: 15,
-                [SECURITY]: 15,
-                [MONEY]: 5,
-                [POPULARITY]: 20,
-                [VARS.SOLAR_INVESTMENTS]: 100,
-            }),
-        },
-    },
-    {
-        type: "card",
-        image: pexelsImage("3044473"),
-        title: "Cheap but dirty brown coal for sale",
-        location: "Working class district",
-        text:
-            "We've got an interesting offer: Buy a modern brown coal power plant cheaply to generate electricity. Deal? Great! (WATCH OUT FOR ENVIRA though...)",
-        weight: 100,
-        isAvailableWhen: [
-            worldQuery({
-                [ENVIRONMENT]: [21, 100],
-                [MONEY]: [15, 100],
-                [VARS.BROWN_COAL_PLANTS]: [0, 0],
-            }),
-        ],
-        actions: {
-            left: addAction({
-                [ENVIRONMENT]: 10,
-                [PEOPLE]: 10,
-                [SECURITY]: 15,
-                [MONEY]: -5,
-                [POPULARITY]: 25,
-                [VARS.BROWN_COAL_PLANTS]: 0,
-            }),
-            right: addAction({
-                [ENVIRONMENT]: -20,
-                [PEOPLE]: -15,
-                [SECURITY]: -10,
-                [MONEY]: 40,
-                [POPULARITY]: -20,
-                [VARS.BROWN_COAL_PLANTS]: 1,
-            }),
+            left: addAction(
+                {
+                    [ENVIRONMENT]: 20,
+                    [PEOPLE]: 12,
+                    [SECURITY]: 10,
+                    [MONEY]: 5,
+                    [POPULARITY]: 17,
+                    [VARS.SOLAR_INVESTMENTS]: 100,
+                },
+                {},
+                "Nah, this will do",
+            ),
+            right: addAction(
+                {
+                    [ENVIRONMENT]: 30,
+                    [PEOPLE]: 15,
+                    [SECURITY]: 15,
+                    [MONEY]: -5,
+                    [POPULARITY]: 20,
+                    [VARS.SOLAR_INVESTMENTS]: 100,
+                },
+                {},
+                "Let's do it!",
+            ),
         },
     },
 ]
