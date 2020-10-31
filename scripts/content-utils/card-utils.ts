@@ -96,14 +96,26 @@ export function cardLogic(
             left: {
                 ...left,
                 ...(showOnce
-                    ? setModifierFlag(left.modifier, card.id, true)
+                    ? {
+                          modifier: setModifierFlag(
+                              left.modifier,
+                              card.id,
+                              true,
+                          ),
+                      }
                     : {}),
                 description: card.actions.left.description,
             },
             right: {
                 ...right,
                 ...(showOnce
-                    ? setModifierFlag(right.modifier, card.id, true)
+                    ? {
+                          modifier: setModifierFlag(
+                              right.modifier,
+                              card.id,
+                              true,
+                          ),
+                      }
                     : {}),
                 description: card.actions.right.description,
             },
