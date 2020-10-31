@@ -1,7 +1,38 @@
-import { CardData, EventCard, CardActionData, WorldQuery, addAction } from "."
+import {
+    CardData,
+    EventCard,
+    CardActionData,
+    WorldQuery,
+    addAction,
+    cardRef,
+    GameWorldModifier,
+} from "."
 import { EventCardActionData } from "../../swipeforfuture.com/src/game/ContentTypes"
 
-export type BaseCard = Omit<CardData, "type" | "isAvailableWhen">
+export type BaseCard = Omit<CardData, "type" | "isAvailableWhen"> & {
+    id: string
+}
+
+/**
+ * Adds or updates the value of a flag in a world state modifier
+ *
+ * @param modifier The game world modifier to update
+ * @param flagId The id of the flag to set
+ * @param flagValue The value to set
+ */
+export function setModifierFlag(
+    modifier: GameWorldModifier,
+    flagId: string,
+    flagValue: boolean,
+): GameWorldModifier {
+    return {
+        ...modifier,
+        flags: {
+            ...(modifier.flags ?? {}),
+            [flagId]: flagValue,
+        },
+    }
+}
 
 /**
  * Creates a complete card given only the artistic content
@@ -20,6 +51,7 @@ export function cardContent(
     [left, right]: [string, string],
 ): BaseCard {
     return {
+        id: cardRef(title),
         image: image,
         title: title,
         text: text,
@@ -39,24 +71,40 @@ export function cardContent(
  * @param isAvailableWhen The worldqueries for when the card is availables
  * @param [left, right] The left and right world actions
  * @param weight The weight of the card
+ * @param showOnce Hide the card after one appearance. We use the convention of setting a flag with the same Id as the card to true.
  */
 export function cardLogic(
     card: BaseCard,
     isAvailableWhen: WorldQuery[],
     [left, right]: [CardActionData, CardActionData],
     weight: number = 1,
-): CardData {
+    showOnce: boolean = false,
+): CardData & BaseCard {
     return {
         ...card,
         weight,
-        isAvailableWhen,
+        isAvailableWhen: showOnce
+            ? isAvailableWhen.map((wq) => ({
+                  ...wq,
+                  flags: {
+                      ...(wq.flags ?? {}),
+                      [card.id]: false,
+                  },
+              }))
+            : isAvailableWhen,
         actions: {
             left: {
                 ...left,
+                ...(showOnce
+                    ? setModifierFlag(left.modifier, card.id, true)
+                    : {}),
                 description: card.actions.left.description,
             },
             right: {
                 ...right,
+                ...(showOnce
+                    ? setModifierFlag(right.modifier, card.id, true)
+                    : {}),
                 description: card.actions.right.description,
             },
         },
@@ -69,12 +117,12 @@ export function cardLogic(
  *
  * @param card A card template that contains artistic content
  * @param [left, right] The left and right world actions
+ * @param showOnce Hide the card after one appearance. We use the convention of setting a flag with the same Id as the card to true.
  */
 export function eventCardLogic(
     card: BaseCard,
     [left, right]: [EventCardActionData, EventCardActionData],
-    weight: CardData["weight"] = 1,
-): EventCard {
+): EventCard & BaseCard {
     return {
         ...card,
         actions: {
