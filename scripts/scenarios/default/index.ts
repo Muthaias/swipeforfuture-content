@@ -1,4 +1,8 @@
-import { ScenarioBuilder, Scenario } from "../../content-utils"
+import {
+    ScenarioBuilder,
+    Scenario,
+    combineDefaultEntries,
+} from "../../content-utils"
 import {
     ENVIRONMENT,
     PEOPLE,
@@ -17,6 +21,7 @@ import { infranCards, infranEventCards, infranEvents } from "./infran"
 import { otherCards } from "./cards"
 import { endGameEventCards, endGameEvents } from "./endgame"
 import { mariaEventCards, mariaEvents } from "./maria"
+import * as BrownCoalPlant from "./brown-coal-plant"
 
 export const builder: ScenarioBuilder = {
     run() {
@@ -24,22 +29,23 @@ export const builder: ScenarioBuilder = {
             id: "default",
             stats: Object.values(STATS),
             cards: [
-                ...catastrophicCards,
-                ...enviraCards,
-                ...infranCards,
-                ...otherCards,
+                ...BrownCoalPlant.cards,
+                // ...catastrophicCards,
+                // ...enviraCards,
+                // ...infranCards,
+                // ...otherCards,
             ],
             events: [
-                ...mariaEvents,
-                ...endGameEvents,
-                ...infranEvents,
-                ...enviraEvents,
+                // ...mariaEvents,
+                // ...endGameEvents,
+                // ...infranEvents,
+                // ...enviraEvents,
             ],
             eventCards: {
-                ...mariaEventCards,
-                ...endGameEventCards,
-                ...enviraEventCards,
-                ...infranEventCards,
+                // ...mariaEventCards,
+                // ...endGameEventCards,
+                // ...enviraEventCards,
+                // ...infranEventCards,
             },
             defaultState: {
                 state: {
@@ -52,11 +58,13 @@ export const builder: ScenarioBuilder = {
                     [VARS.ROADS_SUGGESTED]: 0,
                     [VARS.ROAD_EXPANSION]: 0,
                     [VARS.SOLAR_INVESTMENTS]: 0,
+                    ...combineDefaultEntries([...BrownCoalPlant.defaultVars]),
                 },
                 flags: {
                     [FLAGS.LUNCH_MEETING_COMPLETED]: false,
                     [FLAGS.ENVIRA_INIT]: false,
                     [FLAGS.INFRAN_INIT]: false,
+                    ...combineDefaultEntries([...BrownCoalPlant.defaultFlags]),
                 },
             },
             worldStateModifiers: [
