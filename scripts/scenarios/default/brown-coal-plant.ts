@@ -178,37 +178,21 @@ export const cards: CardData[] = [
     cardLogic(
         reallyNotInvested_4,
         [
-            worldQuery(
-                {
-                    [investment]: [Decision.No, Decision.No],
-                    [reducedPriceOffer]: [Decision.No, Decision.No],
-                },
-                { [reallyNotInvested_4.id]: false },
-            ),
+            worldQuery({
+                [investment]: [Decision.No, Decision.No],
+                [reducedPriceOffer]: [Decision.No, Decision.No],
+            }),
         ],
-        [
-            addAction({ [POPULARITY]: 15 }, { [reallyNotInvested_4.id]: true }),
-            addAction({ [POPULARITY]: 25 }, { [reallyNotInvested_4.id]: true }),
-        ],
+        [addAction({ [POPULARITY]: 15 }), addAction({ [POPULARITY]: 25 })],
+        1,
+        true,
     ),
     cardLogic(
         investmentBlockade_5,
-        [
-            worldQuery(
-                { [investment]: [Decision.Yes, Decision.Yes] },
-                { [investmentBlockade_5.id]: false },
-            ),
-        ],
-        [
-            addAction(
-                { [POPULARITY]: -40 },
-                { [investmentBlockade_5.id]: true },
-            ),
-            addAction(
-                { [POPULARITY]: -30 },
-                { [investmentBlockade_5.id]: true },
-            ),
-        ],
+        [worldQuery({ [investment]: [Decision.Yes, Decision.Yes] })],
+        [addAction({ [POPULARITY]: -40 }), addAction({ [POPULARITY]: -30 })],
+        1,
+        true,
     ),
 ]
 export const eventCards: EventCards = {
