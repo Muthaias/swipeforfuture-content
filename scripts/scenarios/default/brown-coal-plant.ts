@@ -7,14 +7,26 @@ import {
     eventCardLogic,
     defaultState,
     defaultFlag,
+    WorldEvent,
+    cardRef,
+    EventCards,
+    eventCardAction,
+    CardData,
+    setAction,
 } from "../../content-utils"
 import { getImage } from "./image"
+import { FLAGS } from "./flags"
 import { ENVIRONMENT, PEOPLE, SECURITY, MONEY, POPULARITY } from "./stats"
 
+enum Decision {
+    Undecided = 0,
+    No = 1,
+    Yes = 2,
+}
+
 const logicTicker = propRef("ticker")
-const coleIntroduced = propRef("Cole is introduced")
 const investment = propRef("Brown coal investment")
-const reducedPrice = propRef("Reduce price of brown coal investment")
+const reducedPriceOffer = propRef("Reduce price of brown coal investment")
 
 const coleIntroduction_0 = cardContent(
     getImage("cole"),
@@ -23,7 +35,6 @@ const coleIntroduction_0 = cardContent(
     "In parliament",
     ["Hmm...", "Interesting..."],
 )
-// TODO: set flag to enable card 1, but don't show it immediately (low probability)
 
 const investInCheapBrownCoal_1 = cardContent(
     getImage("cole"),
@@ -68,10 +79,13 @@ const investmentBlockade_5 = cardContent(
     "This will not stand",
     "This is unacceptable! The consequences for the environment are huge.",
     "Outside parliament",
-    ["Mind your own business", "Let's move along"],
+    [
+        "Mind your own business",
+        "True, but it's too late to change it now anyway",
+    ],
 )
 
-export const cards = [
+export const mockCards = [
     coleIntroduction_0,
     investInCheapBrownCoal_1,
     didInvest_2,
@@ -97,12 +111,116 @@ export const cards = [
     ),
 )
 
-export const eventCards = []
-
-export const defaultVars = [defaultState(logicTicker, 0)]
-
-export const defaultFlags = [
-    defaultFlag(coleIntroduced, false),
-    defaultFlag(investment, false),
-    defaultFlag(reducedPrice, false),
+export const events: WorldEvent[] = [
+    {
+        initialEventCardId: coleIntroduction_0.id,
+        isAvailableWhen: [
+            worldQuery(
+                {},
+                {
+                    [coleIntroduction_0.id]: false,
+                    [FLAGS.LUNCH_MEETING_COMPLETED]: true,
+                },
+            ),
+        ],
+        probability: 0.5,
+    },
 ]
+
+export const cards: CardData[] = [
+    cardLogic(
+        investInCheapBrownCoal_1,
+        [
+            worldQuery(
+                { [investment]: [Decision.Undecided, Decision.Undecided] },
+                { [coleIntroduction_0.id]: true },
+            ),
+        ],
+        // TODO: Add addAction to make payment and other effects
+        [
+            setAction({
+                [investment]: Decision.No,
+                [reducedPriceOffer]: Decision.Undecided,
+            }),
+            setAction({ [investment]: Decision.Yes }),
+        ],
+        1,
+    ),
+    cardLogic(
+        didInvest_2,
+        [
+            worldQuery(
+                { [investment]: [Decision.Yes, Decision.Yes] },
+                { [didInvest_2.id]: false },
+            ),
+        ],
+        [
+            addAction({ [ENVIRONMENT]: -30 }, { [didInvest_2.id]: true }),
+            addAction({ [ENVIRONMENT]: -30 }, { [didInvest_2.id]: true }),
+        ],
+    ),
+    cardLogic(
+        notInvestedYet_3,
+        [
+            worldQuery({
+                [investment]: [Decision.No, Decision.No],
+                [reducedPriceOffer]: [Decision.Undecided, Decision.Undecided],
+            }),
+        ],
+        [
+            setAction({ [reducedPriceOffer]: Decision.No }),
+            setAction({
+                [investment]: Decision.Yes,
+                [reducedPriceOffer]: Decision.Yes,
+            }),
+        ],
+    ),
+    cardLogic(
+        reallyNotInvested_4,
+        [
+            worldQuery(
+                {
+                    [investment]: [Decision.No, Decision.No],
+                    [reducedPriceOffer]: [Decision.No, Decision.No],
+                },
+                { [reallyNotInvested_4.id]: false },
+            ),
+        ],
+        [
+            addAction({ [POPULARITY]: 15 }, { [reallyNotInvested_4.id]: true }),
+            addAction({ [POPULARITY]: 25 }, { [reallyNotInvested_4.id]: true }),
+        ],
+    ),
+    cardLogic(
+        investmentBlockade_5,
+        [
+            worldQuery(
+                { [investment]: [Decision.Yes, Decision.Yes] },
+                { [investmentBlockade_5.id]: false },
+            ),
+        ],
+        [
+            addAction(
+                { [POPULARITY]: -40 },
+                { [investmentBlockade_5.id]: true },
+            ),
+            addAction(
+                { [POPULARITY]: -30 },
+                { [investmentBlockade_5.id]: true },
+            ),
+        ],
+    ),
+]
+export const eventCards: EventCards = {
+    [coleIntroduction_0.id]: eventCardLogic(coleIntroduction_0, [
+        eventCardAction(addAction({}, { [coleIntroduction_0.id]: true })),
+        eventCardAction(addAction({}, { [coleIntroduction_0.id]: true })),
+    ]),
+}
+
+export const defaultVars = [
+    defaultState(logicTicker, 0),
+    defaultState(investment, Decision.Undecided),
+    defaultState(reducedPriceOffer, Decision.Undecided),
+]
+export const defaultFlags = []

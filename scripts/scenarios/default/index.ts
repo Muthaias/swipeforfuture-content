@@ -29,6 +29,7 @@ export const builder: ScenarioBuilder = {
             id: "default",
             stats: Object.values(STATS),
             cards: [
+                // ...BrownCoalPlant.mockCards,
                 ...BrownCoalPlant.cards,
                 // ...catastrophicCards,
                 // ...enviraCards,
@@ -36,16 +37,18 @@ export const builder: ScenarioBuilder = {
                 // ...otherCards,
             ],
             events: [
-                // ...mariaEvents,
+                ...mariaEvents,
                 // ...endGameEvents,
                 // ...infranEvents,
                 // ...enviraEvents,
+                ...BrownCoalPlant.events,
             ],
             eventCards: {
-                // ...mariaEventCards,
+                ...mariaEventCards,
                 // ...endGameEventCards,
                 // ...enviraEventCards,
                 // ...infranEventCards,
+                ...BrownCoalPlant.eventCards,
             },
             defaultState: {
                 state: {
