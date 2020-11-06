@@ -1,5 +1,5 @@
 import { resolve, join } from "path"
-import { promises } from "fs"
+import { promises, readdirSync, statSync } from "fs"
 const { writeFile, mkdir } = promises
 
 import { GameWorld, ScenarioBuilder, Scenario } from "./content-utils"
@@ -49,12 +49,33 @@ async function exportScenario(outputDir: string, scenario: Scenario) {
     )
 }
 
-if (require.main === module) {
-    const id = process.argv.length >= 3 ? process.argv[2] : "default"
+async function buildAll() {
+    // IDEA: One future improvement could be to only re-build the scenarios that changed.
+    // But it shouldn't matter for a while until we get 10+ large scenarios.
+    const getDirectories = (p: string) =>
+        readdirSync(p).filter((f) => statSync(join(p, f)).isDirectory())
+
+    const scenarios = join(__dirname, "scenarios")
+    for (const id of getDirectories(scenarios)) {
+        buildOne(id)
+    }
+}
+
+async function buildOne(id: string) {
     const basePath = process.argv.length >= 4 ? process.argv[3] : "dist"
 
     buildScenario(id).then((scenario: Scenario) => {
         const path = resolve(join(basePath, id))
         exportScenario(path, scenario)
     })
+}
+
+if (require.main === module) {
+    const id = process.argv.length >= 3 ? process.argv[2] : "*"
+
+    if (id === "*") {
+        buildAll()
+    } else {
+        buildOne(id)
+    }
 }
