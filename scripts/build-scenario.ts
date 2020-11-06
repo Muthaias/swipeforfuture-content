@@ -11,7 +11,7 @@ async function buildScenario(id: string) {
         ).builder
 
         const scenario = builder.run()
-        console.log(`✅ Sucessfully built scenario "${id}"`)
+        console.log(`✅ Successfully built scenario "${id}"`)
 
         return scenario
     } catch (e) {
@@ -45,7 +45,7 @@ async function exportScenario(outputDir: string, scenario: Scenario) {
     )
 
     console.log(
-        `✅ Sucessfully exported scenario "${scenario.id}" to ${outputDir}`,
+        `✅ Successfully exported scenario "${scenario.id}" to ${outputDir}`,
     )
 }
 

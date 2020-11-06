@@ -90,3 +90,16 @@ export function eventCardLogic(
         type: "event",
     }
 }
+
+export function combineWorldQueries(a: WorldQuery, b: WorldQuery): WorldQuery {
+    return {
+        state: {
+            ...(a.state ? a.state : {}),
+            ...(b.state ? b.state : {}),
+        },
+        flags: {
+            ...(a.flags ? a.flags : {}),
+            ...(b.flags ? b.flags : {}),
+        },
+    }
+}
