@@ -79,11 +79,11 @@ export function createEventCardFromTemplate(
         type: "event",
         actions: {
             left: {
-                ...addAction({}),
+                ...swipeAction(addModifier()),
                 nextEventCardId: null,
             },
             right: {
-                ...addAction({}),
+                ...swipeAction(addModifier()),
                 nextEventCardId: null,
             },
         },
@@ -159,58 +159,67 @@ export function worldQuery(
     }
 }
 
+export type Modifier = CardActionData["modifiers"][number]
+
 /**
- * Easily create an action with the set modifier
+ * Create a swipeAction by combining a description with one or more modifiers.
  *
- * Actions are used to modify the game state and flags
+ * @param description A short text to explain one of the alternatives in a swipe decision.
+ * @param modifiers One or more modifiers that should be applied when the player choose this course of action.
+ */
+export function swipeAction(
+    modifiers: Modifier | Modifier[],
+    description?: string,
+): CardActionData {
+    return {
+        description,
+        modifiers: Array.isArray(modifiers) ? modifiers : [modifiers],
+    }
+}
+
+/**
+ * Easily create a `set` modifier, to be used within an action
+ *
+ * Modifiers update the game state and flags
  *
  * @param state The state to modify
  * @param flags The flags to modify
  */
-export const setAction = action("set")
+export const setModifier = modifier("set")
 
 /**
- * Easily create an action with the add modifier
+ * Easily create an `add` modifier, to be used within an action
  *
- * Actions are used to modify the game state and flags
+ * Modifiers update the game state and flags
  *
  * @param state The state to modify
  * @param flags The flags to modify
  */
-export const addAction = action("add")
+export const addModifier = modifier("add")
 
 /**
- * Easily create an action with the replace modifier
+ * Easily create a `replace` modifier, to be used within an action
  *
- * Actions are used to modify the game state and flags
+ * Modifiers update the game state and flags
  *
  * @param state The state to modify
  * @param flags The flags to modify
  */
-export const replaceAction = action("replace")
+export const replaceModifier = modifier("replace")
 
 /**
- * Create an action factory
+ * Create an modifier factory
  *
  * @param type The modifier type to use
  */
-export function action(
-    type: CardActionData["modifiers"][number]["type"],
-): (
-    state?: CardActionData["modifiers"][number]["state"],
-    flags?: CardActionData["modifiers"][number]["flags"],
-    description?: string,
-) => CardActionData {
-    return (state = {}, flags = {}, description) => {
+export function modifier(
+    type: Modifier["type"],
+): (state?: Modifier["state"], flags?: Modifier["flags"]) => Modifier {
+    return (state = {}, flags = {}) => {
         return {
-            description,
-            modifiers: [
-                {
-                    type,
-                    state,
-                    flags,
-                },
-            ],
+            type,
+            state,
+            flags,
         }
     }
 }
@@ -227,7 +236,7 @@ export function eventCardAction(
     eventCardId: EventCardActionData["nextEventCardId"] = null,
 ): EventCardActionData {
     const actualAction =
-        typeof action === "string" ? addAction({}, {}, action) : action
+        typeof action === "string" ? swipeAction(addModifier(), action) : action
     return {
         ...actualAction,
         nextEventCardId: eventCardId,
