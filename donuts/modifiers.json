@@ -1,0 +1,13 @@
+[
+    {
+        "type": "round"
+    },
+    {
+        "type": "cycle",
+        "id": "work-hour:prop:30",
+        "length": 8
+    },
+    {
+        "type": "debug"
+    }
+]

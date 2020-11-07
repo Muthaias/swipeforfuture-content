@@ -1,0 +1,98 @@
+{
+    "welcome:card:6": {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Welcome!",
+        "text": "Hi! My name is Maria. You must be the new president. Do you want to take a lunch to get up to speed with your new duties?",
+        "location": "In parliament",
+        "actions": {
+            "left": {
+                "description": "Nah. I'm good. I think I can handle things on my own.",
+                "modifier": {
+                    "type": "set",
+                    "state": {},
+                    "flags": {}
+                },
+                "nextEventCardId": "welcome-loop:card:7"
+            },
+            "right": {
+                "description": "That sounds great. Let's do it ASAP",
+                "modifier": {
+                    "type": "set",
+                    "state": {},
+                    "flags": {}
+                },
+                "nextEventCardId": "welcome-lunch:card:8"
+            }
+        },
+        "weight": 1,
+        "type": "event"
+    },
+    "welcome-loop:card:7": {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Seriously!",
+        "text": "We need to talk! Get your head in the game. Do you want to take a lunch to get up to speed with your new duties?",
+        "location": "In parliament",
+        "actions": {
+            "left": {
+                "description": "Get off my back.",
+                "modifier": {
+                    "type": "add",
+                    "state": {
+                        "staff-patience:prop:29": -1
+                    },
+                    "flags": {}
+                },
+                "nextEventCardId": "welcome-loop:card:7"
+            },
+            "right": {
+                "description": "Alright. Let's do this.",
+                "modifier": {
+                    "type": "set",
+                    "state": {},
+                    "flags": {}
+                },
+                "nextEventCardId": "welcome-lunch:card:8"
+            }
+        },
+        "weight": 1,
+        "type": "event"
+    },
+    "welcome-lunch:card:8": {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "The lunch meeting",
+        "text": "Really nice lunch! Now your first big decision has come. Should you prioritize the economy or environment?",
+        "location": "In parliament",
+        "actions": {
+            "left": {
+                "description": "Nice talk. Love the economy!",
+                "modifier": {
+                    "type": "set",
+                    "state": {
+                        "money": 70,
+                        "popularity": 52
+                    },
+                    "flags": {
+                        "introduction-complete:prop:28": true
+                    }
+                },
+                "nextEventCardId": null
+            },
+            "right": {
+                "description": "Nice talk. We should think about our future.",
+                "modifier": {
+                    "type": "set",
+                    "state": {
+                        "environment": 70,
+                        "popularity": 65
+                    },
+                    "flags": {
+                        "introduction-complete:prop:28": true
+                    }
+                },
+                "nextEventCardId": null
+            }
+        },
+        "weight": 1,
+        "type": "event"
+    }
+}
