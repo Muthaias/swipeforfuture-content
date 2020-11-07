@@ -22,3 +22,10 @@ For the following steps, replace `[SCENARIO_ID]` with the name of the folder in 
 
 1. `git checkout master && git pull` to ensure you have the latest content available.
 2. `npm run deploy` to publish new content.
+
+---
+
+## Update game module (included as a git submodule) to latest version
+
+1. In the root of the content repo, run `git submodule foreach git pull origin master` to update.
+2. Commit the changes to save the new submodule version that should be included.
