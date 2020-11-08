@@ -3,6 +3,7 @@ import { promises, readdirSync, statSync } from "fs"
 const { writeFile, mkdir } = promises
 
 import { GameWorld, ScenarioBuilder, Scenario } from "./content-utils"
+const MANIFEST_FILENAME = "scenarios.json"
 
 async function buildScenario(id: string) {
     try {
@@ -64,45 +65,45 @@ interface ScenarioManifest {
     }
 }
 
-async function buildAll(basePath: string) {
-    // IDEA: One future improvement could be to only re-build the scenarios that changed.
-    // But it shouldn't matter for a while until we get 10+ large scenarios.
-    const getDirectories = (p: string) =>
-        readdirSync(p).filter((f) => statSync(join(p, f)).isDirectory())
+function getScenarioIds(path: string): string[] {
+    return readdirSync(path).filter((entry) =>
+        statSync(join(path, entry)).isDirectory(),
+    )
+}
 
+function buildScenarioManifest(ids: string[], outputDir: string) {
     const manifest: ScenarioManifest = {
         buildDate: new Date().toISOString(),
         scenarios: {},
     }
 
-    const scenarios = join(__dirname, "scenarios")
-    await Promise.all(
-        getDirectories(scenarios).map((id) => {
-            manifest.scenarios[id] = {}
-            return buildOne(id, basePath)
-        }),
-    )
+    ids.forEach((id) => {
+        manifest.scenarios[id] = {}
+    })
 
-    writeFile(
-        join(basePath, "scenarios.json"),
+    return writeFile(
+        join(outputDir, MANIFEST_FILENAME),
         JSON.stringify(manifest, null, 4),
     )
 }
 
-async function buildOne(id: string, basePath: string) {
-    return buildScenario(id).then((scenario: Scenario) => {
-        const path = resolve(join(basePath, id))
-        exportScenario(path, scenario)
-    })
+async function buildScenarios(ids: string[], outputDir: string) {
+    return Promise.all(
+        ids.map((id) => {
+            return buildScenario(id).then((scenario: Scenario) => {
+                const path = resolve(join(outputDir, id))
+                exportScenario(path, scenario)
+            })
+        }),
+    )
 }
 
 if (require.main === module) {
     const id = process.argv.length >= 3 ? process.argv[2] : "*"
-    const basePath = process.argv.length >= 4 ? process.argv[3] : "dist"
+    const outputDir = process.argv.length >= 4 ? process.argv[3] : "dist"
+    const allScenarioIds = getScenarioIds(join(__dirname, "scenarios"))
+    const ids = id === "*" ? allScenarioIds : [id]
 
-    if (id === "*") {
-        buildAll(basePath)
-    } else {
-        buildOne(id, basePath)
-    }
+    buildScenarios(ids, outputDir)
+    buildScenarioManifest(allScenarioIds, outputDir)
 }
