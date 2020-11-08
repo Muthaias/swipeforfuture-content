@@ -6,7 +6,7 @@ import {
     unsplashImage,
     eventCardAction,
     replaceModifier,
-    swipeAction,
+    action,
 } from "../../content-utils"
 import { ENVIRONMENT, PEOPLE, MONEY, POPULARITY, SECURITY } from "./stats"
 
@@ -46,8 +46,8 @@ export const endGameEventCards: EventCards = {
             "Please find a new planet to destroy, if you want to proceed. And do not try to swipe. Please.",
         weight: 1000,
         actions: {
-            left: eventCardAction(swipeAction(replaceModifier({}, {}))),
-            right: eventCardAction(swipeAction(replaceModifier({}, {}))),
+            left: eventCardAction(action(replaceModifier({}, {}))),
+            right: eventCardAction(action(replaceModifier({}, {}))),
         },
         type: "event",
     },

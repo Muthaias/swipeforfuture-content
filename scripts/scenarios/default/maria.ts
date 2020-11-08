@@ -5,7 +5,7 @@ import {
     unsplashImage,
     cardRef,
     setModifier,
-    swipeAction,
+    action,
     eventCardAction,
     worldQuery,
 } from "../../content-utils"
@@ -63,7 +63,7 @@ export const mariaEventCards = {
             "Really nice lunch! Now your first big decision has come. Should you prioritize the economy (left) or environment (right)?",
         actions: {
             left: eventCardAction(
-                swipeAction(
+                action(
                     setModifier(
                         { [MONEY]: 70, [POPULARITY]: 52 },
                         { [FLAGS.LUNCH_MEETING_COMPLETED]: true },
@@ -72,7 +72,7 @@ export const mariaEventCards = {
                 ),
             ),
             right: eventCardAction(
-                swipeAction(
+                action(
                     setModifier(
                         { [ENVIRONMENT]: 70, [POPULARITY]: 65 },
                         { [FLAGS.LUNCH_MEETING_COMPLETED]: true },

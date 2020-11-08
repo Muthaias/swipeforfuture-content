@@ -5,7 +5,7 @@ import {
     GameWorldModifier,
     cardRef,
     cardLogic,
-    swipeAction,
+    action,
     setModifier,
     combineWorldQueries,
 } from "./"
@@ -47,7 +47,7 @@ export function cardsFromTree(tree: CardTree, bindRef?: string): CardData[] {
                 }),
             ),
             [
-                swipeAction(
+                action(
                     setModifier(
                         {},
                         {
@@ -57,7 +57,7 @@ export function cardsFromTree(tree: CardTree, bindRef?: string): CardData[] {
                         },
                     ),
                 ),
-                swipeAction(
+                action(
                     setModifier(
                         {},
                         {

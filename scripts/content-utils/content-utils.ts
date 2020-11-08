@@ -79,11 +79,11 @@ export function createEventCardFromTemplate(
         type: "event",
         actions: {
             left: {
-                ...swipeAction(addModifier()),
+                ...action(addModifier()),
                 nextEventCardId: null,
             },
             right: {
-                ...swipeAction(addModifier()),
+                ...action(addModifier()),
                 nextEventCardId: null,
             },
         },
@@ -164,15 +164,10 @@ export type Modifier = CardActionData["modifiers"][number]
 /**
  * Create a swipeAction by combining a description with one or more modifiers.
  *
- * @NOTE Not 100% sure about naming
- * - `action` would be clean
- * - `swipe` would make it clear when the action happens. However, actions may happen at other times as well in the future.
- * - `swipeAction` would take the best of both alternatives, but might be too long to type - and read.
- *
  * @param description A short text to explain one of the alternatives in a swipe decision.
  * @param modifiers One or more modifiers that should be applied when the player choose this course of action.
  */
-export function swipeAction(
+export function action(
     modifiers: Modifier | Modifier[],
     description?: string,
 ): CardActionData {
@@ -237,11 +232,13 @@ export function modifier(
  * @param eventCardId The next EventCard to trigger, or null to stop the event.
  */
 export function eventCardAction(
-    action: CardActionData | string,
+    actionOrDescription: CardActionData | string,
     eventCardId: EventCardActionData["nextEventCardId"] = null,
 ): EventCardActionData {
     const actualAction =
-        typeof action === "string" ? swipeAction(addModifier(), action) : action
+        typeof actionOrDescription === "string"
+            ? action(addModifier(), actionOrDescription)
+            : actionOrDescription
     return {
         ...actualAction,
         nextEventCardId: eventCardId,

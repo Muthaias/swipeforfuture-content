@@ -5,7 +5,7 @@ import {
     unsplashImage,
     createCardTemplate,
     addModifier,
-    swipeAction,
+    action,
 } from "../../content-utils"
 import { statIds } from "./stats"
 
@@ -26,8 +26,8 @@ export const catastrophicCards = statIds.map<CardData>((stat) => {
             }),
         ],
         actions: {
-            left: swipeAction(addModifier({ [stat]: -10 })),
-            right: swipeAction(addModifier({ [stat]: 10 })),
+            left: action(addModifier({ [stat]: -10 })),
+            right: action(addModifier({ [stat]: 10 })),
         },
     }
     return createCardFromTemplate(catTemplate, partial)

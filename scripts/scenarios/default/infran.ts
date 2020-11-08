@@ -8,7 +8,7 @@ import {
     worldQuery,
     createEventCardFromTemplate,
     eventCardAction,
-    swipeAction,
+    action,
     addModifier,
     createCardFromTemplate,
 } from "../../content-utils"
@@ -43,10 +43,10 @@ export const infranCards: CardData[] = [
             ),
         ],
         actions: {
-            left: swipeAction(
+            left: action(
                 addModifier({ [MONEY]: -5, [VARS.SOLAR_INVESTMENTS]: 100 }),
             ),
-            right: swipeAction(
+            right: action(
                 addModifier({ [MONEY]: -10, [VARS.SOLAR_INVESTMENTS]: 1 }),
             ),
         },
@@ -70,14 +70,14 @@ export const infranCards: CardData[] = [
             ),
         ],
         actions: {
-            left: swipeAction(
+            left: action(
                 addModifier({
                     [POPULARITY]: -10,
                     [VARS.ROADS_SUGGESTED]: 1,
                     [VARS.ROAD_EXPANSION]: 1,
                 }),
             ),
-            right: swipeAction(
+            right: action(
                 addModifier({
                     [ENVIRONMENT]: -10,
                     [MONEY]: -10,
@@ -113,7 +113,7 @@ export const infranEventCards: EventCards = {
             "Hello sir! I'm Infran. I'll be sure to keep you updated on the nation's infrastructure. Should we get started right away?",
         actions: {
             left: eventCardAction(
-                swipeAction(
+                action(
                     addModifier(
                         { [MONEY]: 10, [POPULARITY]: -10 },
                         { [FLAGS.INFRAN_INIT]: true },
@@ -121,7 +121,7 @@ export const infranEventCards: EventCards = {
                 ),
             ),
             right: eventCardAction(
-                swipeAction(
+                action(
                     addModifier(
                         { [MONEY]: -10, [POPULARITY]: 10 },
                         { [FLAGS.INFRAN_INIT]: true },

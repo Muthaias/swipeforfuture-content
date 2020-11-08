@@ -3,7 +3,7 @@ import {
     worldQuery,
     unsplashImage,
     pexelsImage,
-    swipeAction,
+    action,
     addModifier,
 } from "../../content-utils"
 import { ENVIRONMENT, MONEY, PEOPLE, SECURITY, POPULARITY } from "./stats"
@@ -30,7 +30,7 @@ export const otherCards: CardData[] = [
             ),
         ],
         actions: {
-            left: swipeAction(
+            left: action(
                 addModifier({
                     [ENVIRONMENT]: 30,
                     [PEOPLE]: 15,
@@ -40,7 +40,7 @@ export const otherCards: CardData[] = [
                     [VARS.SOLAR_INVESTMENTS]: 100,
                 }),
             ),
-            right: swipeAction(
+            right: action(
                 addModifier({
                     [ENVIRONMENT]: 30,
                     [PEOPLE]: 15,
@@ -68,7 +68,7 @@ export const otherCards: CardData[] = [
             }),
         ],
         actions: {
-            left: swipeAction(
+            left: action(
                 addModifier({
                     [ENVIRONMENT]: 10,
                     [PEOPLE]: 10,
@@ -78,7 +78,7 @@ export const otherCards: CardData[] = [
                     [VARS.BROWN_COAL_PLANTS]: 0,
                 }),
             ),
-            right: swipeAction(
+            right: action(
                 addModifier({
                     [ENVIRONMENT]: -20,
                     [PEOPLE]: -15,

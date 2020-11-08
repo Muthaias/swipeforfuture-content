@@ -9,7 +9,7 @@ import {
     createEventCardFromTemplate,
     worldQuery,
     createCardFromTemplate,
-    swipeAction,
+    action,
     addModifier,
 } from "../../content-utils"
 import { ENVIRONMENT, PEOPLE, SECURITY, MONEY } from "./stats"
@@ -41,7 +41,7 @@ export const enviraCards: CardData[] = [
             // TODO: improve how this works.
             // Instead of disabling the brown coal power plant cards from appearing again using the state 100,
             // consider using a flag to disable it in a clearer way. Booleans are much better on/off switches than arbitrary numbers that could be misinterpreted
-            left: swipeAction(
+            left: action(
                 addModifier({
                     [ENVIRONMENT]: 10,
                     [PEOPLE]: 10,
@@ -49,7 +49,7 @@ export const enviraCards: CardData[] = [
                     [VARS.BROWN_COAL_PLANTS]: 100,
                 }),
             ),
-            right: swipeAction(
+            right: action(
                 addModifier({
                     [ENVIRONMENT]: -15,
                     [PEOPLE]: -15,
@@ -85,7 +85,7 @@ export const enviraEventCards: EventCards = {
             "Hi! My name is Envira and I'm a climate lobbyist. You'll see me from time to time. I wish you good luck and I hope we'll have constructive meetings in the future.",
         actions: {
             left: eventCardAction(
-                swipeAction(
+                action(
                     addModifier(
                         { [ENVIRONMENT]: -10 },
                         { [FLAGS.ENVIRA_INIT]: true },
@@ -93,7 +93,7 @@ export const enviraEventCards: EventCards = {
                 ),
             ),
             right: eventCardAction(
-                swipeAction(
+                action(
                     addModifier(
                         { [ENVIRONMENT]: 10 },
                         { [FLAGS.ENVIRA_INIT]: true },

@@ -4,7 +4,7 @@ import {
     CardActionData,
     WorldQuery,
     addModifier,
-    swipeAction,
+    action,
 } from "."
 import { EventCardActionData } from "../../swipeforfuture.com/src/game/ContentTypes"
 
@@ -32,8 +32,8 @@ export function cardContent(
         text: text,
         location: location,
         actions: {
-            left: swipeAction(addModifier(), left),
-            right: swipeAction(addModifier(), right),
+            left: action(addModifier(), left),
+            right: action(addModifier(), right),
         },
         weight: 1,
     }
