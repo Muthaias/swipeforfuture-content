@@ -27,5 +27,5 @@ For the following steps, replace `[SCENARIO_ID]` with the name of the folder in 
 
 ## Update game module (included as a git submodule) to latest version
 
-1. In the root of the content repo, run `git submodule foreach git pull origin master` to update.
+1. In the root of the content repo, use `npm run update` to use the latest submodule version.
 2. Commit the changes to save the new submodule version that should be included.
