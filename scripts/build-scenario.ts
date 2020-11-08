@@ -106,6 +106,10 @@ if (require.main === module) {
     const allScenarioIds = getScenarioIds(join(__dirname, "scenarios"))
     const ids = id === "*" ? allScenarioIds : [id]
 
-    buildScenarios(ids, outputDir)
-    buildScenarioManifest(allScenarioIds, outputDir)
+    Promise.all([
+        buildScenarios(ids, outputDir),
+        buildScenarioManifest(allScenarioIds, outputDir),
+    ]).catch((reason: string) => {
+        console.error("❌ Build error: ", reason)
+    })
 }
