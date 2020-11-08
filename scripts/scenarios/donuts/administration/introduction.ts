@@ -6,8 +6,9 @@ import {
     cardContent,
     eventCardLogic,
     eventCardAction,
-    setAction,
-    addAction,
+    setModifier,
+    addModifier,
+    action,
 } from "../../../content-utils"
 import { introductionComplete, staffPatience } from "./admin-state"
 import { getImage } from "../image"
@@ -57,24 +58,31 @@ const welcomeLunchCard = cardContent(
 
 export const eventCards: { [x: string]: EventCard } = {
     [welcome]: eventCardLogic(welcomeCard, [
-        eventCardAction(setAction(), welcomeLoop),
-        eventCardAction(setAction(), welcomeLunch),
+        eventCardAction(action(setModifier(), welcomeLoop)),
+        eventCardAction(action(setModifier(), welcomeLunch)),
     ]),
     [welcomeLoop]: eventCardLogic(enforceLunchCard, [
-        eventCardAction(addAction({ [staffPatience]: -1 }), welcomeLoop),
-        eventCardAction(setAction(), welcomeLunch),
+        eventCardAction(
+            action(addModifier({ [staffPatience]: -1 })),
+            welcomeLoop,
+        ),
+        eventCardAction(action(setModifier(), welcomeLunch)),
     ]),
     [welcomeLunch]: eventCardLogic(welcomeLunchCard, [
         eventCardAction(
-            setAction(
-                { [Stats.money]: 70, [Stats.popularity]: 52 },
-                { [introductionComplete]: true },
+            action(
+                setModifier(
+                    { [Stats.money]: 70, [Stats.popularity]: 52 },
+                    { [introductionComplete]: true },
+                ),
             ),
         ),
         eventCardAction(
-            setAction(
-                { [Stats.environment]: 70, [Stats.popularity]: 65 },
-                { [introductionComplete]: true },
+            action(
+                setModifier(
+                    { [Stats.environment]: 70, [Stats.popularity]: 65 },
+                    { [introductionComplete]: true },
+                ),
             ),
         ),
     ]),

@@ -1,4 +1,11 @@
-import { CardData, EventCard, CardActionData, WorldQuery, addAction } from "."
+import {
+    CardData,
+    EventCard,
+    CardActionData,
+    WorldQuery,
+    addModifier,
+    action,
+} from "."
 import { EventCardActionData } from "../../swipeforfuture.com/src/game/ContentTypes"
 
 export type BaseCard = Omit<CardData, "type" | "isAvailableWhen">
@@ -25,8 +32,8 @@ export function cardContent(
         text: text,
         location: location,
         actions: {
-            left: addAction({}, {}, left),
-            right: addAction({}, {}, right),
+            left: action(addModifier(), left),
+            right: action(addModifier(), right),
         },
         weight: 1,
     }

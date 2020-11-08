@@ -4,8 +4,9 @@ import {
     cardRef,
     worldQuery,
     unsplashImage,
-    replaceAction,
     eventCardAction,
+    replaceModifier,
+    action,
 } from "../../content-utils"
 import { ENVIRONMENT, PEOPLE, MONEY, POPULARITY, SECURITY } from "./stats"
 
@@ -45,8 +46,8 @@ export const endGameEventCards: EventCards = {
             "Please find a new planet to destroy, if you want to proceed. And do not try to swipe. Please.",
         weight: 1000,
         actions: {
-            left: eventCardAction(replaceAction({}, {})),
-            right: eventCardAction(replaceAction({}, {})),
+            left: eventCardAction(action(replaceModifier({}, {}))),
+            right: eventCardAction(action(replaceModifier({}, {}))),
         },
         type: "event",
     },

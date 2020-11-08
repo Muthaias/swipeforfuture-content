@@ -5,7 +5,8 @@ import {
     GameWorldModifier,
     cardRef,
     cardLogic,
-    setAction,
+    action,
+    setModifier,
     combineWorldQueries,
 } from "./"
 
@@ -46,21 +47,25 @@ export function cardsFromTree(tree: CardTree, bindRef?: string): CardData[] {
                 }),
             ),
             [
-                setAction(
-                    {},
-                    {
-                        [leftRef]: true,
-                        ...bindRefRemoval,
-                        ...triggerRefRemoval,
-                    },
+                action(
+                    setModifier(
+                        {},
+                        {
+                            [leftRef]: true,
+                            ...bindRefRemoval,
+                            ...triggerRefRemoval,
+                        },
+                    ),
                 ),
-                setAction(
-                    {},
-                    {
-                        [rightRef]: true,
-                        ...bindRefRemoval,
-                        ...triggerRefRemoval,
-                    },
+                action(
+                    setModifier(
+                        {},
+                        {
+                            [rightRef]: true,
+                            ...bindRefRemoval,
+                            ...triggerRefRemoval,
+                        },
+                    ),
                 ),
             ],
         ),

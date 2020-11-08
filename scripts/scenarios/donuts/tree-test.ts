@@ -1,13 +1,4 @@
-import {
-    CardData,
-    WorldQuery,
-    worldQuery,
-    cardContent,
-    cardLogic,
-    addAction,
-    CardTree,
-    cardsFromTree,
-} from "../../content-utils"
+import { cardContent, CardTree, cardsFromTree } from "../../content-utils"
 import * as Stats from "./stats"
 
 function quickCard(name: string, left: string, right: string) {
