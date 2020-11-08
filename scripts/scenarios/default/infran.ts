@@ -8,7 +8,8 @@ import {
     worldQuery,
     createEventCardFromTemplate,
     eventCardAction,
-    addAction,
+    swipeAction,
+    addModifier,
     createCardFromTemplate,
 } from "../../content-utils"
 import { FLAGS } from "./flags"
@@ -42,8 +43,12 @@ export const infranCards: CardData[] = [
             ),
         ],
         actions: {
-            left: addAction({ [MONEY]: -5, [VARS.SOLAR_INVESTMENTS]: 100 }),
-            right: addAction({ [MONEY]: -10, [VARS.SOLAR_INVESTMENTS]: 1 }),
+            left: swipeAction(
+                addModifier({ [MONEY]: -5, [VARS.SOLAR_INVESTMENTS]: 100 }),
+            ),
+            right: swipeAction(
+                addModifier({ [MONEY]: -10, [VARS.SOLAR_INVESTMENTS]: 1 }),
+            ),
         },
     }),
     createCardFromTemplate(infranTemplate, {
@@ -65,18 +70,22 @@ export const infranCards: CardData[] = [
             ),
         ],
         actions: {
-            left: addAction({
-                [POPULARITY]: -10,
-                [VARS.ROADS_SUGGESTED]: 1,
-                [VARS.ROAD_EXPANSION]: 1,
-            }),
-            right: addAction({
-                [ENVIRONMENT]: -10,
-                [MONEY]: -10,
-                [PEOPLE]: 20,
-                [VARS.ROADS_SUGGESTED]: 1,
-                [VARS.ROAD_EXPANSION]: 1,
-            }),
+            left: swipeAction(
+                addModifier({
+                    [POPULARITY]: -10,
+                    [VARS.ROADS_SUGGESTED]: 1,
+                    [VARS.ROAD_EXPANSION]: 1,
+                }),
+            ),
+            right: swipeAction(
+                addModifier({
+                    [ENVIRONMENT]: -10,
+                    [MONEY]: -10,
+                    [PEOPLE]: 20,
+                    [VARS.ROADS_SUGGESTED]: 1,
+                    [VARS.ROAD_EXPANSION]: 1,
+                }),
+            ),
         },
     }),
 ]
@@ -104,15 +113,19 @@ export const infranEventCards: EventCards = {
             "Hello sir! I'm Infran. I'll be sure to keep you updated on the nation's infrastructure. Should we get started right away?",
         actions: {
             left: eventCardAction(
-                addAction(
-                    { [MONEY]: 10, [POPULARITY]: -10 },
-                    { [FLAGS.INFRAN_INIT]: true },
+                swipeAction(
+                    addModifier(
+                        { [MONEY]: 10, [POPULARITY]: -10 },
+                        { [FLAGS.INFRAN_INIT]: true },
+                    ),
                 ),
             ),
             right: eventCardAction(
-                addAction(
-                    { [MONEY]: -10, [POPULARITY]: 10 },
-                    { [FLAGS.INFRAN_INIT]: true },
+                swipeAction(
+                    addModifier(
+                        { [MONEY]: -10, [POPULARITY]: 10 },
+                        { [FLAGS.INFRAN_INIT]: true },
+                    ),
                 ),
             ),
         },

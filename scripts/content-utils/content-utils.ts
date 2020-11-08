@@ -164,6 +164,11 @@ export type Modifier = CardActionData["modifiers"][number]
 /**
  * Create a swipeAction by combining a description with one or more modifiers.
  *
+ * @NOTE Not 100% sure about naming
+ * - `action` would be clean
+ * - `swipe` would make it clear when the action happens. However, actions may happen at other times as well in the future.
+ * - `swipeAction` would take the best of both alternatives, but might be too long to type - and read.
+ *
  * @param description A short text to explain one of the alternatives in a swipe decision.
  * @param modifiers One or more modifiers that should be applied when the player choose this course of action.
  */

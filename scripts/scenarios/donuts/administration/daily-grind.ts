@@ -4,7 +4,8 @@ import {
     worldQuery,
     cardContent,
     cardLogic,
-    addAction,
+    swipeAction,
+    addModifier,
 } from "../../../content-utils"
 import { getImage } from "../image"
 import { staffPatience } from "./admin-state"
@@ -55,7 +56,7 @@ export const cards: CardData[] = [
                 ...alwaysState,
             }),
         ],
-        [addAction(), addAction()],
+        [swipeAction(addModifier()), swipeAction(addModifier())],
         1,
     ),
     cardLogic(
@@ -65,7 +66,7 @@ export const cards: CardData[] = [
                 ...morningState,
             }),
         ],
-        [addAction(), addAction()],
+        [swipeAction(addModifier()), swipeAction(addModifier())],
         1,
     ),
     cardLogic(
@@ -75,7 +76,10 @@ export const cards: CardData[] = [
                 ...noonState,
             }),
         ],
-        [addAction({ [staffPatience]: -1 }), addAction()],
+        [
+            swipeAction(addModifier({ [staffPatience]: -1 })),
+            swipeAction(addModifier()),
+        ],
         1,
     ),
     cardLogic(
@@ -85,7 +89,10 @@ export const cards: CardData[] = [
                 ...afterNoonState,
             }),
         ],
-        [addAction({ [staffPatience]: -1 }), addAction()],
+        [
+            swipeAction(addModifier({ [staffPatience]: -1 })),
+            swipeAction(addModifier()),
+        ],
         1,
     ),
 ]

@@ -1,9 +1,10 @@
 import {
     CardData,
     worldQuery,
-    addAction,
     unsplashImage,
     pexelsImage,
+    swipeAction,
+    addModifier,
 } from "../../content-utils"
 import { ENVIRONMENT, MONEY, PEOPLE, SECURITY, POPULARITY } from "./stats"
 import { VARS } from "./vars"
@@ -29,22 +30,26 @@ export const otherCards: CardData[] = [
             ),
         ],
         actions: {
-            left: addAction({
-                [ENVIRONMENT]: 30,
-                [PEOPLE]: 15,
-                [SECURITY]: 15,
-                [MONEY]: 5,
-                [POPULARITY]: 20,
-                [VARS.SOLAR_INVESTMENTS]: 100,
-            }),
-            right: addAction({
-                [ENVIRONMENT]: 30,
-                [PEOPLE]: 15,
-                [SECURITY]: 15,
-                [MONEY]: 5,
-                [POPULARITY]: 20,
-                [VARS.SOLAR_INVESTMENTS]: 100,
-            }),
+            left: swipeAction(
+                addModifier({
+                    [ENVIRONMENT]: 30,
+                    [PEOPLE]: 15,
+                    [SECURITY]: 15,
+                    [MONEY]: 5,
+                    [POPULARITY]: 20,
+                    [VARS.SOLAR_INVESTMENTS]: 100,
+                }),
+            ),
+            right: swipeAction(
+                addModifier({
+                    [ENVIRONMENT]: 30,
+                    [PEOPLE]: 15,
+                    [SECURITY]: 15,
+                    [MONEY]: 5,
+                    [POPULARITY]: 20,
+                    [VARS.SOLAR_INVESTMENTS]: 100,
+                }),
+            ),
         },
     },
     {
@@ -63,22 +68,26 @@ export const otherCards: CardData[] = [
             }),
         ],
         actions: {
-            left: addAction({
-                [ENVIRONMENT]: 10,
-                [PEOPLE]: 10,
-                [SECURITY]: 15,
-                [MONEY]: -5,
-                [POPULARITY]: 25,
-                [VARS.BROWN_COAL_PLANTS]: 0,
-            }),
-            right: addAction({
-                [ENVIRONMENT]: -20,
-                [PEOPLE]: -15,
-                [SECURITY]: -10,
-                [MONEY]: 40,
-                [POPULARITY]: -20,
-                [VARS.BROWN_COAL_PLANTS]: 1,
-            }),
+            left: swipeAction(
+                addModifier({
+                    [ENVIRONMENT]: 10,
+                    [PEOPLE]: 10,
+                    [SECURITY]: 15,
+                    [MONEY]: -5,
+                    [POPULARITY]: 25,
+                    [VARS.BROWN_COAL_PLANTS]: 0,
+                }),
+            ),
+            right: swipeAction(
+                addModifier({
+                    [ENVIRONMENT]: -20,
+                    [PEOPLE]: -15,
+                    [SECURITY]: -10,
+                    [MONEY]: 40,
+                    [POPULARITY]: -20,
+                    [VARS.BROWN_COAL_PLANTS]: 1,
+                }),
+            ),
         },
     },
 ]
