@@ -12,13 +12,19 @@ import {
 
 export type CardTree = {
     card: BaseCard
-    left?: CardTree
-    right?: CardTree
+    left?: CardTree | CardLeaf
+    right?: CardTree | CardLeaf
     conditions?: WorldQuery[]
-    action?: GameWorldModifier
+} & CardLeaf
+
+export type CardLeaf = {
+    modifiers?: GameWorldModifier | GameWorldModifier[]
 }
 
-export function cardsFromTree(tree: CardTree, bindRef?: string): CardData[] {
+export function cardsFromTree(
+    tree: Omit<CardTree, "modifiers">,
+    bindRef?: string,
+): CardData[] {
     const leftRef = cardRef(tree.card.title + " left")
     const rightRef = cardRef(tree.card.title + " right")
     const triggerRef = bindRef
@@ -27,6 +33,7 @@ export function cardsFromTree(tree: CardTree, bindRef?: string): CardData[] {
     const triggerRefRemoval = triggerRef ? { [triggerRef]: true } : {}
     const bindRefRemoval = bindRef ? { [bindRef]: false } : {}
     const conditions = tree.conditions ? tree.conditions : [{}]
+
     return [
         cardLogic(
             tree.card,
@@ -47,7 +54,8 @@ export function cardsFromTree(tree: CardTree, bindRef?: string): CardData[] {
                 }),
             ),
             [
-                action(
+                action([
+                    ...mixToArray(tree.left?.modifiers),
                     setModifier(
                         {},
                         {
@@ -56,8 +64,9 @@ export function cardsFromTree(tree: CardTree, bindRef?: string): CardData[] {
                             ...triggerRefRemoval,
                         },
                     ),
-                ),
-                action(
+                ]),
+                action([
+                    ...mixToArray(tree.right?.modifiers),
                     setModifier(
                         {},
                         {
@@ -66,10 +75,18 @@ export function cardsFromTree(tree: CardTree, bindRef?: string): CardData[] {
                             ...triggerRefRemoval,
                         },
                     ),
-                ),
+                ]),
             ],
         ),
-        ...(tree.left ? cardsFromTree(tree.left, leftRef) : []),
-        ...(tree.right ? cardsFromTree(tree.right, rightRef) : []),
+        ...(tree.left && "card" in tree.left
+            ? cardsFromTree(tree.left, leftRef)
+            : []),
+        ...(tree.right && "card" in tree.right
+            ? cardsFromTree(tree.right, rightRef)
+            : []),
     ]
+}
+
+function mixToArray<T>(data?: T | T[]): T[] {
+    return data ? (Array.isArray(data) ? data : [data]) : []
 }
