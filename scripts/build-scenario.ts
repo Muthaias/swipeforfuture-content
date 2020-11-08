@@ -71,7 +71,7 @@ function getScenarioIds(path: string): string[] {
     )
 }
 
-function buildScenarioManifest(ids: string[], outputDir: string) {
+async function buildScenarioManifest(ids: string[], outputDir: string) {
     const manifest: ScenarioManifest = {
         buildDate: new Date().toISOString(),
         scenarios: {},
@@ -80,6 +80,8 @@ function buildScenarioManifest(ids: string[], outputDir: string) {
     ids.forEach((id) => {
         manifest.scenarios[id] = {}
     })
+
+    await mkdir(outputDir, { recursive: true })
 
     return writeFile(
         join(outputDir, MANIFEST_FILENAME),
@@ -104,6 +106,10 @@ if (require.main === module) {
     const allScenarioIds = getScenarioIds(join(__dirname, "scenarios"))
     const ids = id === "*" ? allScenarioIds : [id]
 
-    buildScenarios(ids, outputDir)
-    buildScenarioManifest(allScenarioIds, outputDir)
+    Promise.all([
+        buildScenarios(ids, outputDir),
+        buildScenarioManifest(allScenarioIds, outputDir),
+    ]).catch((reason: string) => {
+        console.error("❌ Build error: ", reason)
+    })
 }
