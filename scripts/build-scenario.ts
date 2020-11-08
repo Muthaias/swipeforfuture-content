@@ -71,7 +71,7 @@ function getScenarioIds(path: string): string[] {
     )
 }
 
-function buildScenarioManifest(ids: string[], outputDir: string) {
+async function buildScenarioManifest(ids: string[], outputDir: string) {
     const manifest: ScenarioManifest = {
         buildDate: new Date().toISOString(),
         scenarios: {},
@@ -80,6 +80,8 @@ function buildScenarioManifest(ids: string[], outputDir: string) {
     ids.forEach((id) => {
         manifest.scenarios[id] = {}
     })
+
+    await mkdir(outputDir, { recursive: true })
 
     return writeFile(
         join(outputDir, MANIFEST_FILENAME),
