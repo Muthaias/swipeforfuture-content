@@ -7,19 +7,23 @@
         "actions": {
             "left": {
                 "description": "Oh... yes",
-                "modifier": {
-                    "type": "add",
-                    "state": {},
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
             },
             "right": {
                 "description": "Thank you",
-                "modifier": {
-                    "type": "add",
-                    "state": {},
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
             }
         },
         "weight": 1,
@@ -44,19 +48,23 @@
         "actions": {
             "left": {
                 "description": "Not really",
-                "modifier": {
-                    "type": "add",
-                    "state": {},
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
             },
             "right": {
                 "description": "Yes! Thank you",
-                "modifier": {
-                    "type": "add",
-                    "state": {},
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
             }
         },
         "weight": 1,
@@ -81,21 +89,25 @@
         "actions": {
             "left": {
                 "description": "*shrug*",
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "staff-patience:prop:29": -1
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "staff-patience:prop:29": -1
+                        },
+                        "flags": {}
+                    }
+                ]
             },
             "right": {
                 "description": "Thanks",
-                "modifier": {
-                    "type": "add",
-                    "state": {},
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
             }
         },
         "weight": 1,
@@ -120,21 +132,25 @@
         "actions": {
             "left": {
                 "description": "*shrug*",
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "staff-patience:prop:29": -1
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "staff-patience:prop:29": -1
+                        },
+                        "flags": {}
+                    }
+                ]
             },
             "right": {
                 "description": "Indeed I did",
-                "modifier": {
-                    "type": "add",
-                    "state": {},
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
             }
         },
         "weight": 1,

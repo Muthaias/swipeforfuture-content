@@ -19,22 +19,26 @@
         ],
         "actions": {
             "left": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "environment": -10
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "environment": -10
+                        },
+                        "flags": {}
+                    }
+                ]
             },
             "right": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "environment": 10
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "environment": 10
+                        },
+                        "flags": {}
+                    }
+                ]
             }
         }
     },
@@ -58,22 +62,26 @@
         ],
         "actions": {
             "left": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "people": -10
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "people": -10
+                        },
+                        "flags": {}
+                    }
+                ]
             },
             "right": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "people": 10
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "people": 10
+                        },
+                        "flags": {}
+                    }
+                ]
             }
         }
     },
@@ -97,22 +105,26 @@
         ],
         "actions": {
             "left": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "security": -10
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "security": -10
+                        },
+                        "flags": {}
+                    }
+                ]
             },
             "right": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "security": 10
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "security": 10
+                        },
+                        "flags": {}
+                    }
+                ]
             }
         }
     },
@@ -136,22 +148,26 @@
         ],
         "actions": {
             "left": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "money": -10
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "money": -10
+                        },
+                        "flags": {}
+                    }
+                ]
             },
             "right": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "money": 10
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "money": 10
+                        },
+                        "flags": {}
+                    }
+                ]
             }
         }
     },
@@ -175,22 +191,26 @@
         ],
         "actions": {
             "left": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "popularity": -10
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "popularity": -10
+                        },
+                        "flags": {}
+                    }
+                ]
             },
             "right": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "popularity": 10
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "popularity": 10
+                        },
+                        "flags": {}
+                    }
+                ]
             }
         }
     },
@@ -216,29 +236,33 @@
         ],
         "actions": {
             "left": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "environment": 10,
-                        "people": 10,
-                        "security": 5,
-                        "brown-coal-plant:prop:0": 100
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "environment": 10,
+                            "people": 10,
+                            "security": 5,
+                            "brown-coal-plant:prop:0": 100
+                        },
+                        "flags": {}
+                    }
+                ]
             },
             "right": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "environment": -15,
-                        "people": -15,
-                        "security": -5,
-                        "money": 35,
-                        "brown-coal-plant:prop:0": 0
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "environment": -15,
+                            "people": -15,
+                            "security": -5,
+                            "money": 35,
+                            "brown-coal-plant:prop:0": 0
+                        },
+                        "flags": {}
+                    }
+                ]
             }
         }
     },
@@ -272,24 +296,28 @@
         ],
         "actions": {
             "left": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "money": -5,
-                        "solar-investments:prop:1": 100
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "money": -5,
+                            "solar-investments:prop:1": 100
+                        },
+                        "flags": {}
+                    }
+                ]
             },
             "right": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "money": -10,
-                        "solar-investments:prop:1": 1
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "money": -10,
+                            "solar-investments:prop:1": 1
+                        },
+                        "flags": {}
+                    }
+                ]
             }
         }
     },
@@ -349,28 +377,32 @@
         ],
         "actions": {
             "left": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "popularity": -10,
-                        "roads-suggested:prop:2": 1,
-                        "road-expansion:prop:3": 1
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "popularity": -10,
+                            "roads-suggested:prop:2": 1,
+                            "road-expansion:prop:3": 1
+                        },
+                        "flags": {}
+                    }
+                ]
             },
             "right": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "environment": -10,
-                        "money": -10,
-                        "people": 20,
-                        "roads-suggested:prop:2": 1,
-                        "road-expansion:prop:3": 1
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "environment": -10,
+                            "money": -10,
+                            "people": 20,
+                            "roads-suggested:prop:2": 1,
+                            "road-expansion:prop:3": 1
+                        },
+                        "flags": {}
+                    }
+                ]
             }
         }
     },
@@ -396,32 +428,36 @@
         ],
         "actions": {
             "left": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "environment": 30,
-                        "people": 15,
-                        "security": 15,
-                        "money": 5,
-                        "popularity": 20,
-                        "solar-investments:prop:1": 100
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "environment": 30,
+                            "people": 15,
+                            "security": 15,
+                            "money": 5,
+                            "popularity": 20,
+                            "solar-investments:prop:1": 100
+                        },
+                        "flags": {}
+                    }
+                ]
             },
             "right": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "environment": 30,
-                        "people": 15,
-                        "security": 15,
-                        "money": 5,
-                        "popularity": 20,
-                        "solar-investments:prop:1": 100
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "environment": 30,
+                            "people": 15,
+                            "security": 15,
+                            "money": 5,
+                            "popularity": 20,
+                            "solar-investments:prop:1": 100
+                        },
+                        "flags": {}
+                    }
+                ]
             }
         }
     },
@@ -453,32 +489,36 @@
         ],
         "actions": {
             "left": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "environment": 10,
-                        "people": 10,
-                        "security": 15,
-                        "money": -5,
-                        "popularity": 25,
-                        "brown-coal-plant:prop:0": 0
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "environment": 10,
+                            "people": 10,
+                            "security": 15,
+                            "money": -5,
+                            "popularity": 25,
+                            "brown-coal-plant:prop:0": 0
+                        },
+                        "flags": {}
+                    }
+                ]
             },
             "right": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "environment": -20,
-                        "people": -15,
-                        "security": -10,
-                        "money": 40,
-                        "popularity": -20,
-                        "brown-coal-plant:prop:0": 1
-                    },
-                    "flags": {}
-                }
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "environment": -20,
+                            "people": -15,
+                            "security": -10,
+                            "money": 40,
+                            "popularity": -20,
+                            "brown-coal-plant:prop:0": 1
+                        },
+                        "flags": {}
+                    }
+                ]
             }
         }
     }

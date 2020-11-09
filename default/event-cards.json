@@ -9,20 +9,24 @@
         "actions": {
             "left": {
                 "description": "Nah. I'm good. I think I can handle things on my own.",
-                "modifier": {
-                    "type": "add",
-                    "state": {},
-                    "flags": {}
-                },
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ],
                 "nextEventCardId": "welcome-loop:card:4"
             },
             "right": {
                 "description": "That sounds great. Let's do it ASAP",
-                "modifier": {
-                    "type": "add",
-                    "state": {},
-                    "flags": {}
-                },
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ],
                 "nextEventCardId": "welcome-lunch:card:5"
             }
         }
@@ -37,20 +41,24 @@
         "actions": {
             "left": {
                 "description": "Get off my back.",
-                "modifier": {
-                    "type": "add",
-                    "state": {},
-                    "flags": {}
-                },
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ],
                 "nextEventCardId": "welcome-loop:card:4"
             },
             "right": {
                 "description": "Alright. Let's do this.",
-                "modifier": {
-                    "type": "add",
-                    "state": {},
-                    "flags": {}
-                },
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ],
                 "nextEventCardId": "welcome-lunch:card:5"
             }
         }
@@ -65,30 +73,34 @@
         "actions": {
             "left": {
                 "description": "Nice talk. Love the economy!",
-                "modifier": {
-                    "type": "set",
-                    "state": {
-                        "money": 70,
-                        "popularity": 52
-                    },
-                    "flags": {
-                        "lunch-meeting-completed:prop:4": true
+                "modifiers": [
+                    {
+                        "type": "set",
+                        "state": {
+                            "money": 70,
+                            "popularity": 52
+                        },
+                        "flags": {
+                            "lunch-meeting-completed:prop:4": true
+                        }
                     }
-                },
+                ],
                 "nextEventCardId": null
             },
             "right": {
                 "description": "Nice talk. We should think about our future.",
-                "modifier": {
-                    "type": "set",
-                    "state": {
-                        "environment": 70,
-                        "popularity": 65
-                    },
-                    "flags": {
-                        "lunch-meeting-completed:prop:4": true
+                "modifiers": [
+                    {
+                        "type": "set",
+                        "state": {
+                            "environment": 70,
+                            "popularity": 65
+                        },
+                        "flags": {
+                            "lunch-meeting-completed:prop:4": true
+                        }
                     }
-                },
+                ],
                 "nextEventCardId": null
             }
         }
@@ -101,19 +113,23 @@
         "weight": 1000,
         "actions": {
             "left": {
-                "modifier": {
-                    "type": "replace",
-                    "state": {},
-                    "flags": {}
-                },
+                "modifiers": [
+                    {
+                        "type": "replace",
+                        "state": {},
+                        "flags": {}
+                    }
+                ],
                 "nextEventCardId": null
             },
             "right": {
-                "modifier": {
-                    "type": "replace",
-                    "state": {},
-                    "flags": {}
-                },
+                "modifiers": [
+                    {
+                        "type": "replace",
+                        "state": {},
+                        "flags": {}
+                    }
+                ],
                 "nextEventCardId": null
             }
         },
@@ -128,27 +144,31 @@
         "type": "event",
         "actions": {
             "left": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "environment": -10
-                    },
-                    "flags": {
-                        "envira-init:prop:5": true
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "environment": -10
+                        },
+                        "flags": {
+                            "envira-init:prop:5": true
+                        }
                     }
-                },
+                ],
                 "nextEventCardId": null
             },
             "right": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "environment": 10
-                    },
-                    "flags": {
-                        "envira-init:prop:5": true
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "environment": 10
+                        },
+                        "flags": {
+                            "envira-init:prop:5": true
+                        }
                     }
-                },
+                ],
                 "nextEventCardId": null
             }
         }
@@ -162,29 +182,33 @@
         "type": "event",
         "actions": {
             "left": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "money": 10,
-                        "popularity": -10
-                    },
-                    "flags": {
-                        "infran-init:prop:6": true
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "money": 10,
+                            "popularity": -10
+                        },
+                        "flags": {
+                            "infran-init:prop:6": true
+                        }
                     }
-                },
+                ],
                 "nextEventCardId": null
             },
             "right": {
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "money": -10,
-                        "popularity": 10
-                    },
-                    "flags": {
-                        "infran-init:prop:6": true
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "money": -10,
+                            "popularity": 10
+                        },
+                        "flags": {
+                            "infran-init:prop:6": true
+                        }
                     }
-                },
+                ],
                 "nextEventCardId": null
             }
         }

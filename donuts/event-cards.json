@@ -7,21 +7,25 @@
         "actions": {
             "left": {
                 "description": "Nah. I'm good. I think I can handle things on my own.",
-                "modifier": {
-                    "type": "set",
-                    "state": {},
-                    "flags": {}
-                },
-                "nextEventCardId": "welcome-loop:card:7"
+                "modifiers": [
+                    {
+                        "type": "set",
+                        "state": {},
+                        "flags": {}
+                    }
+                ],
+                "nextEventCardId": null
             },
             "right": {
                 "description": "That sounds great. Let's do it ASAP",
-                "modifier": {
-                    "type": "set",
-                    "state": {},
-                    "flags": {}
-                },
-                "nextEventCardId": "welcome-lunch:card:8"
+                "modifiers": [
+                    {
+                        "type": "set",
+                        "state": {},
+                        "flags": {}
+                    }
+                ],
+                "nextEventCardId": null
             }
         },
         "weight": 1,
@@ -35,23 +39,27 @@
         "actions": {
             "left": {
                 "description": "Get off my back.",
-                "modifier": {
-                    "type": "add",
-                    "state": {
-                        "staff-patience:prop:29": -1
-                    },
-                    "flags": {}
-                },
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {
+                            "staff-patience:prop:29": -1
+                        },
+                        "flags": {}
+                    }
+                ],
                 "nextEventCardId": "welcome-loop:card:7"
             },
             "right": {
                 "description": "Alright. Let's do this.",
-                "modifier": {
-                    "type": "set",
-                    "state": {},
-                    "flags": {}
-                },
-                "nextEventCardId": "welcome-lunch:card:8"
+                "modifiers": [
+                    {
+                        "type": "set",
+                        "state": {},
+                        "flags": {}
+                    }
+                ],
+                "nextEventCardId": null
             }
         },
         "weight": 1,
@@ -65,30 +73,34 @@
         "actions": {
             "left": {
                 "description": "Nice talk. Love the economy!",
-                "modifier": {
-                    "type": "set",
-                    "state": {
-                        "money": 70,
-                        "popularity": 52
-                    },
-                    "flags": {
-                        "introduction-complete:prop:28": true
+                "modifiers": [
+                    {
+                        "type": "set",
+                        "state": {
+                            "money": 70,
+                            "popularity": 52
+                        },
+                        "flags": {
+                            "introduction-complete:prop:28": true
+                        }
                     }
-                },
+                ],
                 "nextEventCardId": null
             },
             "right": {
                 "description": "Nice talk. We should think about our future.",
-                "modifier": {
-                    "type": "set",
-                    "state": {
-                        "environment": 70,
-                        "popularity": 65
-                    },
-                    "flags": {
-                        "introduction-complete:prop:28": true
+                "modifiers": [
+                    {
+                        "type": "set",
+                        "state": {
+                            "environment": 70,
+                            "popularity": 65
+                        },
+                        "flags": {
+                            "introduction-complete:prop:28": true
+                        }
                     }
-                },
+                ],
                 "nextEventCardId": null
             }
         },
