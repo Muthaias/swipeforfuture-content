@@ -6,7 +6,10 @@ import {
     addModifier,
     action,
 } from "."
-import { EventCardActionData } from "../../swipeforfuture.com/src/game/ContentTypes"
+import {
+    EventCardActionData,
+    GameWorldModifier,
+} from "../../swipeforfuture.com/src/game/ContentTypes"
 
 export type BaseCard = Omit<CardData, "type" | "isAvailableWhen">
 
@@ -44,13 +47,16 @@ export function cardContent(
  *
  * @param card A card template that contains artistic content
  * @param isAvailableWhen The worldqueries for when the card is availables
- * @param [left, right] The left and right world actions
+ * @param [left, right] The left and right GameWorldModifiers
  * @param weight The weight of the card
  */
 export function cardLogic(
     card: BaseCard,
     isAvailableWhen: WorldQuery[],
-    [left, right]: [CardActionData, CardActionData],
+    [left, right]: [
+        GameWorldModifier | GameWorldModifier[],
+        GameWorldModifier | GameWorldModifier[],
+    ],
     weight: number = 1,
 ): CardData {
     return {
@@ -59,12 +65,12 @@ export function cardLogic(
         isAvailableWhen,
         actions: {
             left: {
-                ...left,
                 description: card.actions.left.description,
+                modifiers: Array.isArray(left) ? left : [left],
             },
             right: {
-                ...right,
                 description: card.actions.right.description,
+                modifiers: Array.isArray(right) ? right : [right],
             },
         },
         type: "card",
