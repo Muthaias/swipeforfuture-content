@@ -81,7 +81,7 @@ export function cardLogic(
  * Given a generic card this creates a new event card with updated logic content.
  *
  * @param card A card template that contains artistic content
- * @param [left, right] The left and right world actions
+ * @param [left, right] The left and right EventCardActionData, containing modifiers and nextEventCardId
  */
 export function eventCardLogic(
     card: BaseCard,
