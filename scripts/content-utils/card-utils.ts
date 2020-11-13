@@ -1,11 +1,4 @@
-import {
-    CardData,
-    EventCard,
-    CardActionData,
-    WorldQuery,
-    addModifier,
-    action,
-} from "."
+import { CardData, EventCard, WorldQuery, addModifier, action } from "."
 import {
     EventCardActionData,
     GameWorldModifier,
@@ -81,22 +74,41 @@ export function cardLogic(
  * Given a generic card this creates a new event card with updated logic content.
  *
  * @param card A card template that contains artistic content
- * @param [left, right] The left and right EventCardActionData, containing modifiers and nextEventCardId
+ * @param [left, right] The left and right modifiers and nextEventCardId
  */
 export function eventCardLogic(
     card: BaseCard,
-    [left, right]: [EventCardActionData, EventCardActionData],
+    [
+        [leftModifiers, leftNextEventCardId = null],
+        [rightModifiers, rightNextEventCardId = null],
+    ]: [
+        [
+            GameWorldModifier | GameWorldModifier[],
+            EventCardActionData["nextEventCardId"]?,
+        ],
+        [
+            GameWorldModifier | GameWorldModifier[],
+            EventCardActionData["nextEventCardId"]?,
+        ],
+    ],
     weight: CardData["weight"] = 1,
 ): EventCard {
     return {
         ...card,
+        weight,
         actions: {
             left: {
-                ...left,
+                modifiers: Array.isArray(leftModifiers)
+                    ? leftModifiers
+                    : [leftModifiers],
+                nextEventCardId: leftNextEventCardId,
                 description: card.actions.left.description,
             },
             right: {
-                ...right,
+                modifiers: Array.isArray(rightModifiers)
+                    ? rightModifiers
+                    : [rightModifiers],
+                nextEventCardId: rightNextEventCardId,
                 description: card.actions.right.description,
             },
         },

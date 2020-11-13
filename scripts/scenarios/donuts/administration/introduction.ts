@@ -5,10 +5,8 @@ import {
     cardRef,
     cardContent,
     eventCardLogic,
-    eventCardAction,
     setModifier,
     addModifier,
-    action,
 } from "../../../content-utils"
 import { introductionComplete, staffPatience } from "./admin-state"
 import { getImage } from "../image"
@@ -58,32 +56,29 @@ const welcomeLunchCard = cardContent(
 
 export const eventCards: { [x: string]: EventCard } = {
     [welcome]: eventCardLogic(welcomeCard, [
-        eventCardAction(action(setModifier(), welcomeLoop)),
-        eventCardAction(action(setModifier(), welcomeLunch)),
+        [setModifier(), welcomeLoop],
+        [setModifier(), welcomeLunch],
+    ]),
+    [welcome]: eventCardLogic(welcomeCard, [
+        [setModifier(), welcomeLoop],
+        [setModifier(), welcomeLunch],
     ]),
     [welcomeLoop]: eventCardLogic(enforceLunchCard, [
-        eventCardAction(
-            action(addModifier({ [staffPatience]: -1 })),
-            welcomeLoop,
-        ),
-        eventCardAction(action(setModifier(), welcomeLunch)),
+        [addModifier({ [staffPatience]: -1 }), welcomeLoop],
+        [setModifier(), welcomeLunch],
     ]),
     [welcomeLunch]: eventCardLogic(welcomeLunchCard, [
-        eventCardAction(
-            action(
-                setModifier(
-                    { [Stats.money]: 70, [Stats.popularity]: 52 },
-                    { [introductionComplete]: true },
-                ),
+        [
+            setModifier(
+                { [Stats.money]: 70, [Stats.popularity]: 52 },
+                { [introductionComplete]: true },
             ),
-        ),
-        eventCardAction(
-            action(
-                setModifier(
-                    { [Stats.environment]: 70, [Stats.popularity]: 65 },
-                    { [introductionComplete]: true },
-                ),
+        ],
+        [
+            setModifier(
+                { [Stats.environment]: 70, [Stats.popularity]: 65 },
+                { [introductionComplete]: true },
             ),
-        ),
+        ],
     ]),
 }
