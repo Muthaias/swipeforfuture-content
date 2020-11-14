@@ -1,6 +1,7 @@
 import { GameWorldModifier } from "../../swipeforfuture.com/src/game/ContentTypes"
 import { WorldQuery, CardData, cardRef, setModifier, CardTree } from "./"
 import { cardsFromTree } from "./card-tree"
+import { combineWorldQueries } from "./card-utils"
 
 /**
  * TODO:
@@ -30,7 +31,7 @@ export interface CardSequence {
  */
 export function cardsFromSequence(
     { sequence }: CardSequence,
-    _startConditions?: WorldQuery[],
+    _startConditions: WorldQuery[] = [],
     _endModifiers: GameWorldModifier[] = [],
 ): CardData[] {
     const sequenceRefs = sequence.map((tree) =>
@@ -41,12 +42,13 @@ export function cardsFromSequence(
         const prevRef = sequenceRefs[i - 1]
         const currentRef = sequenceRefs[i]
 
-        const startConditions =
-            i === 0 && _startConditions?.length
-                ? _startConditions
-                : getStartConditions(prevRef, currentRef)
-
-        console.log("start: ", startConditions)
+        const conditions = getStartConditions(prevRef, currentRef)
+        const isAvailableWhen =
+            i > 0
+                ? conditions
+                : conditions.flatMap((c) =>
+                      _startConditions.map((sc) => combineWorldQueries(c, sc)),
+                  )
 
         const endModifiers = [
             ...(i === sequence.length - 1 && _endModifiers?.length
@@ -55,9 +57,7 @@ export function cardsFromSequence(
             ...getEndModifiers(currentRef),
         ]
 
-        console.log("end: ", endModifiers)
-
-        return cardsFromTree(tree, startConditions, endModifiers)
+        return cardsFromTree(tree, isAvailableWhen, endModifiers)
     })
 
     return cards
