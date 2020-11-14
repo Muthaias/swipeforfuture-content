@@ -2,6 +2,9 @@ import {
     cardContent,
     cardsFromSequence,
     CardSequence,
+    addModifier,
+    propRef,
+    defaultFlag,
 } from "../../content-utils"
 
 function quickCard(name: string, left: string, right: string) {
@@ -16,4 +19,18 @@ export const sequence: CardSequence = {
     ],
 }
 
-export const cards = cardsFromSequence(sequence)
+const SEQUENCE_END_MODIFIER_RUN = propRef("SEQUENCE_END_MODIFIER_RUN")
+
+export const defaultFlags = [defaultFlag(SEQUENCE_END_MODIFIER_RUN, false)]
+
+export const cards = cardsFromSequence(
+    sequence,
+    [
+        {
+            flags: {
+                [SEQUENCE_END_MODIFIER_RUN]: false,
+            },
+        },
+    ],
+    [addModifier({}, { [SEQUENCE_END_MODIFIER_RUN]: true })],
+)
