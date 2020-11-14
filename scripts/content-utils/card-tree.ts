@@ -30,26 +30,17 @@ export type CardLeaf = {
  * For actual content, use `tree.conditions` and `tree.modifiers` instead:
  * @param _startConditions Internal WorldQuery[] to control when to show this CardTree node. Useful when you want to complete the previous node in a CardSequence before starting the CardTree.
  * @param _endModifiers Internal GameWorldModifier[] to apply to all CardTree leaf nodes. Useful when you want to complete a CardTree within a CardSequence before moving on to the next node in the CardSequence.
+ * @param _bindRef Internal cardRef to the parent card.
  */
 export function cardsFromTree(
     tree: Omit<CardTree, "modifiers">,
     _startConditions?: WorldQuery[],
     _endModifiers: GameWorldModifier[] = [],
+    _bindRef?: string,
 ): CardData[] {
-    // HACK: retrieving the bindRef from the first _startConditions is hack
-    // that should be improved to ensure we get the correct reference in case we have multiple _startConditions.
-
-    // IDEA: Possibly we should update types for _startConditions and _endModifiers to only ever contain one item
-    // This would reduce complexity of `cardsFromTree()`, while still providing us with most of the same functionality
-    // Since these are only supposed to be used internally, I currently don't see a good use case to support multiple _startConditions or _endModifiers.
-
-    const bindRef = _startConditions?.length
-        ? _startConditions[0]["flags"] &&
-          Object.keys(_startConditions[0]["flags"])[0]
-        : undefined
     const leftRef = cardRef(tree.card.title + " left")
     const rightRef = cardRef(tree.card.title + " right")
-    const triggerRef = bindRef
+    const triggerRef = _bindRef
         ? undefined
         : cardRef(tree.card.title + " origin")
 
@@ -60,7 +51,7 @@ export function cardsFromTree(
 
     _startConditions = _startConditions?.length
         ? _startConditions
-        : getStartConditions(bindRef, triggerRef, !!triggerRef)
+        : getStartConditions(_bindRef, triggerRef, !!triggerRef)
 
     const isAvailableWhen = conditions.flatMap((c) =>
         _startConditions
@@ -73,19 +64,29 @@ export function cardsFromTree(
             action([
                 ...mixToArray(tree.left?.modifiers),
                 ...(!tree?.left?.hasOwnProperty("card") ? _endModifiers : []),
-                getRefRemovalModifier(leftRef, bindRef, triggerRef),
+                getRefRemovalModifier(leftRef, _bindRef, triggerRef),
             ]),
             action([
                 ...mixToArray(tree.right?.modifiers),
                 ...(!tree?.right?.hasOwnProperty("card") ? _endModifiers : []),
-                getRefRemovalModifier(rightRef, bindRef, triggerRef),
+                getRefRemovalModifier(rightRef, _bindRef, triggerRef),
             ]),
         ]),
         ...(tree.left && "card" in tree.left
-            ? cardsFromTree(tree.left, leftStartConditions, _endModifiers)
+            ? cardsFromTree(
+                  tree.left,
+                  leftStartConditions,
+                  _endModifiers,
+                  leftRef,
+              )
             : []),
         ...(tree.right && "card" in tree.right
-            ? cardsFromTree(tree.right, rightStartConditions, _endModifiers)
+            ? cardsFromTree(
+                  tree.right,
+                  rightStartConditions,
+                  _endModifiers,
+                  rightRef,
+              )
             : []),
     ]
 }
