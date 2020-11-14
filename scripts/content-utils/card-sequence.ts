@@ -44,20 +44,18 @@ export function cardsFromSequence(
                 ? _startConditions
                 : getStartConditions(prevRef, currentRef)
 
-        const moveToNextCardInSequence = getEndModifiers(currentRef, nextRef)
-
-        // TODO: Fix bug that the last card isn't removed after sequence is completed
-        // TODO: Fix so that _endModifiers to apply at the end of a CardTree within a sequence are remainig intact, even when used within a Sequence.
+        // TODO: Ensure that _endModifiers are applied at the end of a CardTree within a sequence are remainig intact, even when used within a Sequence.
 
         // if we need to support passing down endModifies and startConditions multiple levels into nested CardTrees and CardSequences,
         // then one possible solution might be to store everything needed in a object, passed as the final argument, where each level can add its references, modifiers, conditions etc.
         // Then as the levels are resolved, keys and values are removed from the object to only keep relevant data there during runtime.
 
-        const endModifiers = nextRef
-            ? getEndModifiers(currentRef, nextRef)
-            : _endModifiers?.length
-            ? _endModifiers
-            : []
+        const endModifiers = [
+            ...(_endModifiers?.length ? _endModifiers : []),
+            ...getEndModifiers(currentRef, nextRef),
+        ]
+
+        console.log(endModifiers)
 
         return cardsFromTree(tree, startConditions, endModifiers)
     })
