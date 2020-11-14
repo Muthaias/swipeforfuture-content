@@ -3,6 +3,7 @@ import {
     CardTree,
     cardsFromTree,
     addModifier,
+    setModifier,
 } from "../../content-utils"
 import * as Stats from "./stats"
 
@@ -56,14 +57,8 @@ export const tree: CardTree = {
             },
         },
         right: {
-            card: quickCard("A:R:R", "A:R:R:L", "A:R:R:R"),
+            // Verify that END_MODIFIERS are applied correctly even for shorter branches
             modifiers: addModifier({ right: 1 }),
-            left: {
-                modifiers: addModifier({ left: 1 }),
-            },
-            right: {
-                modifiers: addModifier({ right: 1 }),
-            },
         },
         modifiers: addModifier({ right: 1 }),
     },
@@ -71,5 +66,5 @@ export const tree: CardTree = {
 
 export const cards = cardsFromTree(tree, undefined, [
     addModifier({}, { "END_MODIFIERS_WORKED!": true }),
-    addModifier({}, { "END_MODIFIERS_ARE_GREAT!": true }),
+    setModifier({}, { "END_MODIFIERS_ARE_GREAT!": true }),
 ])
