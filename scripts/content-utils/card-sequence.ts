@@ -6,7 +6,7 @@ import { cardsFromTree } from "./card-tree"
  * TODO:
  *
  * 1) ✅ Create CardSequence with support for linking cards
- * - fix bug to only show final card in sequence once
+ * - ✅ fix bug to only show final card in sequence once
  * - (maybe) fix removing unused flags after they have been used to trigger cards in the sequence
  *
  * 2) ✅ Add support to execute different modifiers on left and right (implemented by CardTree)
@@ -32,12 +32,6 @@ export function cardsFromSequence(
     const cards = sequence.flatMap((tree, i) => {
         const prevRef = sequenceRefs[i - 1]
         const currentRef = sequenceRefs[i]
-        const nextRef = sequenceRefs[i + 1]
-
-        // if we don't need prevRef or nextRef
-        //      Then we can simplify the code below
-        //      to either use default _startConditions and _endModifiers
-        //      or generate them based on currentRef
 
         const startConditions =
             i === 0 && _startConditions?.length
@@ -52,7 +46,7 @@ export function cardsFromSequence(
 
         const endModifiers = [
             ...(_endModifiers?.length ? _endModifiers : []),
-            ...getEndModifiers(currentRef, nextRef),
+            ...getEndModifiers(currentRef),
         ]
 
         console.log(endModifiers)
@@ -63,7 +57,6 @@ export function cardsFromSequence(
     return cards
 }
 
-// TODO: remove unused params and simplify functions if possible.
 function getStartConditions(prevRef: string, currentRef: string) {
     return [
         {
@@ -75,13 +68,12 @@ function getStartConditions(prevRef: string, currentRef: string) {
     ]
 }
 
-function getEndModifiers(currentRef: string, nextRef: string) {
+function getEndModifiers(currentRef: string) {
     return [
         setModifier(
             {},
             {
                 ...(currentRef ? { [currentRef]: true } : {}),
-                // ...(nextRef ? { [nextRef]: true } : {}),
             },
         ),
     ]
