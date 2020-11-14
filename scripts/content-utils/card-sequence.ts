@@ -19,7 +19,15 @@ export interface CardSequence {
     sequence: CardTree[]
 }
 
-// TODO: Document params and explain how to work with the internal params.
+/**
+ * @param sequence The CardSequence to turn into an array of cards
+ *
+ * NOTE: The following params should only be used internally by the content utils
+ * to connect the CardTrees. Define content within your CardTrees.
+ *
+ * @param _startConditions Internal WorldQuery[] to control when to start showing this CardSequence.
+ * @param _endModifiers Internal GameWorldModifier[] to apply when all nodes of this CardSequence has been completed.
+ */
 export function cardsFromSequence(
     { sequence }: CardSequence,
     _startConditions?: WorldQuery[],

@@ -21,7 +21,6 @@ export type CardLeaf = {
 }
 
 /**
- *
  * @param tree The CardTree to recursively turn into an array of cards
  *
  * NOTE: The following params should only be used internally by the content utils
