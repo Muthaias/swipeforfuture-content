@@ -69,4 +69,7 @@ export const tree: CardTree = {
     },
 }
 
-export const cards = cardsFromTree(tree)
+export const cards = cardsFromTree(tree, undefined, [
+    addModifier({}, { "END_MODIFIERS_WORKED!": true }),
+    addModifier({}, { "END_MODIFIERS_ARE_GREAT!": true }),
+])
