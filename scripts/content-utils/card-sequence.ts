@@ -46,18 +46,16 @@ export function cardsFromSequence(
                 ? _startConditions
                 : getStartConditions(prevRef, currentRef)
 
-        // TODO: Ensure that _endModifiers are applied at the end of a CardTree within a sequence are remainig intact, even when used within a Sequence.
-
-        // if we need to support passing down endModifies and startConditions multiple levels into nested CardTrees and CardSequences,
-        // then one possible solution might be to store everything needed in a object, passed as the final argument, where each level can add its references, modifiers, conditions etc.
-        // Then as the levels are resolved, keys and values are removed from the object to only keep relevant data there during runtime.
+        console.log("start: ", startConditions)
 
         const endModifiers = [
-            ...(_endModifiers?.length ? _endModifiers : []),
+            ...(i === sequence.length - 1 && _endModifiers?.length
+                ? _endModifiers
+                : []),
             ...getEndModifiers(currentRef),
         ]
 
-        console.log(endModifiers)
+        console.log("end: ", endModifiers)
 
         return cardsFromTree(tree, startConditions, endModifiers)
     })
