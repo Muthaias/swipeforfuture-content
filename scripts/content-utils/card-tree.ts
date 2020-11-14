@@ -72,12 +72,12 @@ export function cardsFromTree(
         cardLogic(tree.card, isAvailableWhen, [
             action([
                 ...mixToArray(tree.left?.modifiers),
-                ...(!tree.left && !tree.right ? _endModifiers : []),
+                ...(!tree?.left?.hasOwnProperty("card") ? _endModifiers : []),
                 getRefRemovalModifier(leftRef, bindRef, triggerRef),
             ]),
             action([
                 ...mixToArray(tree.right?.modifiers),
-                ...(!tree.left && !tree.right ? _endModifiers : []),
+                ...(!tree?.right?.hasOwnProperty("card") ? _endModifiers : []),
                 getRefRemovalModifier(rightRef, bindRef, triggerRef),
             ]),
         ]),
