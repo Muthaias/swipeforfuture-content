@@ -33,7 +33,7 @@ export type CardLeaf = {
  */
 export function cardsFromTree(
     tree: Omit<CardTree, "modifiers">,
-    _startConditions?: WorldQuery[],
+    _startConditions: WorldQuery[] = [],
     _endModifiers: GameWorldModifier[] = [],
     _bindRef?: string,
 ): CardData[] {
@@ -43,20 +43,27 @@ export function cardsFromTree(
         ? undefined
         : cardRef(tree.card.title + " origin")
 
-    const conditions = tree.conditions ? tree.conditions : [{}]
-
     const leftStartConditions = getStartConditions(leftRef, triggerRef, false)
     const rightStartConditions = getStartConditions(rightRef, triggerRef, false)
 
-    _startConditions = _startConditions?.length
-        ? _startConditions
-        : getStartConditions(_bindRef, triggerRef, !!triggerRef)
-
-    const isAvailableWhen = conditions.flatMap((c) =>
-        _startConditions
-            ? _startConditions.map((sc) => combineWorldQueries(c, sc))
-            : c,
+    const treeConditions = tree.conditions?.length ? tree.conditions : []
+    const startConditions = getStartConditions(
+        _bindRef,
+        triggerRef,
+        !!triggerRef,
     )
+
+    const conditions = treeConditions.length
+        ? startConditions.flatMap((c) =>
+              treeConditions.map((tc) => combineWorldQueries(c, tc)),
+          )
+        : startConditions
+
+    const isAvailableWhen = _startConditions.length
+        ? conditions.flatMap((c) =>
+              _startConditions.map((sc) => combineWorldQueries(c, sc)),
+          )
+        : conditions
 
     return [
         cardLogic(tree.card, isAvailableWhen, [
@@ -94,7 +101,7 @@ function getStartConditions(
     bindRef: string | undefined,
     triggerRef: string | undefined,
     isOrigin?: boolean,
-) {
+): WorldQuery[] {
     let flag = {}
     if (triggerRef) {
         if (
@@ -123,7 +130,7 @@ function getRefRemovalModifier(
     primaryRef: string,
     bindRef: string | undefined,
     triggerRef: string | undefined,
-) {
+): GameWorldModifier {
     const triggerRefRemoval = triggerRef ? { [triggerRef]: true } : {}
     const bindRefRemoval = bindRef ? { [bindRef]: false } : {}
 

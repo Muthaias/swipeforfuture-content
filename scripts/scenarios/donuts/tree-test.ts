@@ -58,16 +58,20 @@ export const tree: CardTree = {
             },
         },
         right: {
-            // Verify that END_MODIFIERS are applied correctly even for shorter branches
+            // By ending the branch earlier, this will cerify that END_MODIFIERS are applied correctly even for shorter branches
             modifiers: addModifier({ right: 1 }),
         },
         modifiers: addModifier({ right: 1 }),
     },
 }
 
-export const cards = cardsFromTree(tree, undefined, [
-    addModifier({}, { "END_MODIFIERS_WORKED!": true }),
-    setModifier({}, { "END_MODIFIERS_ARE_GREAT!": true }),
-])
+export const cards = cardsFromTree(
+    tree,
+    [{ flags: { "END_MODIFIERS_WORKED!": false } }],
+    [
+        addModifier({}, { "END_MODIFIERS_WORKED!": true }),
+        setModifier({}, { "END_MODIFIERS_ARE_GREAT!": true }),
+    ],
+)
 
 // export const cards = OLD_cardsFromTree(tree)
