@@ -13,9 +13,21 @@ function quickCard(name: string, left: string, right: string) {
 
 export const sequence: CardSequence = {
     sequence: [
-        { card: quickCard("1", "1_L", "1_R") },
-        { card: quickCard("2", "2_L", "2_R") },
-        { card: quickCard("3", "3_L", "3_R") },
+        {
+            card: quickCard("1", "1:L", "1:R"),
+            left: {
+                card: quickCard("1:L", "1:L:L", "1:L:R"),
+                left: {
+                    card: quickCard("1:L:L", "1:L:L:L", "1:L:L:R"),
+                    // 1:L:L:L and
+                    // 1:L:L:R should both move on to 2
+                },
+                // 1:L:R should move on to 2
+            },
+            // 1:R should move on to 2
+        },
+        { card: quickCard("2", "2:L", "2:R") },
+        { card: quickCard("3", "3:L", "3:R") },
     ],
 }
 
