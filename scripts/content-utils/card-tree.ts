@@ -20,6 +20,11 @@ export type CardLeaf = {
     modifiers?: GameWorldModifier | GameWorldModifier[]
 }
 
+// TODO: Refactor CardTree to use this runtime type guard
+export function isCardTree(node: any): node is CardTree {
+    return node.card !== undefined
+}
+
 /**
  * @param tree The CardTree to recursively turn into an array of cards
  *

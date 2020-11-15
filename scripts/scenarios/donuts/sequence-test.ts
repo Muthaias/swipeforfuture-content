@@ -26,8 +26,23 @@ export const sequence: CardSequence = {
             },
             // 1:R should move on to 2
         },
-        { card: quickCard("2", "2:L", "2:R") },
-        { card: quickCard("3", "3:L", "3:R") },
+        {
+            sequence: [
+                { card: quickCard("2", "2:L", "2:R") },
+                { card: quickCard("3", "3:L", "3:R") },
+                {
+                    card: quickCard("4", "4:L", "4:R"),
+                    left: {
+                        card: quickCard("4:L", "4:L:L", "4:L:R"),
+                        // 4:L:L and
+                        // 4:L:R should both move on to 5
+                    },
+                    // 4:R should move on to 5
+                },
+            ],
+        },
+        { card: quickCard("5", "5:L", "5:R") },
+        { card: quickCard("6", "6:L", "6:R") },
     ],
 }
 

@@ -1,7 +1,14 @@
 import { GameWorldModifier } from "../../swipeforfuture.com/src/game/ContentTypes"
-import { WorldQuery, CardData, cardRef, setModifier, CardTree } from "./"
-import { cardsFromTree } from "./card-tree"
-import { combineWorldQueries } from "./card-utils"
+import {
+    WorldQuery,
+    CardData,
+    cardRef,
+    setModifier,
+    CardTree,
+    cardsFromTree,
+    isCardTree,
+    combineWorldQueries,
+} from "./"
 
 /**
  * TODO:
@@ -14,10 +21,16 @@ import { combineWorldQueries } from "./card-utils"
  *
  * 3) ✅ Add support for CardTree within the CardSequenuce. If a node is a CardTree, then recursively call the cardsFromTree() function to build that subtree.
  * 4) Add support for CardSequence within the CardTree. If a node is a CardSequence, then then recursively call the cardsFromSequence() function to build that subsequence.
+ *
+ * 5) Add support for combining multiple CardSequences within a CardSequence
  */
 
 export interface CardSequence {
-    sequence: CardTree[]
+    sequence: (CardTree | CardSequence)[]
+}
+
+export function isCardSequence(node: any): node is CardSequence {
+    return node.sequence !== undefined
 }
 
 /**
@@ -34,11 +47,42 @@ export function cardsFromSequence(
     _startConditions: WorldQuery[] = [],
     _endModifiers: GameWorldModifier[] = [],
 ): CardData[] {
-    const sequenceRefs = sequence.map((tree) =>
-        cardRef(tree.card.title + " sequence"),
+    // Remove any empty sequences to not mess up sequenceRefs
+    // Maybe we could protect against this by improving the type to check for a non-empty array or something
+    sequence = sequence.filter((node) =>
+        isCardSequence(node) ? !!node.sequence.length : true,
     )
 
-    const cards = sequence.flatMap((tree, i) => {
+    const sequenceRefs = sequence.map((node) => {
+        if (isCardTree(node)) {
+            return cardRef(node.card.title + " sequence")
+        } else if (isCardSequence(node)) {
+            if (isCardTree(node.sequence[0])) {
+                return cardRef(node.sequence[0].card.title + " sequence")
+            }
+            // TODO: Add support for nesting CardSequences multiple levels.
+            // This is probably not going to be a common use case
+            // However, we might want to support this to allow combining and re-using subsections of Sequences
+            // This would allow us to split large Sequences into smaller bits, and then combine them by nesting them within each other.
+            throw Error(
+                `⚠️ Nesting multiple levels of CardSequences directly within one another is not yet supported\n\n${JSON.stringify(
+                    node,
+                    null,
+                    4,
+                )}\n`,
+            )
+        } else {
+            throw Error(
+                `⚠️ Unknown node type in CardSequence: \n\n${JSON.stringify(
+                    node,
+                    null,
+                    4,
+                )}\n`,
+            )
+        }
+    })
+
+    const cards = sequence.flatMap((node, i) => {
         const prevRef = sequenceRefs[i - 1]
         const currentRef = sequenceRefs[i]
 
@@ -57,7 +101,19 @@ export function cardsFromSequence(
             ...getEndModifiers(currentRef),
         ]
 
-        return cardsFromTree(tree, isAvailableWhen, endModifiers)
+        if (isCardSequence(node)) {
+            return cardsFromSequence(node, isAvailableWhen, endModifiers)
+        } else if (isCardTree(node)) {
+            return cardsFromTree(node, isAvailableWhen, endModifiers)
+        } else {
+            throw Error(
+                `⚠️ Unknown node type in CardSequence: \n\n${JSON.stringify(
+                    node,
+                    null,
+                    4,
+                )}\n`,
+            )
+        }
     })
 
     return cards
