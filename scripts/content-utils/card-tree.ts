@@ -22,7 +22,7 @@ export type CardLeaf = {
 
 // TODO: Refactor CardTree to use this runtime type guard
 export function isCardTree(node: any): node is CardTree {
-    return node.card !== undefined
+    return node && node.card !== undefined
 }
 
 /**
@@ -83,7 +83,7 @@ export function cardsFromTree(
                 getRefRemovalModifier(rightRef, _bindRef, triggerRef),
             ],
         ]),
-        ...(tree.left && isCardTree(tree.left)
+        ...(isCardTree(tree.left)
             ? cardsFromTree(
                   tree.left,
                   leftStartConditions,
@@ -91,7 +91,7 @@ export function cardsFromTree(
                   leftRef,
               )
             : []),
-        ...(tree.right && isCardTree(tree.right)
+        ...(isCardTree(tree.right)
             ? cardsFromTree(
                   tree.right,
                   rightStartConditions,

@@ -30,7 +30,7 @@ export interface CardSequence {
 }
 
 export function isCardSequence(node: any): node is CardSequence {
-    return node.sequence !== undefined
+    return node && node.sequence !== undefined
 }
 
 /**
