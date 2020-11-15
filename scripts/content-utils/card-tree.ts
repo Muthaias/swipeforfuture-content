@@ -74,16 +74,16 @@ export function cardsFromTree(
         cardLogic(tree.card, isAvailableWhen, [
             [
                 ...mixToArray(tree.left?.modifiers),
-                ...(!tree?.left?.hasOwnProperty("card") ? _endModifiers : []),
+                ...(!isCardTree(tree.left) ? _endModifiers : []),
                 getRefRemovalModifier(leftRef, _bindRef, triggerRef),
             ],
             [
                 ...mixToArray(tree.right?.modifiers),
-                ...(!tree?.right?.hasOwnProperty("card") ? _endModifiers : []),
+                ...(!isCardTree(tree.right) ? _endModifiers : []),
                 getRefRemovalModifier(rightRef, _bindRef, triggerRef),
             ],
         ]),
-        ...(tree.left && "card" in tree.left
+        ...(tree.left && isCardTree(tree.left)
             ? cardsFromTree(
                   tree.left,
                   leftStartConditions,
@@ -91,7 +91,7 @@ export function cardsFromTree(
                   leftRef,
               )
             : []),
-        ...(tree.right && "card" in tree.right
+        ...(tree.right && isCardTree(tree.right)
             ? cardsFromTree(
                   tree.right,
                   rightStartConditions,
