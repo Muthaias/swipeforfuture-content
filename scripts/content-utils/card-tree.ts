@@ -52,17 +52,17 @@ export function cardsFromTree(
     const rightStartConditions = getStartConditions(rightRef, triggerRef, false)
 
     const treeConditions = tree.conditions?.length ? tree.conditions : []
-    const startConditions = getStartConditions(
+    const internalStartConditions = getStartConditions(
         _bindRef,
         triggerRef,
         !!triggerRef,
     )
 
     const conditions = treeConditions.length
-        ? startConditions.flatMap((c) =>
+        ? internalStartConditions.flatMap((c) =>
               treeConditions.map((tc) => combineWorldQueries(c, tc)),
           )
-        : startConditions
+        : internalStartConditions
 
     const isAvailableWhen = _startConditions.length
         ? conditions.flatMap((c) =>
