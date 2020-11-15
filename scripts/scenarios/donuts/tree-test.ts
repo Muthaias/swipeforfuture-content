@@ -2,7 +2,6 @@ import {
     cardContent,
     CardTree,
     cardsFromTree,
-    OLD_cardsFromTree,
     addModifier,
     setModifier,
 } from "../../content-utils"
@@ -73,5 +72,3 @@ export const cards = cardsFromTree(
         setModifier({}, { "END_MODIFIERS_ARE_GREAT!": true }),
     ],
 )
-
-// export const cards = OLD_cardsFromTree(tree)

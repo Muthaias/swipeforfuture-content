@@ -67,16 +67,16 @@ export function cardsFromTree(
 
     return [
         cardLogic(tree.card, isAvailableWhen, [
-            action([
+            [
                 ...mixToArray(tree.left?.modifiers),
                 ...(!tree?.left?.hasOwnProperty("card") ? _endModifiers : []),
                 getRefRemovalModifier(leftRef, _bindRef, triggerRef),
-            ]),
-            action([
+            ],
+            [
                 ...mixToArray(tree.right?.modifiers),
                 ...(!tree?.right?.hasOwnProperty("card") ? _endModifiers : []),
                 getRefRemovalModifier(rightRef, _bindRef, triggerRef),
-            ]),
+            ],
         ]),
         ...(tree.left && "card" in tree.left
             ? cardsFromTree(
@@ -146,73 +146,4 @@ function getRefRemovalModifier(
 
 function mixToArray<T>(data?: T | T[]): T[] {
     return data ? (Array.isArray(data) ? data : [data]) : []
-}
-
-/**
- * Keeping old implementation for now to make testing easier.
- */
-export function OLD_cardsFromTree(
-    tree: Omit<CardTree, "modifiers">,
-    bindRef?: string,
-): CardData[] {
-    const leftRef = cardRef(tree.card.title + " left")
-    const rightRef = cardRef(tree.card.title + " right")
-    const triggerRef = bindRef
-        ? undefined
-        : cardRef(tree.card.title + " origin")
-    const triggerRefRemoval = triggerRef ? { [triggerRef]: true } : {}
-    const bindRefRemoval = bindRef ? { [bindRef]: false } : {}
-    const conditions = tree.conditions ? tree.conditions : [{}]
-
-    return [
-        cardLogic(
-            tree.card,
-            conditions.map((c) =>
-                combineWorldQueries(c, {
-                    flags: {
-                        ...(bindRef
-                            ? {
-                                  [bindRef]: true,
-                              }
-                            : {}),
-                        ...(triggerRef
-                            ? {
-                                  [triggerRef]: false,
-                              }
-                            : {}),
-                    },
-                }),
-            ),
-            [
-                [
-                    ...mixToArray(tree.left?.modifiers),
-                    setModifier(
-                        {},
-                        {
-                            [leftRef]: true,
-                            ...bindRefRemoval,
-                            ...triggerRefRemoval,
-                        },
-                    ),
-                ],
-                [
-                    ...mixToArray(tree.right?.modifiers),
-                    setModifier(
-                        {},
-                        {
-                            [rightRef]: true,
-                            ...bindRefRemoval,
-                            ...triggerRefRemoval,
-                        },
-                    ),
-                ],
-            ],
-        ),
-        ...(tree.left && "card" in tree.left
-            ? OLD_cardsFromTree(tree.left, leftRef)
-            : []),
-        ...(tree.right && "card" in tree.right
-            ? OLD_cardsFromTree(tree.right, rightRef)
-            : []),
-    ]
 }
