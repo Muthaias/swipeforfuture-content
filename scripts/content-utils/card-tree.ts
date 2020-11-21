@@ -5,7 +5,6 @@ import {
     GameWorldModifier,
     cardRef,
     cardLogic,
-    action,
     setModifier,
     combineWorldQueries,
 } from "./"
@@ -54,7 +53,7 @@ export function cardsFromTree(
                 }),
             ),
             [
-                action([
+                [
                     ...mixToArray(tree.left?.modifiers),
                     setModifier(
                         {},
@@ -64,8 +63,8 @@ export function cardsFromTree(
                             ...triggerRefRemoval,
                         },
                     ),
-                ]),
-                action([
+                ],
+                [
                     ...mixToArray(tree.right?.modifiers),
                     setModifier(
                         {},
@@ -75,7 +74,7 @@ export function cardsFromTree(
                             ...triggerRefRemoval,
                         },
                     ),
-                ]),
+                ],
             ],
         ),
         ...(tree.left && "card" in tree.left

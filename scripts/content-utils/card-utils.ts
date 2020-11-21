@@ -1,12 +1,8 @@
+import { CardData, EventCard, WorldQuery, addModifier, action } from "."
 import {
-    CardData,
-    EventCard,
-    CardActionData,
-    WorldQuery,
-    addModifier,
-    action,
-} from "."
-import { EventCardActionData } from "../../swipeforfuture.com/src/game/ContentTypes"
+    EventCardActionData,
+    GameWorldModifier,
+} from "../../swipeforfuture.com/src/game/ContentTypes"
 
 export type BaseCard = Omit<CardData, "type" | "isAvailableWhen">
 
@@ -44,13 +40,16 @@ export function cardContent(
  *
  * @param card A card template that contains artistic content
  * @param isAvailableWhen The worldqueries for when the card is availables
- * @param [left, right] The left and right world actions
+ * @param [left, right] The left and right GameWorldModifiers
  * @param weight The weight of the card
  */
 export function cardLogic(
     card: BaseCard,
     isAvailableWhen: WorldQuery[],
-    [left, right]: [CardActionData, CardActionData],
+    [left, right]: [
+        GameWorldModifier | GameWorldModifier[],
+        GameWorldModifier | GameWorldModifier[],
+    ],
     weight: number = 1,
 ): CardData {
     return {
@@ -59,12 +58,12 @@ export function cardLogic(
         isAvailableWhen,
         actions: {
             left: {
-                ...left,
                 description: card.actions.left.description,
+                modifiers: Array.isArray(left) ? left : [left],
             },
             right: {
-                ...right,
                 description: card.actions.right.description,
+                modifiers: Array.isArray(right) ? right : [right],
             },
         },
         type: "card",
@@ -75,22 +74,41 @@ export function cardLogic(
  * Given a generic card this creates a new event card with updated logic content.
  *
  * @param card A card template that contains artistic content
- * @param [left, right] The left and right world actions
+ * @param [left, right] The left and right modifiers and nextEventCardId
  */
 export function eventCardLogic(
     card: BaseCard,
-    [left, right]: [EventCardActionData, EventCardActionData],
+    [
+        [leftModifiers, leftNextEventCardId = null],
+        [rightModifiers, rightNextEventCardId = null],
+    ]: [
+        [
+            GameWorldModifier | GameWorldModifier[],
+            EventCardActionData["nextEventCardId"]?,
+        ],
+        [
+            GameWorldModifier | GameWorldModifier[],
+            EventCardActionData["nextEventCardId"]?,
+        ],
+    ],
     weight: CardData["weight"] = 1,
 ): EventCard {
     return {
         ...card,
+        weight,
         actions: {
             left: {
-                ...left,
+                modifiers: Array.isArray(leftModifiers)
+                    ? leftModifiers
+                    : [leftModifiers],
+                nextEventCardId: leftNextEventCardId,
                 description: card.actions.left.description,
             },
             right: {
-                ...right,
+                modifiers: Array.isArray(rightModifiers)
+                    ? rightModifiers
+                    : [rightModifiers],
+                nextEventCardId: rightNextEventCardId,
                 description: card.actions.right.description,
             },
         },

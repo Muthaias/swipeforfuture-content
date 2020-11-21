@@ -4,7 +4,6 @@ import {
     worldQuery,
     cardContent,
     cardLogic,
-    action,
     addModifier,
 } from "../../../content-utils"
 import { getImage } from "../image"
@@ -56,7 +55,7 @@ export const cards: CardData[] = [
                 ...alwaysState,
             }),
         ],
-        [action(addModifier()), action(addModifier())],
+        [addModifier(), addModifier()],
         1,
     ),
     cardLogic(
@@ -66,7 +65,7 @@ export const cards: CardData[] = [
                 ...morningState,
             }),
         ],
-        [action(addModifier()), action(addModifier())],
+        [addModifier(), addModifier()],
         1,
     ),
     cardLogic(
@@ -76,7 +75,7 @@ export const cards: CardData[] = [
                 ...noonState,
             }),
         ],
-        [action(addModifier({ [staffPatience]: -1 })), action(addModifier())],
+        [addModifier({ [staffPatience]: -1 }), addModifier()],
         1,
     ),
     cardLogic(
@@ -86,7 +85,7 @@ export const cards: CardData[] = [
                 ...afterNoonState,
             }),
         ],
-        [action(addModifier({ [staffPatience]: -1 })), action(addModifier())],
+        [addModifier({ [staffPatience]: -1 }), addModifier()],
         1,
     ),
 ]
