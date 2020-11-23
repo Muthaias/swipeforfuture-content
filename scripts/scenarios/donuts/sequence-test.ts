@@ -46,18 +46,18 @@ export const sequence: CardSequence = {
     ],
 }
 
-const SEQUENCE_END_MODIFIER_RUN = propRef("SEQUENCE_END_MODIFIER_RUN")
+const sequenceEndModifiersAdded = propRef("sequenceEndModifiersAdded")
 
-export const defaultFlags = [defaultFlag(SEQUENCE_END_MODIFIER_RUN, false)]
+export const defaultFlags = [defaultFlag(sequenceEndModifiersAdded, false)]
 
 export const cards = cardsFromSequence(
     sequence,
     [
         {
             flags: {
-                [SEQUENCE_END_MODIFIER_RUN]: false,
+                [sequenceEndModifiersAdded]: false,
             },
         },
     ],
-    [addModifier({}, { [SEQUENCE_END_MODIFIER_RUN]: true })],
+    [addModifier({}, { [sequenceEndModifiersAdded]: true })],
 )
