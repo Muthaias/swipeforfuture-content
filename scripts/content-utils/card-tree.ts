@@ -22,9 +22,9 @@ export type CardLeaf = {
 }
 
 export function isCardTree(
-    node: CardTree | CardLeaf | CardSequence,
+    node?: CardTree | CardLeaf | CardSequence,
 ): node is CardTree {
-    return "card" in node
+    return !!node && "card" in node
 }
 
 /**
@@ -76,16 +76,16 @@ export function cardsFromTree(
         cardLogic(tree.card, isAvailableWhen, [
             [
                 ...mixToArray(tree.left?.modifiers),
-                ...(tree.left && isCardTree(tree.left) ? [] : _endModifiers),
+                ...(!isCardTree(tree.left) ? _endModifiers : []),
                 getRefRemovalModifier(leftRef, _bindRef, triggerRef),
             ],
             [
                 ...mixToArray(tree.right?.modifiers),
-                ...(tree.right && isCardTree(tree.right) ? [] : _endModifiers),
+                ...(!isCardTree(tree.right) ? _endModifiers : []),
                 getRefRemovalModifier(rightRef, _bindRef, triggerRef),
             ],
         ]),
-        ...(tree.left && isCardTree(tree.left)
+        ...(isCardTree(tree.left)
             ? cardsFromTree(
                   tree.left,
                   leftStartConditions,
@@ -93,7 +93,7 @@ export function cardsFromTree(
                   leftRef,
               )
             : []),
-        ...(tree.right && isCardTree(tree.right)
+        ...(isCardTree(tree.right)
             ? cardsFromTree(
                   tree.right,
                   rightStartConditions,
