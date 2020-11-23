@@ -5,6 +5,7 @@ import {
     cardRef,
     setModifier,
     CardTree,
+    CardLeaf,
     cardsFromTree,
     isCardTree,
     combineWorldQueries,
@@ -29,8 +30,10 @@ export interface CardSequence {
     sequence: (CardTree | CardSequence)[]
 }
 
-export function isCardSequence(node: any): node is CardSequence {
-    return node && node.sequence !== undefined
+export function isCardSequence(
+    node: CardSequence | CardTree | CardLeaf,
+): node is CardSequence {
+    return "sequence" in node
 }
 
 /**

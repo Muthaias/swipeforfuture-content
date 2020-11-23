@@ -7,6 +7,7 @@ import {
     cardLogic,
     setModifier,
     combineWorldQueries,
+    CardSequence,
 } from "./"
 
 export type CardTree = {
@@ -20,9 +21,10 @@ export type CardLeaf = {
     modifiers?: GameWorldModifier | GameWorldModifier[]
 }
 
-// TODO: Refactor CardTree to use this runtime type guard
-export function isCardTree(node: any): node is CardTree {
-    return node && node.card !== undefined
+export function isCardTree(
+    node: CardTree | CardLeaf | CardSequence,
+): node is CardTree {
+    return "card" in node
 }
 
 /**
@@ -74,16 +76,16 @@ export function cardsFromTree(
         cardLogic(tree.card, isAvailableWhen, [
             [
                 ...mixToArray(tree.left?.modifiers),
-                ...(!isCardTree(tree.left) ? _endModifiers : []),
+                ...(tree.left && isCardTree(tree.left) ? [] : _endModifiers),
                 getRefRemovalModifier(leftRef, _bindRef, triggerRef),
             ],
             [
                 ...mixToArray(tree.right?.modifiers),
-                ...(!isCardTree(tree.right) ? _endModifiers : []),
+                ...(tree.right && isCardTree(tree.right) ? [] : _endModifiers),
                 getRefRemovalModifier(rightRef, _bindRef, triggerRef),
             ],
         ]),
-        ...(isCardTree(tree.left)
+        ...(tree.left && isCardTree(tree.left)
             ? cardsFromTree(
                   tree.left,
                   leftStartConditions,
@@ -91,7 +93,7 @@ export function cardsFromTree(
                   leftRef,
               )
             : []),
-        ...(isCardTree(tree.right)
+        ...(tree.right && isCardTree(tree.right)
             ? cardsFromTree(
                   tree.right,
                   rightStartConditions,
