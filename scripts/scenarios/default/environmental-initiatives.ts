@@ -33,6 +33,16 @@ const truckPartnershipInit = cardContent(
     ["Move along", "Interesting. Tell me more"],
 )
 
+// Reference: http://climateinitiativesplatform.org/index.php/ACT_Assessing_Low-Carbon_Transition
+const actInit = cardContent(
+    getImage("envira"),
+    "Assessing low Carbon Transition",
+    "ACT is an initiative that creates an accountability framework and sectorial methodologies to assess how companies' strategies and actions are contributing to the Paris Agreement mitigation goals.",
+    "In parliament",
+    ["Do we need it?", "How do we apply it?"],
+)
+
 export const cards: CardData[] = [
     mockCard(truckPartnershipInit),
+    mockCard(actInit),
 ]
