@@ -7,7 +7,7 @@ RUN mkdir /exec
 COPY package.json /exec/package.json
 COPY package-lock.json /exec/package-lock.json
 COPY tsconfig.json /exec/tsconfig.json
-COPY README.md /exec/README.md
+
 WORKDIR /exec
 RUN npm install
 

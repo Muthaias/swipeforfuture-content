@@ -15,4 +15,4 @@ services:
       - ./dist:/exec/dist
       - ./scripts:/exec/scripts
       - ./swipeforfuture.com:/exec/swipeforfuture.com
-    entrypoint: ["npm", "run", "dev"]
+    entrypoint: ["npm", "run", "dev-poll"]
