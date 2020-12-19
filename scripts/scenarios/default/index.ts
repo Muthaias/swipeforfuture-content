@@ -17,6 +17,7 @@ import { infranCards, infranEventCards, infranEvents } from "./infran"
 import { otherCards } from "./cards"
 import { endGameEventCards, endGameEvents } from "./endgame"
 import { mariaEventCards, mariaEvents } from "./maria"
+import * as EnvironmentInitiatives from "./environmental-initiatives"
 
 export const builder: ScenarioBuilder = {
     run() {
@@ -28,6 +29,7 @@ export const builder: ScenarioBuilder = {
                 ...enviraCards,
                 ...infranCards,
                 ...otherCards,
+                ...EnvironmentInitiatives.cards,
             ],
             events: [
                 ...mariaEvents,
