@@ -1,0 +1,1027 @@
+[
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "What a crazy election. Now that we are in office, we can get started with important work, Governor. ",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "We have a lot of choices to make. You can choose by swiping the card left or right. Try now.",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "The people elected because you promised to convert the country to green energy (swipe to continue)",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "But, we barely won the election. Our country relies heavily on coal energy for jobs and power...",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "We promised to convert to green energy, but you will need to keep the citizens happy and employed too...",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "These are the world stats. If any of them drop to 0, our country will collapse! (swipe to continue)",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "This is the economy icon. It represents the jobs, production, and trade power of the country.",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "This is the environment icon. Pollution and dirty energy can negatively impact our environment.",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "This is the money icon. It shows how much money your government has to spend on different projects.",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "The popularity icons show how much the three groups (environmentalist, miners, undecided voters) like you.",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "Finally, the green energy icon shows what percent of our country's energy is green.",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "You job as governor is to make the right choices. Every choice affects the world stats. Let's try it out.  (swipe to continue)",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "We have a large grant to build our first green energy plant. Would you like to build a wind farm or a solar farm?",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Build a wind farm",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Build a solar farm",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "Congratulations! You have built a wind farm",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "Congratulations! You have built a solar farm.",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "Great job! You've increased the green energy to 10%. We need to reach 80% to save our country.",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "We also need to keep people happy. There are three groups: miners, environmentalists, and undecided voters.",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "I put together a focus group, so you can hear what these groups have to say. Do you want to meet them?",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "No. I want to get started",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Yes. Let's meet them",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1529088746738-c4c0a152fb2c?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "As a coal miner, I don't know much about the environment, but my family and friends depend on those jobs.",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1546541612-82d19b258cd5?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "As an environmentalist, protecting our planet is the most important issue to me. ",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1584799235813-aaf50775698c?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "I don't know who I will vote for next time. I am really on the fence about the green energy plans.",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "The focus group will let you know what different groups think about your recent big decisions.",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "You will need to keep 2 groups at 50% or more happiness to get reelected. If any group drops to 0, we will lose!",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "Listen to the opinions of the people and your advisors. This is a hard job and will take hard choices.",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Continue",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fit=crop&w=800&q=60",
+        "title": "Tutorial",
+        "text": "Remember, you only have XXXXXXXXX turns to get to 80% green energy. Good luck! (Ready to begin?)",
+        "location": "",
+        "actions": {
+            "left": {
+                "description": "No, I want to hear the tutorial again",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            },
+            "right": {
+                "description": "Yes, I am ready to play!",
+                "modifiers": [
+                    {
+                        "type": "add",
+                        "state": {},
+                        "flags": {}
+                    }
+                ]
+            }
+        },
+        "weight": 1,
+        "isAvailableWhen": [
+            {
+                "state": {
+                    "environment": [
+                        0,
+                        100
+                    ]
+                },
+                "flags": {}
+            }
+        ],
+        "type": "card"
+    }
+]

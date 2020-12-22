@@ -6,7 +6,6 @@
         "location": "In parliament",
         "actions": {
             "left": {
-                "description": "Nah. I'm good. I think I can handle things on my own.",
                 "modifiers": [
                     {
                         "type": "set",
@@ -14,10 +13,10 @@
                         "flags": {}
                     }
                 ],
-                "nextEventCardId": null
+                "nextEventCardId": "welcome-loop:card:7",
+                "description": "Nah. I'm good. I think I can handle things on my own."
             },
             "right": {
-                "description": "That sounds great. Let's do it ASAP",
                 "modifiers": [
                     {
                         "type": "set",
@@ -25,7 +24,8 @@
                         "flags": {}
                     }
                 ],
-                "nextEventCardId": null
+                "nextEventCardId": "welcome-lunch:card:8",
+                "description": "That sounds great. Let's do it ASAP"
             }
         },
         "weight": 1,
@@ -38,7 +38,6 @@
         "location": "In parliament",
         "actions": {
             "left": {
-                "description": "Get off my back.",
                 "modifiers": [
                     {
                         "type": "add",
@@ -48,10 +47,10 @@
                         "flags": {}
                     }
                 ],
-                "nextEventCardId": "welcome-loop:card:7"
+                "nextEventCardId": "welcome-loop:card:7",
+                "description": "Get off my back."
             },
             "right": {
-                "description": "Alright. Let's do this.",
                 "modifiers": [
                     {
                         "type": "set",
@@ -59,7 +58,8 @@
                         "flags": {}
                     }
                 ],
-                "nextEventCardId": null
+                "nextEventCardId": "welcome-lunch:card:8",
+                "description": "Alright. Let's do this."
             }
         },
         "weight": 1,
@@ -72,7 +72,6 @@
         "location": "In parliament",
         "actions": {
             "left": {
-                "description": "Nice talk. Love the economy!",
                 "modifiers": [
                     {
                         "type": "set",
@@ -85,10 +84,10 @@
                         }
                     }
                 ],
-                "nextEventCardId": null
+                "nextEventCardId": null,
+                "description": "Nice talk. Love the economy!"
             },
             "right": {
-                "description": "Nice talk. We should think about our future.",
                 "modifiers": [
                     {
                         "type": "set",
@@ -101,7 +100,8 @@
                         }
                     }
                 ],
-                "nextEventCardId": null
+                "nextEventCardId": null,
+                "description": "Nice talk. We should think about our future."
             }
         },
         "weight": 1,
