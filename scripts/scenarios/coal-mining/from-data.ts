@@ -8,7 +8,7 @@ const rawData = loadFile<{
     "Swipe Left Text": string
     "Swipe Right Text": string
     "Image Desc": string
-}>("/home/mattiasnyberg/Downloads/MVP Card List.xlsx", {
+}>("./scripts/scenarios/coal-mining/data/base.xlsx", {
     "Card Name": toString,
     "Card Type": toString,
     Character: toString,
