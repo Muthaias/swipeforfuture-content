@@ -5,7 +5,10 @@ export type TypeMapping<T> = {
     [A in keyof T]: (value: unknown) => T[A]
 }
 
-export function loadFile<T>(path: string, fieldMapping: TypeMapping<T>): T[] {
+export function loadFile<T>(
+    path: string,
+    fieldMapping: TypeMapping<T>,
+): (T & { __sheet?: string })[] {
     const book = xlsx.read(fs.readFileSync(path))
     const requiredFields: (keyof T)[] = Object.keys(fieldMapping) as (keyof T)[]
     const transformedSheets = Object.keys(book.Sheets).map<T[]>((key) => {
@@ -16,18 +19,18 @@ export function loadFile<T>(path: string, fieldMapping: TypeMapping<T>): T[] {
                 header: 0,
             },
         )
-        return data.map(
-            (d) =>
-                requiredFields.reduce<Partial<T>>(
-                    (acc: Partial<T>, fieldId) => {
-                        return {
-                            ...acc,
-                            [fieldId]: fieldMapping[fieldId](d[fieldId]),
-                        }
-                    },
-                    {},
-                ) as T,
-        )
+        return data.map((d) => ({
+            __sheet: key,
+            ...(requiredFields.reduce<Partial<T>>(
+                (acc: Partial<T>, fieldId) => {
+                    return {
+                        ...acc,
+                        [fieldId]: fieldMapping[fieldId](d[fieldId]),
+                    }
+                },
+                {},
+            ) as T),
+        }))
     })
     return new Array<T>().concat(...transformedSheets)
 }
