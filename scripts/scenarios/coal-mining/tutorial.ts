@@ -1,17 +1,21 @@
 import {
     CardData,
+    BaseCard,
     EventCard,
     WorldEvent,
     WorldQuery,
-    worldQuery,
     cardContent,
     cardLogic,
     addModifier,
     unsplashImage,
+    createIdContext,
+    GameWorldModifier,
+    combineWorldQueries,
 } from "../../content-utils"
 import * as Stats from "./stats"
 
 const alwaysState: WorldQuery["state"] = { [Stats.environment]: [0, 100] }
+const getId = createIdContext("tutorial")
 
 const images = {
     campaignAdvisor: unsplashImage("1573497019940-1c28c88b4f3e"),
@@ -20,14 +24,97 @@ const images = {
     undecidedVoter: unsplashImage("1584799235813-aaf50775698c"),
 }
 
-const mockCard = (card: any) => {
+function chainCards<T extends BaseCard>(endCard?: T) {
+    return (card: T, index: number, cards: T[]) => {
+        const next = cards[index + 1] || endCard
+        return linkLogic(
+            card,
+            [],
+            [{next}, {next}]
+        )
+    }
+}
+
+function link(card: BaseCard): WorldQuery {
+    const id = getId(card)
+    return {
+        flags: {
+            [id]: true,
+        }
+    }
+}
+
+function linkTo(card: BaseCard): GameWorldModifier {
+    const id = getId(card)
+    return {
+        type: "set",
+        flags: {
+            [id]: true
+        }
+    }
+}
+
+function linkVisited(card: BaseCard): GameWorldModifier {
+    const id = getId(card)
+    return {
+        type: "set",
+        flags: {
+            [id]: false
+        }
+    }
+}
+
+type ModifierWithNextCard = GameWorldModifier & {next?: BaseCard}
+
+function linkLogic(
+    card: BaseCard,
+    isAvailableWhen: WorldQuery[],
+    [left, right]: [
+        ModifierWithNextCard | ModifierWithNextCard[],
+        ModifierWithNextCard | ModifierWithNextCard[],
+    ],
+    weight: number = 1,
+): CardData {
     return cardLogic(
         card,
+        isAvailableWhen.length > 0 ? (
+            isAvailableWhen.map(wq => combineWorldQueries(
+                wq,
+                link(card)
+            ))
+        ) : (
+            [link(card)]
+        ),
         [
-            worldQuery({
-                ...alwaysState,
-            }),
+            [
+                ...(Array.isArray(left) ? left : [left]).map(wm => [
+                    {
+                        ...wm,
+                        next: undefined
+                    },
+                    ...(wm.next ? [linkTo(wm.next)] : [])
+                ]).flat(),
+                linkVisited(card),
+            ],
+            [
+                ...(Array.isArray(right) ? right : [right]).map(wm => [
+                    {
+                        ...wm,
+                        next: undefined
+                    },
+                    ...(wm.next ? [linkTo(wm.next)] : [])
+                ]).flat(),
+                linkVisited(card),
+            ]
         ],
+        weight
+    )
+}
+
+const mockCard = (card: BaseCard) => {
+    return cardLogic(
+        card,
+        [link(card)],
         [addModifier(), addModifier()],
         1,
     )
@@ -244,32 +331,61 @@ const Intro_Final = cardContent(
 )
 
 export const cards: CardData[] = [
-    mockCard(Hello_Player),
-    mockCard(How_to_Swipe),
-    mockCard(Story_1),
-    mockCard(Story_2),
-    mockCard(Story_3),
-    mockCard(UI_1),
-    mockCard(UI_Jobs),
-    mockCard(UI_Envi),
-    mockCard(UI_Money),
-    mockCard(UI_Popularity),
-    mockCard(UI_Green),
-    mockCard(UI_Test),
-    mockCard(UI_Test2),
-    mockCard(UI_TestWind),
-    mockCard(UI_TestSolar),
-    mockCard(UI_Test_3),
-    mockCard(Intro_FocusGroup1),
-    mockCard(Intro_FocusGroup2),
-    mockCard(Intro_FocusGroup_Miner),
-    mockCard(Intro_FocusGroup_Enviro),
-    mockCard(Intro_FocusGroup_Unde),
-    mockCard(Intro_FocusGroupFinal),
-    mockCard(Intro_Happiness),
-    mockCard(Intro_Listen),
-    mockCard(Intro_Final),
-]
+    Hello_Player,
+    How_to_Swipe,
+    Story_1,
+    Story_2,
+    Story_3,
+    UI_1,
+    UI_Jobs,
+    UI_Envi,
+    UI_Money,
+    UI_Popularity,
+    UI_Green,
+    UI_Test,
+].map(
+    chainCards(UI_Test2)
+).concat([
+    linkLogic(
+        UI_Test2,
+        [],
+        [{next: UI_TestWind}, {next:UI_TestSolar}],
+    ),
+    linkLogic(
+        UI_TestWind,
+        [],
+        [{next: UI_Test_3}, {next: UI_Test_3}],
+    ),
+    linkLogic(
+        UI_TestSolar,
+        [],
+        [{next: UI_Test_3}, {next: UI_Test_3}],
+    )
+]).concat([
+    UI_Test_3,
+    Intro_FocusGroup1,
+].map(
+    chainCards(Intro_FocusGroup2))
+).concat([
+    linkLogic(
+        Intro_FocusGroup2,
+        [],
+        [{next: Intro_FocusGroupFinal}, {next: Intro_FocusGroup_Miner}]
+    )
+]).concat([
+    Intro_FocusGroup_Miner,
+    Intro_FocusGroup_Enviro,
+    Intro_FocusGroup_Unde,
+].map(
+    chainCards(Intro_FocusGroupFinal))
+).concat([
+    Intro_FocusGroupFinal,
+    Intro_Happiness,
+    Intro_Listen,
+    Intro_Final,
+].map(
+    chainCards())
+)
 
 export const eventCards: { [x: string]: EventCard } = {}
 export const events: WorldEvent[] = []

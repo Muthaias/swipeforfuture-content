@@ -18,7 +18,7 @@ export const builder: ScenarioBuilder = {
             },
             defaultState: {
                 state: combineDefaultEntries([...Stats.defaultStates]),
-                flags: combineDefaultEntries([]),
+                flags: combineDefaultEntries([...Stats.defaultFlags]),
             },
             worldStateModifiers: [
                 {
