@@ -50,11 +50,7 @@ export function createLinkContext(getId: (obj: unknown) => string) {
     ): CardData {
         return cardLogic(
             card,
-            isAvailableWhen.length > 0
-                ? isAvailableWhen.map((wq) =>
-                      combineWorldQueries(wq, link(card)),
-                  )
-                : [link(card)],
+            [...isAvailableWhen, link(card)],
             [
                 [
                     ...(Array.isArray(left) ? left : [left])
