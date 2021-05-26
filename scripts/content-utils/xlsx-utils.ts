@@ -46,6 +46,18 @@ export function toString(value: any): string {
     return value ? value + "" : ""
 }
 
+export function toStringOrUndefined(value: any): string | undefined {
+    return value === undefined ? undefined : value + ""
+}
+
+export function toStringArray(split = ";"): (value: any) => string[] {
+    return (value: any) => {
+        return toString(value)
+            .split(split)
+            .map((v) => v.trim())
+    }
+}
+
 export function toNumber(value: any): number {
     return value ? parseFloat(value) : 0
 }

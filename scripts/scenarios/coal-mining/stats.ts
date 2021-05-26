@@ -21,6 +21,4 @@ export const defaultStates = [
     defaultState(popularity, 50),
 ]
 
-export const defaultFlags = [
-    defaultFlag("tutorial:0", true)
-]
+export const defaultFlags = [defaultFlag("tutorial:0", true)]

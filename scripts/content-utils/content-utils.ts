@@ -298,9 +298,9 @@ export function createIdContext(namespace?: string) {
     let index = 0
     const map = new Map<unknown, string>()
     return (obj: unknown) => {
-        const id = map.get(obj) || (
-            [namespace, index++].filter(v => v !== undefined).join(":")
-        )
+        const id =
+            map.get(obj) ||
+            [namespace, index++].filter((v) => v !== undefined).join(":")
         map.set(obj, id)
         return id
     }

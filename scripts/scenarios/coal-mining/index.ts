@@ -1,5 +1,6 @@
 import * as Tutorial from "./tutorial"
 import * as Stats from "./stats"
+import * as FromData from "./from-data"
 
 import {
     ScenarioBuilder,
@@ -11,7 +12,7 @@ export const builder: ScenarioBuilder = {
         const scenario: Scenario = {
             id: "donuts",
             stats: Object.values(Stats.definitions),
-            cards: [...Tutorial.cards],
+            cards: [...Tutorial.cards, ...FromData.cards],
             events: [...Tutorial.events],
             eventCards: {
                 ...Tutorial.eventCards,
