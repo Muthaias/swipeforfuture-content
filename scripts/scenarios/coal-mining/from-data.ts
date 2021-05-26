@@ -9,6 +9,7 @@ import {
     BaseCard,
     cardContent,
     createIdContext,
+    GameWorldModifier,
 } from "../../content-utils"
 import { createLinkContext } from "./utils"
 import { getImage } from "./images"
@@ -29,6 +30,56 @@ type DataDescription = {
     "Right Step"?: string
     Location: string
     Title: string
+}
+
+function parseGameWorldModifiers(data: string[]): GameWorldModifier[] {
+    const {
+        add,
+        set,
+        _unknown,
+    } = data.reduce<{
+        add: {id: string, value: number}[]
+        set: {id: string, value: number}[]
+        _unknown: string[]
+    }>((acc, entry) => {
+        const match = entry.match(/(\w+)\s*([+-=])\s*([-]?\d+)/)
+        if (match) {
+            const separator = match[2]
+            const type: "add" | "set" = ({
+                "type+": "add" as "add",
+                "type-": "add" as "add",
+                "type=": "set" as "set",
+            })["type" + separator] || "set"
+            acc[type].push({
+                id: match[1],
+                value: parseFloat(match[3])
+            })
+        } else {
+            acc._unknown.push(entry)
+        }
+        return acc
+    }, {add: [], set: [], _unknown: []})
+
+    if (_unknown.length > 0) {
+        console.warn(_unknown)
+    }
+
+    return [
+        {
+            type: "add",
+            state: add.reduce<{[x: string]: number}>((acc, entry) => {
+                acc[entry.id] = entry.value
+                return acc
+            }, {})
+        },
+        {
+            type: "set",
+            state: set.reduce<{[x: string]: number}>((acc, entry) => {
+                acc[entry.id] = entry.value
+                return acc
+            }, {})
+        }
+    ]
 }
 
 function toCardData(data: DataDescription[]): CardData[] {
@@ -59,7 +110,16 @@ function toCardData(data: DataDescription[]): CardData[] {
         const right = entry["Right Step"]
             ? cardIdMap.get(entry["Right Step"])
             : undefined
-        return linkLogic(card, [], [{ next: left }, { next: right }])
+        return linkLogic(card, [], [
+            [
+                ...parseGameWorldModifiers(entry["Left Effect"]),
+                { next: left }
+            ],
+            [
+                ...parseGameWorldModifiers(entry["Right Effect"]),
+                { next: right }
+            ]
+        ])
     })
     return cards
 }
