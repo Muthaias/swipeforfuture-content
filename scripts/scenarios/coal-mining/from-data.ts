@@ -46,13 +46,15 @@ function parseGameWorldModifiers(data: string[]): GameWorldModifier[] {
         if (match) {
             const separator = match[2]
             const type: "add" | "set" = ({
-                "type+": "add" as "add",
-                "type-": "add" as "add",
-                "type=": "set" as "set",
-            })["type" + separator] || "set"
+                "+": "add" as "add",
+                "-": "add" as "add",
+                "=": "set" as "set",
+            })[separator] || "set"
             acc[type].push({
                 id: match[1],
-                value: parseFloat(match[3])
+                value: (
+                    separator === "-" ? -1 : 1
+                ) * parseFloat(match[3])
             })
         } else {
             acc._unknown.push(entry)
@@ -64,7 +66,7 @@ function parseGameWorldModifiers(data: string[]): GameWorldModifier[] {
         console.warn(_unknown)
     }
 
-    return [
+    const mods: GameWorldModifier[] = [
         {
             type: "add",
             state: add.reduce<{[x: string]: number}>((acc, entry) => {
@@ -80,6 +82,7 @@ function parseGameWorldModifiers(data: string[]): GameWorldModifier[] {
             }, {})
         }
     ]
+    return mods
 }
 
 function toCardData(data: DataDescription[]): CardData[] {
