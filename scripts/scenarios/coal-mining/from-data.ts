@@ -1,6 +1,7 @@
 import {
     loadFile,
     toString,
+    toNumber,
     toStringArray,
     toLowerCaseString,
 } from "../../content-utils/xlsx-utils"
@@ -32,6 +33,7 @@ type DataDescription = {
     Location: string
     Title: string
     When: string[]
+    Weight: number
 }
 
 function loadStandadFile(path: string): DataDescription[] {
@@ -52,6 +54,7 @@ function loadStandadFile(path: string): DataDescription[] {
             Location: toString(""),
             Title: toString(""),
             When: toStringArray(";", toLowerCaseString("")),
+            Weight: toNumber,
         },
         {
             sheetIds: ["init"],
@@ -227,6 +230,7 @@ function toCardData(data: DataDescription[]): CardData[] {
                     { next: right },
                 ],
             ],
+            entry.Weight
         )
     })
     return cards
