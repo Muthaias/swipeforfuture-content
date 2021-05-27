@@ -42,17 +42,25 @@ export function loadFile<T>(
     return new Array<T>().concat(...transformedSheets)
 }
 
-export function toString(value: any): string {
-    return value ? value + "" : ""
-}
-
-export function toStringOrUndefined(value: any): string | undefined {
-    return value === undefined ? undefined : value + ""
-}
-
-export function toStringArray(split = ";"): (value: any) => string[] {
+export function toString<T>(base: T): (v: any) => (string | T) {
     return (value: any) => {
-        return toString(value)
+        return value === undefined ? base : value + ""
+    }
+}
+
+export function toLowerCaseString<T>(base: T): (v: any) => (string | T) {
+    return (val: any) => {
+        const r = toString(undefined)(val)
+        return r === undefined ? base : r.toLocaleLowerCase();
+    }
+}
+
+export function toStringArray(
+    split = ";",
+    processValue: (val: any) => string = toString("")
+): (value: any) => string[] {
+    return (value: any) => {
+        return processValue(value)
             .split(split)
             .map((v) => v.trim())
     }

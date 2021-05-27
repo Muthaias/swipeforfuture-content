@@ -2,7 +2,7 @@ import {
     loadFile,
     toString,
     toStringArray,
-    toStringOrUndefined,
+    toLowerCaseString,
 } from "../../content-utils/xlsx-utils"
 import {
     CardData,
@@ -34,10 +34,36 @@ type DataDescription = {
     When: string[]
 }
 
+function loadStandadFile(path: string): DataDescription[] {
+    return loadFile<DataDescription>(
+        path,
+        {
+            "Card Name": toLowerCaseString(""),
+            "Card Type": toString(""),
+            Character: toString(""),
+            "Text of card": toString(""),
+            "Swipe Left Text": toString(""),
+            "Swipe Right Text": toString(""),
+            "Image Desc": toString(""),
+            "Left Effect": toStringArray(";", toLowerCaseString("")),
+            "Right Effect": toStringArray(";", toLowerCaseString("")),
+            "Left Step": toLowerCaseString(undefined),
+            "Right Step": toLowerCaseString(undefined),
+            Location: toString(""),
+            Title: toString(""),
+            When: toStringArray(";", toLowerCaseString("")),
+        },
+        {
+            sheetIds: ["init"],
+        },
+    )
+}
+
 function parseGameWorldModifiers(data: string[]): GameWorldModifier[] {
-    const { add, set, _unknown } = data.reduce<{
+    const { add, set, flags, _unknown } = data.reduce<{
         add: { id: string; value: number }[]
         set: { id: string; value: number }[]
+        flags: { [id: string]: boolean }
         _unknown: string[]
     }>(
         (acc, entry) => {
@@ -55,11 +81,16 @@ function parseGameWorldModifiers(data: string[]): GameWorldModifier[] {
                     value: (separator === "-" ? -1 : 1) * parseFloat(match[3]),
                 })
             } else {
-                acc._unknown.push(entry)
+                const flagMatch = entry.match(/(\w+)\s*=\s*(true|false)/)
+                if (flagMatch) {
+                    acc.flags[flagMatch[1]] = flagMatch[2] === "true"
+                } else {
+                    acc._unknown.push(entry)
+                }
             }
             return acc
         },
-        { add: [], set: [], _unknown: [] },
+        { add: [], set: [], _unknown: [], flags: {} },
     )
 
     if (_unknown.length > 0) {
@@ -80,46 +111,77 @@ function parseGameWorldModifiers(data: string[]): GameWorldModifier[] {
                 acc[entry.id] = entry.value
                 return acc
             }, {}),
+            flags: flags,
         },
     ]
     return mods
 }
 
 function parseWorldQuery(data: string): WorldQuery | undefined {
-    const entries = data
+    type WQState = {
+        [x: string]: [number, number]
+    }
+    type WQFlag = {
+        [x: string]: boolean
+    }
+    const dataEntries = data
         .split(",")
         .map((e) => e.trim())
-        .map((e) => {
+    const entries = dataEntries
+        .map<WQState | undefined>((e) => {
             const match = e.match(/(\w+)\s*=\s*(\d+)\s*-\s*(\d+)/)
             if (match) {
                 return {
                     [match[1]]: [parseFloat(match[2]), parseFloat(match[3])],
                 }
-            } else {
-                console.warn("Unable to parse query: ", e)
             }
             return undefined
         })
         .filter(
             (
                 e,
-            ): e is {
-                [x: string]: [number, number]
-            } => e !== undefined,
+            ): e is WQState => e !== undefined,
+        )
+    const flags = dataEntries
+        .map<WQFlag | undefined>((e) => {
+            const match = e.match(/(\w+)\s*=\s*(true|false)/)
+            if (match) {
+                return {
+                    [match[1]]: match[2] === "true",
+                }
+            }
+            return undefined
+        })
+        .filter(
+            (
+                e,
+            ): e is WQFlag => e !== undefined,
         )
 
     if (entries.length === 0) return undefined
 
-    return entries.reduce<WorldQuery>(
-        (acc, entry) => {
-            acc.state = {
-                ...acc.state,
-                ...entry,
-            }
-            return acc
-        },
-        { state: {} },
-    )
+    return {
+        ...entries.reduce<WorldQuery>(
+            (acc, entry) => {
+                acc.state = {
+                    ...acc.state,
+                    ...entry,
+                }
+                return acc
+            },
+            { state: {} },
+        ),
+        ...flags.reduce<WorldQuery>(
+            (acc, entry) => {
+                acc.flags = {
+                    ...acc.flags,
+                    ...entry,
+                }
+                return acc
+            },
+            { state: {} },
+        )
+    }
 }
 
 function toCardData(data: DataDescription[]): CardData[] {
@@ -170,27 +232,6 @@ function toCardData(data: DataDescription[]): CardData[] {
     return cards
 }
 
-const rawData = loadFile<DataDescription>(
-    "./data/test.xlsx",
-    {
-        "Card Name": toString,
-        "Card Type": toString,
-        Character: toString,
-        "Text of card": toString,
-        "Swipe Left Text": toString,
-        "Swipe Right Text": toString,
-        "Image Desc": toString,
-        "Left Effect": toStringArray(),
-        "Right Effect": toStringArray(),
-        "Left Step": toStringOrUndefined,
-        "Right Step": toStringOrUndefined,
-        Location: toString,
-        Title: toString,
-        When: toStringArray(),
-    },
-    {
-        sheetIds: ["init"],
-    },
-)
+const rawData = loadStandadFile("./data/test.xlsx")
 
 export const cards = toCardData(rawData)

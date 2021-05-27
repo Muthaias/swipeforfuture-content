@@ -19,7 +19,7 @@ export const defaultStates = [
     defaultState(security, 50),
     defaultState(money, 50),
     defaultState(popularity, 50),
-    defaultState("Init", 0),
+    defaultState("init", 0),
 ]
 
 export const defaultFlags = [defaultFlag("tutorial:0", true)]
