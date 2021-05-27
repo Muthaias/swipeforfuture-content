@@ -60,9 +60,12 @@ export function toStringArray(
     processValue: (val: any) => string = toString("")
 ): (value: any) => string[] {
     return (value: any) => {
-        return processValue(value)
-            .split(split)
-            .map((v) => v.trim())
+        const result = processValue(value)
+        return result === "" ? [] : (
+            result
+                .split(split)
+                .map((v) => v.trim())
+        )
     }
 }
 

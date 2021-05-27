@@ -161,9 +161,12 @@ function parseWorldQuery(data: string): WorldQuery | undefined {
             ): e is WQFlag => e !== undefined,
         )
 
-    if (entries.length === 0) return undefined
+    if (
+        entries.length === 0 &&
+        flags.length === 0
+    ) return undefined
 
-    return {
+    const wq = {
         ...entries.reduce<WorldQuery>(
             (acc, entry) => {
                 acc.state = {
@@ -185,6 +188,7 @@ function parseWorldQuery(data: string): WorldQuery | undefined {
             { state: {} },
         )
     }
+    return wq
 }
 
 function toCardData(data: DataDescription[]): CardData[] {
