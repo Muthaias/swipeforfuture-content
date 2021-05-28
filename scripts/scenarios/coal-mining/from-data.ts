@@ -63,60 +63,67 @@ function loadStandadFile(path: string): DataDescription[] {
 }
 
 function parseGameWorldModifiers(data: string[]): GameWorldModifier[] {
-    const { add, set, flags, _unknown } = data.reduce<{
-        add: { id: string; value: number }[]
-        set: { id: string; value: number }[]
-        flags: { [id: string]: boolean }
+    type Operation = { id: string; value: number | boolean }
+    const operations = data.reduce<{
+        add: Operation[]
+        set: Operation[]
+        replace: Operation[]
         _unknown: string[]
     }>(
         (acc, entry) => {
-            const match = entry.match(/(\w+)\s*([+-=])\s*([-]?\d+)/)
+            const match = entry.match(/(\w+)\s*(\+|-|=|==)\s*(([-]?\d+)|(true|false))/)
             if (match) {
                 const separator = match[2]
-                const type: "add" | "set" =
+                const value = match[3] === "true" ? (
+                    true
+                ) : (
+                    match[3] === "false" ? (
+                        false
+                    ) : (
+                        (separator === "-" ? -1 : 1) * parseFloat(match[3])
+                    )
+                )
+                const type: "add" | "set" | "replace" =
                     {
                         "+": "add" as "add",
                         "-": "add" as "add",
                         "=": "set" as "set",
+                        "==": "replace" as "replace",
                     }[separator] || "set"
                 acc[type].push({
                     id: match[1],
-                    value: (separator === "-" ? -1 : 1) * parseFloat(match[3]),
+                    value: value,
                 })
             } else {
-                const flagMatch = entry.match(/(\w+)\s*=\s*(true|false)/)
-                if (flagMatch) {
-                    acc.flags[flagMatch[1]] = flagMatch[2] === "true"
-                } else {
-                    acc._unknown.push(entry)
-                }
+                acc._unknown.push(entry)
             }
             return acc
         },
-        { add: [], set: [], _unknown: [], flags: {} },
+        { add: [], set: [], replace: [], _unknown: [] },
     )
 
-    if (_unknown.length > 0) {
-        console.warn(_unknown)
+    if (operations._unknown.length > 0) {
+        console.warn(operations._unknown)
     }
 
     const mods: GameWorldModifier[] = [
-        {
-            type: "add",
-            state: add.reduce<{ [x: string]: number }>((acc, entry) => {
+        "add" as "add",
+        "set" as "set",
+        "replace" as "replace"
+    ].filter(type => operations[type].length > 0).map(type => {
+        const ops = operations[type]
+        return {
+            type: type,
+            state: ops.filter((o): o is {id: string, value: number} => typeof o.value === "number").reduce<{ [x: string]: number }>((acc, entry) => {
                 acc[entry.id] = entry.value
                 return acc
             }, {}),
-        },
-        {
-            type: "set",
-            state: set.reduce<{ [x: string]: number }>((acc, entry) => {
+            flags: ops.filter((o): o is {id: string, value: boolean} => typeof o.value === "boolean").reduce<{ [x: string]: boolean }>((acc, entry) => {
                 acc[entry.id] = entry.value
                 return acc
             }, {}),
-            flags: flags,
-        },
-    ]
+        }
+    })
     return mods
 }
 
