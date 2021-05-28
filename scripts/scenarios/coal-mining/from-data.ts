@@ -71,18 +71,17 @@ function parseGameWorldModifiers(data: string[]): GameWorldModifier[] {
         _unknown: string[]
     }>(
         (acc, entry) => {
-            const match = entry.match(/(\w+)\s*(\+|-|=|==)\s*(([-]?\d+)|(true|false))/)
+            const match = entry.match(
+                /(\w+)\s*(\+|-|=|==)\s*(([-]?\d+)|(true|false))/,
+            )
             if (match) {
                 const separator = match[2]
-                const value = match[3] === "true" ? (
-                    true
-                ) : (
-                    match[3] === "false" ? (
-                        false
-                    ) : (
-                        (separator === "-" ? -1 : 1) * parseFloat(match[3])
-                    )
-                )
+                const value =
+                    match[3] === "true"
+                        ? true
+                        : match[3] === "false"
+                        ? false
+                        : (separator === "-" ? -1 : 1) * parseFloat(match[3])
                 const type: "add" | "set" | "replace" =
                     {
                         "+": "add" as "add",
@@ -109,21 +108,33 @@ function parseGameWorldModifiers(data: string[]): GameWorldModifier[] {
     const mods: GameWorldModifier[] = [
         "add" as "add",
         "set" as "set",
-        "replace" as "replace"
-    ].filter(type => operations[type].length > 0).map(type => {
-        const ops = operations[type]
-        return {
-            type: type,
-            state: ops.filter((o): o is {id: string, value: number} => typeof o.value === "number").reduce<{ [x: string]: number }>((acc, entry) => {
-                acc[entry.id] = entry.value
-                return acc
-            }, {}),
-            flags: ops.filter((o): o is {id: string, value: boolean} => typeof o.value === "boolean").reduce<{ [x: string]: boolean }>((acc, entry) => {
-                acc[entry.id] = entry.value
-                return acc
-            }, {}),
-        }
-    })
+        "replace" as "replace",
+    ]
+        .filter((type) => operations[type].length > 0)
+        .map((type) => {
+            const ops = operations[type]
+            return {
+                type: type,
+                state: ops
+                    .filter(
+                        (o): o is { id: string; value: number } =>
+                            typeof o.value === "number",
+                    )
+                    .reduce<{ [x: string]: number }>((acc, entry) => {
+                        acc[entry.id] = entry.value
+                        return acc
+                    }, {}),
+                flags: ops
+                    .filter(
+                        (o): o is { id: string; value: boolean } =>
+                            typeof o.value === "boolean",
+                    )
+                    .reduce<{ [x: string]: boolean }>((acc, entry) => {
+                        acc[entry.id] = entry.value
+                        return acc
+                    }, {}),
+            }
+        })
     return mods
 }
 
@@ -134,9 +145,7 @@ function parseWorldQuery(data: string): WorldQuery | undefined {
     type WQFlag = {
         [x: string]: boolean
     }
-    const dataEntries = data
-        .split(",")
-        .map((e) => e.trim())
+    const dataEntries = data.split(",").map((e) => e.trim())
     const entries = dataEntries
         .map<WQState | undefined>((e) => {
             const match = e.match(/(\w+)\s*=\s*(\d+)\s*-\s*(\d+)/)
@@ -147,11 +156,7 @@ function parseWorldQuery(data: string): WorldQuery | undefined {
             }
             return undefined
         })
-        .filter(
-            (
-                e,
-            ): e is WQState => e !== undefined,
-        )
+        .filter((e): e is WQState => e !== undefined)
     const flags = dataEntries
         .map<WQFlag | undefined>((e) => {
             const match = e.match(/(\w+)\s*=\s*(true|false)/)
@@ -162,16 +167,9 @@ function parseWorldQuery(data: string): WorldQuery | undefined {
             }
             return undefined
         })
-        .filter(
-            (
-                e,
-            ): e is WQFlag => e !== undefined,
-        )
+        .filter((e): e is WQFlag => e !== undefined)
 
-    if (
-        entries.length === 0 &&
-        flags.length === 0
-    ) return undefined
+    if (entries.length === 0 && flags.length === 0) return undefined
 
     const wq = {
         ...entries.reduce<WorldQuery>(
@@ -193,7 +191,7 @@ function parseWorldQuery(data: string): WorldQuery | undefined {
                 return acc
             },
             { state: {} },
-        )
+        ),
     }
     return wq
 }
@@ -241,7 +239,7 @@ function toCardData(data: DataDescription[]): CardData[] {
                     { next: right },
                 ],
             ],
-            entry.Weight
+            entry.Weight,
         )
     })
     return cards

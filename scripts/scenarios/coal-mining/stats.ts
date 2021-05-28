@@ -23,5 +23,5 @@ export const defaultStates = [
 
 export const defaultFlags = [
     defaultFlag("tutorial:0", true),
-    defaultFlag("init", false)
+    defaultFlag("init", false),
 ]
