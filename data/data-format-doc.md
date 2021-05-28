@@ -30,9 +30,12 @@ This sections describes the column names used by the loader. The headers ar anno
 * When -> WorldQueries
 
 ### WorldQueries Type
+A world query describes a state space, of the game, in which a card is available in the card stack. All the requirements specified in a world query needs to be satisfied in order for the card to be available. Multiple world queries are used to make cards available in separate state spaces. For `numbers` a world query uses a range selector and for `booleans` exact matches are allowed.
+
+#### Syntax
 All content in the `WorldQueries` type is to be considered case insensitive.
 
-A world query is described by a number of state selections separated by `,`. A state selection is written as `<variable>=<value-range>` where `<variable>` is the name of a variable and `<value-range>` can be a `boolean` or a `number range`. A `number range` is written as `<x>-<y>`, where `<x>`, `<y>` are numbers and `<x>` is less than or equal to `<y>`. Multiple world queries are separated by `;`.
+A world query is described by a number of state selections separated by `,`. A state selection is written as `<variable>=<value-range>` where `<variable>` is the name of a variable and `<value-range>` can be a `boolean` or a `number range`. A `number range` is written as `<x>-<y>`, where `<x>`, `<y>` are numbers and `<x>` is less than or equal to `<y>`. Multiple world queries are separated by `;`. A `boolean` is either `true` or `false`
 
 The example `a=1-5, b=0-100, c=true; d=false, e=10-10` will be evaluated as follows:
 ```yaml
@@ -48,13 +51,13 @@ The example `a=1-5, b=0-100, c=true; d=false, e=10-10` will be evaluated as foll
 ``` 
 
 ### Effect Type
-All content in the `Effect` type is to be considered case insensitive.
-
 An effect is described by one or more operations. There are three types of operations, `replace`, `set` and `add`. The `replace` operation resets the game to the initial game state (the state from which the game was started) and applies a `set` operation with the specified variables. A `set` operation sets a variable in the game state to a specified value. Finally an `add` operation adds a value to a variable.
 
 `Note`: The `set` and `replace` operations support `numbers` and `booleans` while `add` only supports `numbers`.
 
 #### Syntax
+All content in the `Effect` type is to be considered case insensitive.
+
 In a cell operations are separated by `;` and an operation can be described as `<variable>(-|+|=|==)<value>`. Where `<variable>` should be replaced by the name of a variable, `<value>` should be a `number` or a `boolean`. The operators `-` and `+` will create an `add` operation with a negative and positive value respectively. While the operator `=` and `==` represent `set` and `replace` respectively.
 
 #### Evaluation
