@@ -83,6 +83,8 @@ A value of type `CharacterID` is not parsed at all but it is expected that you u
 ### ID Type
 A value of type `ID` is always parsed into lower case letters and thus any usage of it may be considered case insensitive.
 
+An `ID` is used in th context of linking cards to each other. Specifying an `ID` for `Left Step` or `Right Step` will guarantee that the card with the given `ID` will show up at some point. By using a link, a target card is added to the card pile and is prioritized using `weights` just as with other cards.
+
 Ex. `My Cool ID` is parsed as `my cool id`.
 
 ### Text Type
