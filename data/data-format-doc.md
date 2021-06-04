@@ -11,7 +11,7 @@ The current implementation has a few limitations which are as follows:
 These limitations are in no way impossible to fix but they have currently not been prioritized due to time constraints.
 
 ## A card sheet
-This sections describes the column names used by the loader. The headers ar annotated with their respective type as follows `<header> -> <string>`. For example `Card Name -> ID` 
+This sections describes the column names used by the loader. The headers ar annotated with their respective type as follows `<header> -> <type>`. For example `Card Name -> ID` 
 
 * Card Name -> ID
 * Card Type -> Text
