@@ -192,7 +192,7 @@ function parseWorldQuery(data: string): WorldQuery | undefined {
                 }
                 return acc
             },
-            { state: {} },
+            { flags: {} },
         ),
     }
     return wq
