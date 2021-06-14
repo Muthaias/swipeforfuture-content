@@ -20,6 +20,10 @@ export const { getImage } = imageDB([
         unsplashImage("1546541612-82d19b258cd5"),
         "Environmentally Minded Citizen",
     ),
+    imageEntry(
+        unsplashImage("1529229089-f5719a804879"),
+        "Morning Coffee"
+    ),
     imageEntry(unsplashImage("1584799235813-aaf50775698c"), "Undecided Voter"),
     imageEntry(unsplashImage("1573497019940-1c28c88b4f3e"), "maria"),
     imageEntry(unsplashImage("1529088746738-c4c0a152fb2c"), "infran"),

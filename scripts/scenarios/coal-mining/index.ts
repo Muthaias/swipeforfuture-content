@@ -26,6 +26,11 @@ export const builder: ScenarioBuilder = {
                     type: "round",
                 },
                 {
+                    type: "cycle",
+                    id: "daycycle",
+                    length: 4,
+                },
+                {
                     type: "debug",
                 },
             ],

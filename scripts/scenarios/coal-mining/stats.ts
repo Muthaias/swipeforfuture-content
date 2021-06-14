@@ -19,6 +19,8 @@ export const defaultStates = [
     defaultState(security, 50),
     defaultState(money, 50),
     defaultState(popularity, 50),
+    defaultState("daycycle", -1),
+    defaultState("day", 0),
 ]
 
 export const defaultFlags = [
