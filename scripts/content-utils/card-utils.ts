@@ -116,15 +116,15 @@ export function eventCardLogic(
     }
 }
 
-export function combineWorldQueries(a: WorldQuery, b: WorldQuery): WorldQuery {
-    return {
+export function combineWorldQueries(...queries: WorldQuery[]): WorldQuery {
+    return queries.reduce((acc, q) => ({
         state: {
-            ...(a.state ? a.state : {}),
-            ...(b.state ? b.state : {}),
+            ...(acc.state ? acc.state : {}),
+            ...(q.state ? q.state : {}),
         },
         flags: {
-            ...(a.flags ? a.flags : {}),
-            ...(b.flags ? b.flags : {}),
+            ...(acc.flags ? acc.flags : {}),
+            ...(q.flags ? q.flags : {}),
         },
-    }
+    }))
 }

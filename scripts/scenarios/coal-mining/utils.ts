@@ -47,10 +47,22 @@ export function createLinkContext(getId: (obj: unknown) => string) {
             ModifierWithNextCard | ModifierWithNextCard[],
         ],
         weight: number = 1,
+        require: WorldQuery[] = [],
     ): CardData {
         return cardLogic(
             card,
-            [...isAvailableWhen, link(card)],
+            [
+                ...(require.length === 0
+                    ? isAvailableWhen
+                    : isAvailableWhen
+                          .map((q) =>
+                              require.map((rq) => combineWorldQueries(q, rq)),
+                          )
+                          .flat()),
+                ...(require.length === 0
+                    ? [link(card)]
+                    : require.map((rq) => combineWorldQueries(rq, link(card)))),
+            ],
             [
                 [
                     ...(Array.isArray(left) ? left : [left])

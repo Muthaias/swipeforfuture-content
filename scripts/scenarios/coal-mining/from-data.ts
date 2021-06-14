@@ -33,6 +33,7 @@ type DataDescription = {
     Location: string
     Title: string
     When: string[]
+    Require: string[]
     Weight: number
 }
 
@@ -54,6 +55,7 @@ function loadStandadFile(path: string): DataDescription[] {
             Location: toString(""),
             Title: toString(""),
             When: toStringArray(";", toLowerCaseString("")),
+            Require: toStringArray(";", toLowerCaseString("")),
             Weight: toNumber,
         },
         {
@@ -240,6 +242,9 @@ function toCardData(data: DataDescription[]): CardData[] {
                 ],
             ],
             entry.Weight,
+            entry["Require"]
+                .map((q) => parseWorldQuery(q))
+                .filter((q): q is WorldQuery => q !== undefined),
         )
     })
     return cards
