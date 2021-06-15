@@ -95,3 +95,12 @@ Ex. `My Cool ID` is parsed as `my cool id`.
 
 ### Text Type
 Text is more or less used as is.
+
+## Creating a card
+This section describes one way to think about and work with the logic of cards.
+
+### How to think of the logic
+* If you want your card to be triggered by another card, use `Left Step` and/or `Right Step` to point to `Card Name`
+  * If you want to add additional requirements before triggering the card also use `Require`
+* If you want your card to be triggered by a specified `WorldQuery`, use `When`
+  * If you want to add additional requirements to each `WorldQuery` also use `Require`
