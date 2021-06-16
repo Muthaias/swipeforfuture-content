@@ -37,7 +37,7 @@ type DataDescription = {
     Weight: number
 }
 
-function loadStandadFile(path: string): DataDescription[] {
+function loadStandadFile(path: string, sheetIds?: string[]): DataDescription[] {
     return loadFile<DataDescription>(
         path,
         {
@@ -59,7 +59,7 @@ function loadStandadFile(path: string): DataDescription[] {
             Weight: toNumber,
         },
         {
-            sheetIds: ["init"],
+            sheetIds,
         },
     )
 }
@@ -250,6 +250,6 @@ function toCardData(data: DataDescription[]): CardData[] {
     return cards
 }
 
-const rawData = loadStandadFile("./data/test.xlsx")
+const rawData = loadStandadFile("./data/scenario-1-build.xlsx", undefined)
 
 export const cards = toCardData(rawData)

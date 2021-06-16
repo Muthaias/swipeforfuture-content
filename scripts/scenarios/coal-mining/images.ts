@@ -40,4 +40,13 @@ export const { getImage } = imageDB([
         "Solar Farm",
         "solar",
     ),
+    imageEntry(unsplashImage("1602697245635-4e40e3bba87d"), "Coal Lobbyist"),
+    imageEntry(unsplashImage("1621087955713-429347cb00e4"), "Secretary of Development"),
+    imageEntry(unsplashImage("1614940873537-487b4741dbaa"), "Environmental NGO Rep"),
+    imageEntry(unsplashImage("1619275526612-bdaf4cd9bc9b"), "Local Politician"),
+    imageEntry(unsplashImage("1536689423400-602247d31184"), "Secretary of Transport"),
+    imageEntry(unsplashImage("1557040135-9dc2a6b60411"), "Campaign Advisor"),
+    imageEntry(unsplashImage("1580411450318-6abb27b94eeb"), "Opposing Politician"),
+    imageEntry(unsplashImage("1560250097-0b93528c311a"), "Economic Advisor"),
+    imageEntry(unsplashImage("1569032915512-922c2e506c51"), "Secretary of Energy"),
 ])
