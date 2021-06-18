@@ -10,14 +10,21 @@ export function loadFile<T>(
     fieldMapping: TypeMapping<T>,
     {
         sheetIds,
+        sheetFilter,
     }: Partial<{
-        sheetIds: string[]
+        sheetIds: string[],
+        sheetFilter: (id: string) => boolean
     }> = {},
 ): (T & { __sheet?: string })[] {
     const book = xlsx.read(fs.readFileSync(path))
+    const finalFilter = sheetFilter || (() => true)
     const requiredFields: (keyof T)[] = Object.keys(fieldMapping) as (keyof T)[]
     const transformedSheets = Object.keys(book.Sheets).map<T[]>((key) => {
-        if (sheetIds !== undefined && !sheetIds.includes(key)) return []
+        if (
+            sheetIds !== undefined &&
+            !sheetIds.includes(key) &&
+            finalFilter(key)
+        ) return []
 
         const sheet = book.Sheets[key]
         const data = xlsx.utils.sheet_to_json<{ [A in keyof T]: unknown }>(

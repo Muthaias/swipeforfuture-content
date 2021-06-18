@@ -60,6 +60,7 @@ function loadStandadFile(path: string, sheetIds?: string[]): DataDescription[] {
         },
         {
             sheetIds,
+            sheetFilter: (key) => key[0] !== "_",
         },
     )
 }
