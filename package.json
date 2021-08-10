@@ -9,8 +9,7 @@
         "start": "npm run dev",
         "dev": "ts-node-dev --respawn --transpile-only scripts/build-scenario.ts",
         "dev-poll": "ts-node-dev --respawn --poll --transpile-only scripts/build-scenario.ts",
-        "serve": "serve dist -p 5000 -C",
-        "prettify": "npx prettier \"scripts/**/*\" --write",
+        "serve": "sirv dist -p 5000 -c",
         "predeploy": "npm run build",
         "deploy": "gh-pages -d dist",
         "update": "git submodule foreach git pull origin master"
@@ -18,23 +17,13 @@
     "author": "Mattias Nyberg",
     "license": "MIT",
     "dependencies": {
-        "@types/node": "^14.14.34",
-        "gh-pages": "^3.1.0",
-        "serve": "^11.3.2",
-        "ts-node": "^9.1.1",
-        "ts-node-dev": "^1.0.6",
-        "typescript": "^4.2.3",
-        "xlsx": "^0.16.9"
-    },
-    "devDependencies": {
-        "husky": "^4.3.0",
-        "prettier": "^2.1.2",
-        "pretty-quick": "^3.1.0"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "pretty-quick --staged"
-        }
+        "@types/node": "^16.4.13",
+        "gh-pages": "^3.2.3",
+        "sirv-cli": "^1.0.12",
+        "ts-node": "^10.2.0",
+        "ts-node-dev": "^1.1.8",
+        "typescript": "^4.3.5",
+        "xlsx": "^0.17.0"
     },
     "prettier": {
         "tabWidth": 4,
