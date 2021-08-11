@@ -1,4 +1,4 @@
-import { createCardsMap, Scenario } from "../../content-utils"
+import { Scenario } from "../../content-utils"
 import {
     ENVIRONMENT,
     PEOPLE,
@@ -14,7 +14,7 @@ import { endGameCards } from "./endgame"
 const scenario: Scenario = {
     id: "new-world",
     stats: Object.values(STATS),
-    cards: createCardsMap([...catastrophicCards, ...endGameCards]),
+    cards: [...catastrophicCards, ...endGameCards],
     defaultState: {
         state: {
             [ENVIRONMENT]: 40,

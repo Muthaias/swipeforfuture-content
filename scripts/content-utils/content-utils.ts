@@ -10,7 +10,6 @@
 */
 
 import {
-    Cards,
     Card,
     GameWorld,
     StatDefinition,
@@ -258,15 +257,4 @@ export function createIdContext(namespace?: string) {
         map.set(obj, id)
         return id
     }
-}
-
-export function createCardsMap(allCards: Card[]): Cards {
-    const cards = allCards.reduce(
-        (prev: Cards, card) => {
-            prev[card.id] = card
-            return prev
-        },
-        {},
-    )
-    return cards
 }
