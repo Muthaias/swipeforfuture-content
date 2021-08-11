@@ -10,13 +10,12 @@
 */
 
 import {
-    CardData,
-    EventCard,
+    Cards,
+    Card,
     GameWorld,
     StatDefinition,
     CardActionData,
     WorldQuery,
-    EventCardActionData,
 } from "./index"
 
 /**
@@ -49,11 +48,10 @@ export interface ScenarioManifest {
  * @param extras Optional additional data that is seldom reused from a template
  */
 export function createCardTemplate(
-    cardData: Pick<CardData, "image" | "location" | "weight">,
-    extras: Partial<Pick<CardData, "title" | "text">> = {},
-): CardData {
+    cardData: Pick<Card, "image" | "location" | "weight">,
+    extras: Partial<Pick<Card, "title" | "text">> = {},
+): Omit<Card, 'id'> {
     return {
-        type: "card",
         ...cardData,
         ...{
             title: "",
@@ -68,52 +66,21 @@ export function createCardTemplate(
     }
 }
 
-/**
- * Create an event card based on a template, to avoid repetition
- *
- * @param template The card template to extend
- * @param override Fields to override
- */
-export function createEventCardFromTemplate(
-    { image, title, text, location, weight }: CardData,
-    override: Partial<EventCard>,
-): EventCard {
-    const eventCard: EventCard = {
-        image,
-        title,
-        text,
-        location,
-        weight,
-        type: "event",
-        actions: {
-            left: {
-                ...action(addModifier()),
-                nextEventCardId: null,
-            },
-            right: {
-                ...action(addModifier()),
-                nextEventCardId: null,
-            },
-        },
-    }
-
-    return {
-        ...eventCard,
-        ...override,
-    }
-}
 
 /**
  * Create a card based on a template, to avoid repetition
  *
+ * @param id The card id of the created card
  * @param template The card template to extend
  * @param override Fields to override
  */
 export function createCardFromTemplate(
-    template: CardData,
-    override: Partial<CardData>,
-): CardData {
+    id: Card['id'],
+    template: Omit<Card, 'id'>,
+    override: Omit<Card, 'id' | 'image' | 'location' | 'weight'>,
+): Card {
     return {
+        id,
         ...template,
         ...override,
     }
@@ -233,27 +200,6 @@ export function modifier(
 }
 
 /**
- * Create an EventCard action to modify the state & flags and possibly point to another EventCard.
- *
- * @param action The action is either a state modifier or a string for description.
- *               An empty state modifier will be used for a string description.
- * @param eventCardId The next EventCard to trigger, or null to stop the event.
- */
-export function eventCardAction(
-    actionOrDescription: CardActionData | string,
-    eventCardId: EventCardActionData["nextEventCardId"] = null,
-): EventCardActionData {
-    const actualAction =
-        typeof actionOrDescription === "string"
-            ? action(addModifier(), actionOrDescription)
-            : actionOrDescription
-    return {
-        ...actualAction,
-        nextEventCardId: eventCardId,
-    }
-}
-
-/**
  * Generate a unique cardRef to identify cards
  *
  * @param debugHint A string to identify the cardRef and help debugging
@@ -312,4 +258,15 @@ export function createIdContext(namespace?: string) {
         map.set(obj, id)
         return id
     }
+}
+
+export function createCardsMap(allCards: Card[]): Cards {
+    const cards = allCards.reduce(
+        (prev: Cards, card) => {
+            prev[card.id] = card
+            return prev
+        },
+        {},
+    )
+    return cards
 }
