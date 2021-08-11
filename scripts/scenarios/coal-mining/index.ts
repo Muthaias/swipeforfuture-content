@@ -3,38 +3,35 @@ import * as Stats from "./stats"
 import * as FromData from "./from-data"
 
 import {
-    ScenarioBuilder,
     Scenario,
     combineDefaultEntries,
 } from "../../content-utils"
-export const builder: ScenarioBuilder = {
-    run() {
-        const scenario: Scenario = {
-            id: "donuts",
-            stats: Object.values(Stats.definitions),
-            cards: [...FromData.cards],
-            events: [...Tutorial.events],
-            eventCards: {
-                ...Tutorial.eventCards,
-            },
-            defaultState: {
-                state: combineDefaultEntries([...Stats.defaultStates]),
-                flags: combineDefaultEntries([...Stats.defaultFlags]),
-            },
-            worldStateModifiers: [
-                {
-                    type: "round",
-                },
-                {
-                    type: "cycle",
-                    id: "daycycle",
-                    length: 4,
-                },
-                {
-                    type: "debug",
-                },
-            ],
-        }
-        return scenario
+
+const scenario: Scenario = {
+    id: "coal-mining",
+    stats: Object.values(Stats.definitions),
+    cards: [...FromData.cards],
+    events: [...Tutorial.events],
+    eventCards: {
+        ...Tutorial.eventCards,
     },
+    defaultState: {
+        state: combineDefaultEntries([...Stats.defaultStates]),
+        flags: combineDefaultEntries([...Stats.defaultFlags]),
+    },
+    worldStateModifiers: [
+        {
+            type: "round",
+        },
+        {
+            type: "cycle",
+            id: "daycycle",
+            length: 4,
+        },
+        {
+            type: "debug",
+        },
+    ],
 }
+
+export default scenario
