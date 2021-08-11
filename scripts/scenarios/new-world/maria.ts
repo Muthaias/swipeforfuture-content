@@ -6,6 +6,7 @@ import {
     action,
     worldQuery,
     createCardFromTemplate,
+    CardPriority,
 } from "../../content-utils"
 import { POPULARITY, MONEY, ENVIRONMENT } from "./stats"
 import { FLAGS } from "./flags"
@@ -40,6 +41,7 @@ export const mariaCards = [
         isAvailableWhen: [
             worldQuery({}, { [FLAGS.LUNCH_MEETING_COMPLETED]: false }),
         ],
+        priority: CardPriority.Event
     }),
     createCardFromTemplate(welcomeLoop, mariaTemplate, {
         title: "Seriously!",
