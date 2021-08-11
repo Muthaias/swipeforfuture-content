@@ -7,14 +7,16 @@ import {
     POPULARITY,
     STATS,
 } from "./stats"
+import { FLAGS } from './flags'
 
 import { catastrophicCards } from "./cat"
+import { mariaCards } from "./maria"
 import { endGameCards } from "./endgame"
 
 const scenario: Scenario = {
     id: "new-world",
     stats: Object.values(STATS),
-    cards: [...catastrophicCards, ...endGameCards],
+    cards: [...mariaCards, ...catastrophicCards, ...endGameCards],
     defaultState: {
         state: {
             [ENVIRONMENT]: 40,
@@ -23,7 +25,9 @@ const scenario: Scenario = {
             [MONEY]: 55,
             [POPULARITY]: 53,
         },
-        flags: {},
+        flags: {
+            [FLAGS.LUNCH_MEETING_COMPLETED]: false
+        },
     },
     worldStateModifiers: [
         {

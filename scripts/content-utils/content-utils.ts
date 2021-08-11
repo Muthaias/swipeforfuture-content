@@ -49,7 +49,7 @@ export interface ScenarioManifest {
 export function createCardTemplate(
     cardData: Pick<Card, "image" | "location" | "weight">,
     extras: Partial<Pick<Card, "title" | "text">> = {},
-): Omit<Card, 'id'> {
+): Omit<Card, "id"> {
     return {
         ...cardData,
         ...{
@@ -65,7 +65,6 @@ export function createCardTemplate(
     }
 }
 
-
 /**
  * Create a card based on a template, to avoid repetition
  *
@@ -74,9 +73,9 @@ export function createCardTemplate(
  * @param override Fields to override
  */
 export function createCardFromTemplate(
-    id: Card['id'],
-    template: Omit<Card, 'id'>,
-    override: Omit<Card, 'id' | 'image' | 'location' | 'weight'>,
+    id: Card["id"],
+    template: Omit<Card, "id">,
+    override: Omit<Card, "id" | "image" | "location" | "weight">,
 ): Card {
     return {
         id,
@@ -140,14 +139,17 @@ export type Modifier = CardActionData["modifiers"][number]
  *
  * @param description A short text to explain one of the alternatives in a swipe decision.
  * @param modifiers One or more modifiers that should be applied when the player choose this course of action.
+ * @param nextCard Point to a specific card to show directly when an action was taken.
  */
 export function action(
     modifiers: Modifier | Modifier[],
     description?: string,
+    nextCard?: Card["id"],
 ): CardActionData {
     return {
         description,
         modifiers: Array.isArray(modifiers) ? modifiers : [modifiers],
+        ...(nextCard ? { nextCard } : {}),
     }
 }
 
