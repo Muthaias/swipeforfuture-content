@@ -1,13 +1,12 @@
 import {
-    WorldEvent,
     createCardTemplate,
-    createEventCardFromTemplate,
     unsplashImage,
     cardRef,
     setModifier,
     action,
-    eventCardAction,
     worldQuery,
+    createCardFromTemplate,
+    CardPriority,
 } from "../../content-utils"
 import { POPULARITY, MONEY, ENVIRONMENT } from "./stats"
 import { FLAGS } from "./flags"
@@ -22,64 +21,58 @@ const welcome = cardRef("welcome")
 const welcomeLoop = cardRef("welcome-loop")
 const welcomeLunch = cardRef("welcome-lunch")
 
-export const mariaEvents: WorldEvent[] = [
-    {
-        initialEventCardId: welcome,
-        isAvailableWhen: [
-            worldQuery({}, { [FLAGS.LUNCH_MEETING_COMPLETED]: false }),
-        ],
-        probability: 1,
-    },
-]
-
-export const mariaEventCards = {
-    [welcome]: createEventCardFromTemplate(mariaTemplate, {
+export const mariaCards = [
+    createCardFromTemplate(welcome, mariaTemplate, {
         title: "Welcome!",
         text:
             "Hi! My name is Maria. You must be the new president. Do you want to take a lunch to get up to speed with your new duties?",
         actions: {
-            left: eventCardAction(
+            left: action(
+                [],
                 "Nah. I'm good. I think I can handle things on my own.",
                 welcomeLoop,
             ),
-            right: eventCardAction(
+            right: action(
+                [],
                 "That sounds great. Let's do it ASAP",
                 welcomeLunch,
             ),
         },
+        isAvailableWhen: [
+            worldQuery({}, { [FLAGS.LUNCH_MEETING_COMPLETED]: false }),
+        ],
+        priority: CardPriority.Event
     }),
-    [welcomeLoop]: createEventCardFromTemplate(mariaTemplate, {
+    createCardFromTemplate(welcomeLoop, mariaTemplate, {
         title: "Seriously!",
         text:
             "We need to talk! Get your head in the game. Do you want to take a lunch to get up to speed with your new duties?",
         actions: {
-            left: eventCardAction("Get off my back.", welcomeLoop),
-            right: eventCardAction("Alright. Let's do this.", welcomeLunch),
+            left:  action([], "Get off my back.", welcomeLoop),
+            right: action([], "Alright. Let's do this.", welcomeLunch),
         },
+        isAvailableWhen: []
     }),
-    [welcomeLunch]: createEventCardFromTemplate(mariaTemplate, {
+    createCardFromTemplate(welcomeLunch, mariaTemplate, {
         title: "The lunch meeting",
         text:
             "Really nice lunch! Now your first big decision has come. Should you prioritize the economy (left) or environment (right)?",
         actions: {
-            left: eventCardAction(
-                action(
-                    setModifier(
-                        { [MONEY]: 70, [POPULARITY]: 52 },
-                        { [FLAGS.LUNCH_MEETING_COMPLETED]: true },
-                    ),
-                    "Nice talk. Love the economy!",
+            left: action(
+                setModifier(
+                    { [MONEY]: 70, [POPULARITY]: 52 },
+                    { [FLAGS.LUNCH_MEETING_COMPLETED]: true },
                 ),
+                "Nice talk. Love the economy!",
             ),
-            right: eventCardAction(
-                action(
-                    setModifier(
-                        { [ENVIRONMENT]: 70, [POPULARITY]: 65 },
-                        { [FLAGS.LUNCH_MEETING_COMPLETED]: true },
-                    ),
-                    "Nice talk. We should think about our future.",
+            right: action(
+                setModifier(
+                    { [ENVIRONMENT]: 70, [POPULARITY]: 65 },
+                    { [FLAGS.LUNCH_MEETING_COMPLETED]: true },
                 ),
+                "Nice talk. We should think about our future.",
             ),
         },
+        isAvailableWhen: [],
     }),
-}
+]

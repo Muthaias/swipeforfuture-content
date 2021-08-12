@@ -1,4 +1,4 @@
-import { Scenario } from "../../content-utils"
+import { Scenario, getDynamicFlags } from "../../content-utils"
 import {
     ENVIRONMENT,
     PEOPLE,
@@ -12,12 +12,12 @@ import { VARS } from "./vars"
 import { FLAGS } from "./flags"
 
 import { catastrophicCards } from "./cat"
-import { enviraCards, enviraEventCards, enviraEvents } from "./envira"
-import { infranCards, infranEventCards, infranEvents } from "./infran"
+import { enviraCards } from "./envira"
+import { infranCards } from "./infran"
 import { otherCards } from "./cards"
-import { endGameEventCards, endGameEvents } from "./endgame"
-import { mariaEventCards, mariaEvents } from "./maria"
-import * as EnvironmentInitiatives from "./environmental-initiatives"
+import { endGameCards } from "./endgame"
+import { mariaCards } from "./maria"
+import { environmentalInitiativeCards } from "./environmental-initiatives"
 
 const scenario: Scenario = {
     id: "default",
@@ -27,20 +27,12 @@ const scenario: Scenario = {
         ...enviraCards,
         ...infranCards,
         ...otherCards,
-        ...EnvironmentInitiatives.cards,
+        ...environmentalInitiativeCards,
+        ...mariaCards,
+        ...endGameCards,
+        ...infranCards,
+        ...enviraCards,
     ],
-    events: [
-        ...mariaEvents,
-        ...endGameEvents,
-        ...infranEvents,
-        ...enviraEvents,
-    ],
-    eventCards: {
-        ...mariaEventCards,
-        ...endGameEventCards,
-        ...enviraEventCards,
-        ...infranEventCards,
-    },
     defaultState: {
         state: {
             [ENVIRONMENT]: 40,
@@ -57,6 +49,7 @@ const scenario: Scenario = {
             [FLAGS.LUNCH_MEETING_COMPLETED]: false,
             [FLAGS.ENVIRA_INIT]: false,
             [FLAGS.INFRAN_INIT]: false,
+            ...getDynamicFlags()
         },
     },
     worldStateModifiers: [

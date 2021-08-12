@@ -1,10 +1,10 @@
-// import defaultScenario from "./default"
+import defaultScenario from "./default"
 // import donuts from "./donuts"
 // import coalMining from "./coal-mining"
 import newWorld from "./new-world"
 
 import { Scenario } from "../content-utils"
-const allScenarios = [newWorld]
+const allScenarios = [newWorld, defaultScenario]
 
 const scenarios: Record<string, Scenario> = allScenarios.reduce(
     (prev: Record<string, Scenario>, scenario) => {

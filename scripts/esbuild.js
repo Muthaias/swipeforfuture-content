@@ -14,12 +14,14 @@ await emptyDir(compiledDir)
 const args = process.argv.slice(2)
 const mode = args.includes("--watch") ? "watch" : "build"
 // const ids = args.filter((item) => item !== "--watch")
-const ids = ['new-world', 'default']
+const ids = ["new-world", "default"]
 
 // TODO: Temporarily disable importing all scenarios and focus only on the `new-world` which uses the new content format.
 // TODO: Add support for old scenarios in the future too.
 // const scenarioPaths = await glob('./scripts/scenarios/**/*.ts')
-const scenarioPaths = await glob(`./scripts/scenarios/+(${ids.join('|')})/**/*.ts`)
+const scenarioPaths = await glob(
+    `./scripts/scenarios/+(${ids.join("|")})/**/*.ts`,
+)
 
 /**
  * Export JSON files for selected scenarios.

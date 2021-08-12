@@ -1,11 +1,12 @@
 import {
-    CardData,
+    Card,
     worldQuery,
     createCardFromTemplate,
     unsplashImage,
     createCardTemplate,
     addModifier,
     action,
+    cardRef,
 } from "../../content-utils"
 import { statIds } from "./stats"
 
@@ -15,8 +16,8 @@ export const catTemplate = createCardTemplate({
     weight: 1,
 })
 
-export const catastrophicCards = statIds.map<CardData>((stat) => {
-    const partial: Partial<CardData> = {
+export const catastrophicCards = statIds.map<Card>((stat) => {
+    const partial: Partial<Card> = {
         title: `Look at me! I'm ${stat.toUpperCase()} Cat`,
         text:
             "Your cat needs some love and tenderness. Try to make time in your busy schedule",
@@ -30,5 +31,5 @@ export const catastrophicCards = statIds.map<CardData>((stat) => {
             right: action(addModifier({ [stat]: 10 })),
         },
     }
-    return createCardFromTemplate(catTemplate, partial)
+    return createCardFromTemplate(cardRef(`cat-${stat}`), catTemplate, partial)
 })
