@@ -14,12 +14,12 @@ await emptyDir(compiledDir)
 const args = process.argv.slice(2)
 const mode = args.includes("--watch") ? "watch" : "build"
 // const ids = args.filter((item) => item !== "--watch")
-const ids = ['new-world']
+const ids = ['new-world', 'default']
 
 // TODO: Temporarily disable importing all scenarios and focus only on the `new-world` which uses the new content format.
 // TODO: Add support for old scenarios in the future too.
 // const scenarioPaths = await glob('./scripts/scenarios/**/*.ts')
-const scenarioPaths = await glob('./scripts/scenarios/new-world/**/*.ts')
+const scenarioPaths = await glob(`./scripts/scenarios/+(${ids.join('|')})/**/*.ts`)
 
 /**
  * Export JSON files for selected scenarios.
@@ -62,11 +62,10 @@ esbuild
         watch:
             mode === "watch"
                 ? {
-                      onRebuild(error, result) {
+                      onRebuild(error) {
                           if (error) console.error("watch build failed:", error)
                           else {
                               // Rebuild TS files when changes are detected
-                              console.log("watch build succeeded:", result)
                               exportScenarioJSON(ids)
                           }
                       },
