@@ -16,4 +16,4 @@ services:
       - ./scripts:/exec/scripts
       - ./data:/exec/data
       - ./swipeforfuture.com:/exec/swipeforfuture.com
-    entrypoint: ["npm", "run", "dev-poll"]
+    entrypoint: ["npm", "run", "start"]

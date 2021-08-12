@@ -1,7 +1,7 @@
 FROM fedora
 
 RUN dnf update -y && \
-    dnf module install nodejs:12 -y
+    dnf module install nodejs:16/development -y
 
 RUN mkdir /exec
 COPY package.json /exec/package.json
