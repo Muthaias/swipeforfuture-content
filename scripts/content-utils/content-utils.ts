@@ -1,14 +1,3 @@
-// GOAL: composable functions to generate content based on ContentTypes + variable input
-// GOAL: export JSON
-// GOAL: Save game world scenario to specific folder
-
-/*
-    IDEA: User stories
-
-    As a card developer I would like to:
-    - Create convenience function for creating a card that only should trigger once (using a unique flag)
-*/
-
 import {
     Card,
     GameWorld,
