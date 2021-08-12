@@ -1,8 +1,6 @@
 {
-    "buildDate": "2020-12-22T20:26:14.812Z",
+    "buildDate": "2021-08-12T22:44:14.334Z",
     "scenarios": {
-        "coal-mining": {},
-        "default": {},
-        "donuts": {}
+        "default": {}
     }
 }
