@@ -6,6 +6,7 @@ import {
     action,
     addModifier,
     cardRef,
+    CardPriority,
 } from "../../content-utils"
 import { ENVIRONMENT, MONEY, PEOPLE, SECURITY, POPULARITY } from "./stats"
 import { VARS } from "./vars"
@@ -52,6 +53,7 @@ export const otherCards: Card[] = [
                 }),
             ),
         },
+        priority: CardPriority.Card
     },
     {
         id: cardRef('coal-sale'),
@@ -90,5 +92,6 @@ export const otherCards: Card[] = [
                 }),
             ),
         },
+        priority: CardPriority.Card
     },
 ]

@@ -1,7 +1,7 @@
 import { Card, WorldQuery, addModifier, action } from "."
-import { GameWorldModifier } from "../../swipeforfuture.com/src/game/ContentTypes"
+import { CardPriority, GameWorldModifier } from "../../swipeforfuture.com/src/game/ContentTypes"
 
-export type BaseCard = Omit<Card, "isAvailableWhen">
+export type BaseCard = Omit<Card, "isAvailableWhen" | "priority">
 
 /**
  * Creates a complete card given only the artistic content
@@ -19,7 +19,7 @@ export function cardContent(
     title: string,
     text: string,
     location: string,
-    [left, right]: [string, string],
+    [left, right]: [string, string]
 ): BaseCard {
     return {
         id,
@@ -31,7 +31,7 @@ export function cardContent(
             left: action(addModifier(), left),
             right: action(addModifier(), right),
         },
-        weight: 1,
+        weight: 1
     }
 }
 
@@ -51,6 +51,7 @@ export function cardLogic(
         GameWorldModifier | GameWorldModifier[],
     ],
     weight: number = 1,
+    priority: CardPriority = CardPriority.Card
 ): Card {
     return {
         ...card,
@@ -68,6 +69,7 @@ export function cardLogic(
                 next: card.actions.right.next,
             },
         },
+        priority,
     }
 }
 

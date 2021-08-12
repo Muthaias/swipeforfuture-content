@@ -1,3 +1,4 @@
+import { CardPriority } from "../../swipeforfuture.com/src/game/ContentTypes"
 import {
     Card,
     GameWorld,
@@ -51,6 +52,7 @@ export function createCardTemplate(
             left: { modifiers: [{}] },
             right: { modifiers: [{}] },
         },
+        priority: CardPriority.Card
     }
 }
 

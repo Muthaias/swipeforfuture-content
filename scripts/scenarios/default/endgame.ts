@@ -5,6 +5,7 @@ import {
     unsplashImage,
     replaceModifier,
     action,
+    CardPriority,
 } from "../../content-utils"
 import { ENVIRONMENT, PEOPLE, MONEY, POPULARITY, SECURITY } from "./stats"
 
@@ -37,6 +38,7 @@ export const endGameCards: Card[] = [
             worldQuery({
                 [POPULARITY]: [0, 0],
             }),
-        ]
+        ],
+        priority: CardPriority.Card
     },
 ]
