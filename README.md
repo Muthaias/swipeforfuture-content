@@ -1,5 +1,9 @@
 # Swipe for Future Content
 
+**NOTE:** As of 2021-08-13, official scenarios are hosted together with the [core game](https://github.com/Greenheart/swipeforfuture.com).
+
+---
+
 This project contains community scenarios for Swipe for Future.
 
 ## How to install
