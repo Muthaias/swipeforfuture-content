@@ -14,7 +14,7 @@ await emptyDir(compiledDir)
 const args = process.argv.slice(2)
 const mode = args.includes("--watch") ? "watch" : "build"
 // const ids = args.filter((item) => item !== "--watch")
-const ids = ["new-world", "default"]
+const ids = ["default"]
 
 // TODO: Temporarily disable importing all scenarios and focus only on the `new-world` which uses the new content format.
 // TODO: Add support for old scenarios in the future too.
