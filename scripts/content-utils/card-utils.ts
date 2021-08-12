@@ -1,14 +1,12 @@
-import { CardData, EventCard, WorldQuery, addModifier, action } from "."
-import {
-    EventCardActionData,
-    GameWorldModifier,
-} from "../../swipeforfuture.com/src/game/ContentTypes"
+import { Card, WorldQuery, addModifier, action } from "."
+import { GameWorldModifier } from "../../swipeforfuture.com/src/game/ContentTypes"
 
-export type BaseCard = Omit<CardData, "type" | "isAvailableWhen">
+export type BaseCard = Omit<Card, "isAvailableWhen">
 
 /**
  * Creates a complete card given only the artistic content
  *
+ * @param id The id of the card, preferrably created using `cardRef()`
  * @param image The image url to use for the card
  * @param title The title of the card
  * @param text The main text of the card
@@ -16,6 +14,7 @@ export type BaseCard = Omit<CardData, "type" | "isAvailableWhen">
  * @param [left, right] Descriptions of left and right actions
  */
 export function cardContent(
+    id: string,
     image: string,
     title: string,
     text: string,
@@ -23,10 +22,11 @@ export function cardContent(
     [left, right]: [string, string],
 ): BaseCard {
     return {
-        image: image,
-        title: title,
-        text: text,
-        location: location,
+        id,
+        image,
+        title,
+        text,
+        location,
         actions: {
             left: action(addModifier(), left),
             right: action(addModifier(), right),
@@ -51,7 +51,7 @@ export function cardLogic(
         GameWorldModifier | GameWorldModifier[],
     ],
     weight: number = 1,
-): CardData {
+): Card {
     return {
         ...card,
         weight,
@@ -60,59 +60,14 @@ export function cardLogic(
             left: {
                 description: card.actions.left.description,
                 modifiers: Array.isArray(left) ? left : [left],
+                next: card.actions.right.next,
             },
             right: {
                 description: card.actions.right.description,
                 modifiers: Array.isArray(right) ? right : [right],
+                next: card.actions.right.next,
             },
         },
-        type: "card",
-    }
-}
-
-/**
- * Given a generic card this creates a new event card with updated logic content.
- *
- * @param card A card template that contains artistic content
- * @param [left, right] The left and right modifiers and nextEventCardId
- */
-export function eventCardLogic(
-    card: BaseCard,
-    [
-        [leftModifiers, leftNextEventCardId = null],
-        [rightModifiers, rightNextEventCardId = null],
-    ]: [
-        [
-            GameWorldModifier | GameWorldModifier[],
-            EventCardActionData["nextEventCardId"]?,
-        ],
-        [
-            GameWorldModifier | GameWorldModifier[],
-            EventCardActionData["nextEventCardId"]?,
-        ],
-    ],
-    weight: CardData["weight"] = 1,
-): EventCard {
-    return {
-        ...card,
-        weight,
-        actions: {
-            left: {
-                modifiers: Array.isArray(leftModifiers)
-                    ? leftModifiers
-                    : [leftModifiers],
-                nextEventCardId: leftNextEventCardId,
-                description: card.actions.left.description,
-            },
-            right: {
-                modifiers: Array.isArray(rightModifiers)
-                    ? rightModifiers
-                    : [rightModifiers],
-                nextEventCardId: rightNextEventCardId,
-                description: card.actions.right.description,
-            },
-        },
-        type: "event",
     }
 }
 
