@@ -75,7 +75,7 @@ export function createCardTemplate(
 export function createCardFromTemplate(
     id: Card["id"],
     template: Omit<Card, "id">,
-    override: Omit<Card, "id" | "image" | "location" | "weight">,
+    override: Partial<Card>,
 ): Card {
     return {
         id,
