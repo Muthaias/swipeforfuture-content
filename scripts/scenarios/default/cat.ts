@@ -19,8 +19,7 @@ export const catTemplate = createCardTemplate({
 export const catastrophicCards = statIds.map<Card>((stat) => {
     const partial: Partial<Card> = {
         title: `Look at me! I'm ${stat.toUpperCase()} Cat`,
-        text:
-            "Your cat needs some love and tenderness. Try to make time in your busy schedule",
+        text: "Your cat needs some love and tenderness. Try to make time in your busy schedule",
         isAvailableWhen: [
             worldQuery({
                 [stat]: [0, 100],

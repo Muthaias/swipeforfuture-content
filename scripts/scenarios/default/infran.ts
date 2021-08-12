@@ -20,8 +20,8 @@ export const infranTemplate = createCardTemplate({
 })
 
 const infranIntro = cardRef("infran-intro")
-const infranSolar = cardRef('infran-solar')
-const infranRoad = cardRef('infran-road')
+const infranSolar = cardRef("infran-solar")
+const infranRoad = cardRef("infran-road")
 
 export const infranCards: Card[] = [
     createCardFromTemplate(infranIntro, infranTemplate, {
@@ -50,7 +50,7 @@ export const infranCards: Card[] = [
                 },
             ),
         ],
-        priority: CardPriority.Event
+        priority: CardPriority.Event,
     }),
     createCardFromTemplate(infranSolar, infranTemplate, {
         title: "Invest in solar?",

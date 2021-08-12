@@ -49,7 +49,7 @@ const scenario: Scenario = {
             [FLAGS.LUNCH_MEETING_COMPLETED]: false,
             [FLAGS.ENVIRA_INIT]: false,
             [FLAGS.INFRAN_INIT]: false,
-            ...getDynamicFlags()
+            ...getDynamicFlags(),
         },
     },
     worldStateModifiers: [

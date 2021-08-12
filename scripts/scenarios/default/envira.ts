@@ -22,27 +22,24 @@ export const enviraTemplate = createCardTemplate({
 // NOTE: These card refs might be hard to track. Could be nice to group them together in an object, to easily know that they are card refs.
 // Compare `CARDS.enviraIntro` vs `enviraIntro`
 const enviraIntro = cardRef("envira-intro")
-const enviraCoal = cardRef('envira-coal')
+const enviraCoal = cardRef("envira-coal")
 
 export const enviraCards: Card[] = [
     createCardFromTemplate(enviraIntro, enviraTemplate, {
         title: "The activist",
-        text:
-            "Hi! My name is Envira and I'm a climate lobbyist. You'll see me from time to time. I wish you good luck and I hope we'll have constructive meetings in the future.",
+        text: "Hi! My name is Envira and I'm a climate lobbyist. You'll see me from time to time. I wish you good luck and I hope we'll have constructive meetings in the future.",
         actions: {
-            left:
-                action(
-                    addModifier(
-                        { [ENVIRONMENT]: -10 },
-                        { [FLAGS.ENVIRA_INIT]: true },
-                    ),
+            left: action(
+                addModifier(
+                    { [ENVIRONMENT]: -10 },
+                    { [FLAGS.ENVIRA_INIT]: true },
+                ),
             ),
-            right:
-                action(
-                    addModifier(
-                        { [ENVIRONMENT]: 10 },
-                        { [FLAGS.ENVIRA_INIT]: true },
-                    ),
+            right: action(
+                addModifier(
+                    { [ENVIRONMENT]: 10 },
+                    { [FLAGS.ENVIRA_INIT]: true },
+                ),
             ),
         },
         isAvailableWhen: [
@@ -54,12 +51,11 @@ export const enviraCards: Card[] = [
                 },
             ),
         ],
-        priority: CardPriority.Event
+        priority: CardPriority.Event,
     }),
     createCardFromTemplate(enviraCoal, enviraTemplate, {
         title: "Keep it in the ground!",
-        text:
-            "This is insane! Are you really investing in this brown coal plant and prioritizing short-term profits over the future of the planet - and your people!?",
+        text: "This is insane! Are you really investing in this brown coal plant and prioritizing short-term profits over the future of the planet - and your people!?",
         isAvailableWhen: [
             worldQuery(
                 { [VARS.BROWN_COAL_PLANTS]: [1, 1] },

@@ -24,8 +24,7 @@ const welcomeLunch = cardRef("welcome-lunch")
 export const mariaCards = [
     createCardFromTemplate(welcome, mariaTemplate, {
         title: "Welcome!",
-        text:
-            "Hi! My name is Maria. You must be the new president. Do you want to take a lunch to get up to speed with your new duties?",
+        text: "Hi! My name is Maria. You must be the new president. Do you want to take a lunch to get up to speed with your new duties?",
         actions: {
             left: action(
                 [],
@@ -41,22 +40,20 @@ export const mariaCards = [
         isAvailableWhen: [
             worldQuery({}, { [FLAGS.LUNCH_MEETING_COMPLETED]: false }),
         ],
-        priority: CardPriority.Event
+        priority: CardPriority.Event,
     }),
     createCardFromTemplate(welcomeLoop, mariaTemplate, {
         title: "Seriously!",
-        text:
-            "We need to talk! Get your head in the game. Do you want to take a lunch to get up to speed with your new duties?",
+        text: "We need to talk! Get your head in the game. Do you want to take a lunch to get up to speed with your new duties?",
         actions: {
-            left:  action([], "Get off my back.", welcomeLoop),
+            left: action([], "Get off my back.", welcomeLoop),
             right: action([], "Alright. Let's do this.", welcomeLunch),
         },
-        isAvailableWhen: []
+        isAvailableWhen: [],
     }),
     createCardFromTemplate(welcomeLunch, mariaTemplate, {
         title: "The lunch meeting",
-        text:
-            "Really nice lunch! Now your first big decision has come. Should you prioritize the economy (left) or environment (right)?",
+        text: "Really nice lunch! Now your first big decision has come. Should you prioritize the economy (left) or environment (right)?",
         actions: {
             left: action(
                 setModifier(

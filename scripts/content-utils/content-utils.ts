@@ -52,7 +52,7 @@ export function createCardTemplate(
             left: { modifiers: [{}] },
             right: { modifiers: [{}] },
         },
-        priority: CardPriority.Card
+        priority: CardPriority.Card,
     }
 }
 
@@ -150,12 +150,12 @@ export function showOnlyOnce(card: Card) {
     const expectedState = { [hasBeenShown]: false }
     const modifier = setModifier({}, { [hasBeenShown]: true })
 
-    card.isAvailableWhen = card.isAvailableWhen.map(query => ({
+    card.isAvailableWhen = card.isAvailableWhen.map((query) => ({
         state: query.state,
         flags: {
             ...query.flags,
-            ...expectedState
-        }
+            ...expectedState,
+        },
     }))
     card.actions.left.modifiers.push(modifier)
     card.actions.right.modifiers.push(modifier)

@@ -15,8 +15,7 @@ export const endGameCards: Card[] = [
         image: unsplashImage("1497039465987-61d305728610"),
         title: "The World Has Ended.",
         location: "",
-        text:
-            "Please find a new planet to destroy, if you want to proceed. And do not try to swipe. Please.",
+        text: "Please find a new planet to destroy, if you want to proceed. And do not try to swipe. Please.",
         weight: 1000,
         actions: {
             left: action(replaceModifier({}, {})),
@@ -39,6 +38,6 @@ export const endGameCards: Card[] = [
                 [POPULARITY]: [0, 0],
             }),
         ],
-        priority: CardPriority.Card
+        priority: CardPriority.Card,
     },
 ]

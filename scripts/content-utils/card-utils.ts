@@ -1,5 +1,8 @@
 import { Card, WorldQuery, addModifier, action } from "."
-import { CardPriority, GameWorldModifier } from "../../swipeforfuture.com/src/game/ContentTypes"
+import {
+    CardPriority,
+    GameWorldModifier,
+} from "../../swipeforfuture.com/src/game/ContentTypes"
 
 export type BaseCard = Omit<Card, "isAvailableWhen" | "priority">
 
@@ -19,7 +22,7 @@ export function cardContent(
     title: string,
     text: string,
     location: string,
-    [left, right]: [string, string]
+    [left, right]: [string, string],
 ): BaseCard {
     return {
         id,
@@ -31,7 +34,7 @@ export function cardContent(
             left: action(addModifier(), left),
             right: action(addModifier(), right),
         },
-        weight: 1
+        weight: 1,
     }
 }
 
@@ -51,7 +54,7 @@ export function cardLogic(
         GameWorldModifier | GameWorldModifier[],
     ],
     weight: number = 1,
-    priority: CardPriority = CardPriority.Card
+    priority: CardPriority = CardPriority.Card,
 ): Card {
     return {
         ...card,

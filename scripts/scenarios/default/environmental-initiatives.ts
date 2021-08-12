@@ -27,8 +27,8 @@ function mockCard(card: BaseCard) {
     )
 }
 
-const truckPartnership = cardRef('truck-partner')
-const actInitiative = cardRef('act-initiative')
+const truckPartnership = cardRef("truck-partner")
+const actInitiative = cardRef("act-initiative")
 
 // Reference: http://climateinitiativesplatform.org/index.php/21st_Century_Truck_Partnership
 const truckPartnershipInit = cardContent(

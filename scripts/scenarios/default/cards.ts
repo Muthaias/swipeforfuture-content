@@ -14,12 +14,11 @@ import { FLAGS } from "./flags"
 
 export const otherCards: Card[] = [
     {
-        id: cardRef('solar-ready'),
+        id: cardRef("solar-ready"),
         image: unsplashImage("1497435334941-8c899ee9e8e9"),
         title: "Our solar project is ready!",
         location: "The greener other side",
-        text:
-            "Congratulations! We beat the initial German energy expansion ⚡️",
+        text: "Congratulations! We beat the initial German energy expansion ⚡️",
         weight: 100,
         isAvailableWhen: [
             worldQuery(
@@ -53,15 +52,14 @@ export const otherCards: Card[] = [
                 }),
             ),
         },
-        priority: CardPriority.Card
+        priority: CardPriority.Card,
     },
     {
-        id: cardRef('coal-sale'),
+        id: cardRef("coal-sale"),
         image: pexelsImage("3044473"),
         title: "Cheap but dirty brown coal for sale",
         location: "Working class district",
-        text:
-            "We've got an interesting offer: Buy a modern brown coal power plant cheaply to generate electricity. Deal? Great! (WATCH OUT FOR ENVIRA though...)",
+        text: "We've got an interesting offer: Buy a modern brown coal power plant cheaply to generate electricity. Deal? Great! (WATCH OUT FOR ENVIRA though...)",
         weight: 100,
         isAvailableWhen: [
             worldQuery({
@@ -92,6 +90,6 @@ export const otherCards: Card[] = [
                 }),
             ),
         },
-        priority: CardPriority.Card
+        priority: CardPriority.Card,
     },
 ]
