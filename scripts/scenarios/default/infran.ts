@@ -1,16 +1,13 @@
 import {
-    CardData,
-    WorldEvent,
-    EventCards,
+    Card,
     createCardTemplate,
     unsplashImage,
     cardRef,
     worldQuery,
-    createEventCardFromTemplate,
-    eventCardAction,
+    createCardFromTemplate,
     action,
     addModifier,
-    createCardFromTemplate,
+    CardPriority,
 } from "../../content-utils"
 import { FLAGS } from "./flags"
 import { POPULARITY, MONEY, ENVIRONMENT, PEOPLE } from "./stats"
@@ -23,13 +20,42 @@ export const infranTemplate = createCardTemplate({
 })
 
 const infranIntro = cardRef("infran-intro")
+const infranSolar = cardRef('infran-solar')
+const infranRoad = cardRef('infran-road')
 
-export const infranCards: CardData[] = [
-    createCardFromTemplate(infranTemplate, {
+export const infranCards: Card[] = [
+    createCardFromTemplate(infranIntro, infranTemplate, {
+        title: "The constructor",
+        text: "Hello sir! I'm Infran. I'll be sure to keep you updated on the nation's infrastructure. Should we get started right away?",
+        actions: {
+            left: action(
+                addModifier(
+                    { [MONEY]: 10, [POPULARITY]: -10 },
+                    { [FLAGS.INFRAN_INIT]: true },
+                ),
+            ),
+            right: action(
+                addModifier(
+                    { [MONEY]: -10, [POPULARITY]: 10 },
+                    { [FLAGS.INFRAN_INIT]: true },
+                ),
+            ),
+        },
+        isAvailableWhen: [
+            worldQuery(
+                {},
+                {
+                    [FLAGS.LUNCH_MEETING_COMPLETED]: true,
+                    [FLAGS.INFRAN_INIT]: false,
+                },
+            ),
+        ],
+        priority: CardPriority.Event
+    }),
+    createCardFromTemplate(infranSolar, infranTemplate, {
         title: "Invest in solar?",
         location: "In the bathroom",
-        text:
-            "The Germans are on to us!! We need to invest in solar power. Yay (right) or nay (left)?",
+        text: "The Germans are on to us!! We need to invest in solar power. Yay (right) or nay (left)?",
         isAvailableWhen: [
             worldQuery(
                 {
@@ -51,10 +77,9 @@ export const infranCards: CardData[] = [
             ),
         },
     }),
-    createCardFromTemplate(infranTemplate, {
+    createCardFromTemplate(infranRoad, infranTemplate, {
         title: "Road expansion",
-        text:
-            "The people needs roads to support future market growth. Let me take charge and make this happen.",
+        text: "The people needs roads to support future market growth. Let me take charge and make this happen.",
         isAvailableWhen: [
             worldQuery(
                 { [PEOPLE]: [50, 100], [VARS.ROADS_SUGGESTED]: [0, 0] },
@@ -89,45 +114,3 @@ export const infranCards: CardData[] = [
         },
     }),
 ]
-
-export const infranEvents: WorldEvent[] = [
-    {
-        initialEventCardId: infranIntro,
-        isAvailableWhen: [
-            worldQuery(
-                {},
-                {
-                    [FLAGS.LUNCH_MEETING_COMPLETED]: true,
-                    [FLAGS.INFRAN_INIT]: false,
-                },
-            ),
-        ],
-        probability: 0.5,
-    },
-]
-
-export const infranEventCards: EventCards = {
-    [infranIntro]: createEventCardFromTemplate(infranTemplate, {
-        title: "The constructor",
-        text:
-            "Hello sir! I'm Infran. I'll be sure to keep you updated on the nation's infrastructure. Should we get started right away?",
-        actions: {
-            left: eventCardAction(
-                action(
-                    addModifier(
-                        { [MONEY]: 10, [POPULARITY]: -10 },
-                        { [FLAGS.INFRAN_INIT]: true },
-                    ),
-                ),
-            ),
-            right: eventCardAction(
-                action(
-                    addModifier(
-                        { [MONEY]: -10, [POPULARITY]: 10 },
-                        { [FLAGS.INFRAN_INIT]: true },
-                    ),
-                ),
-            ),
-        },
-    }),
-}

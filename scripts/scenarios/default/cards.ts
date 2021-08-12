@@ -1,18 +1,20 @@
 import {
-    CardData,
+    Card,
     worldQuery,
     unsplashImage,
     pexelsImage,
     action,
     addModifier,
+    cardRef,
+    CardPriority,
 } from "../../content-utils"
 import { ENVIRONMENT, MONEY, PEOPLE, SECURITY, POPULARITY } from "./stats"
 import { VARS } from "./vars"
 import { FLAGS } from "./flags"
 
-export const otherCards: CardData[] = [
+export const otherCards: Card[] = [
     {
-        type: "card",
+        id: cardRef('solar-ready'),
         image: unsplashImage("1497435334941-8c899ee9e8e9"),
         title: "Our solar project is ready!",
         location: "The greener other side",
@@ -51,9 +53,10 @@ export const otherCards: CardData[] = [
                 }),
             ),
         },
+        priority: CardPriority.Card
     },
     {
-        type: "card",
+        id: cardRef('coal-sale'),
         image: pexelsImage("3044473"),
         title: "Cheap but dirty brown coal for sale",
         location: "Working class district",
@@ -89,5 +92,6 @@ export const otherCards: CardData[] = [
                 }),
             ),
         },
+        priority: CardPriority.Card
     },
 ]

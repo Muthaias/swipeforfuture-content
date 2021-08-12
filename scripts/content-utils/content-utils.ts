@@ -1,22 +1,10 @@
-// GOAL: composable functions to generate content based on ContentTypes + variable input
-// GOAL: export JSON
-// GOAL: Save game world scenario to specific folder
-
-/*
-    IDEA: User stories
-
-    As a card developer I would like to:
-    - Create convenience function for creating a card that only should trigger once (using a unique flag)
-*/
-
+import { CardPriority } from "../../swipeforfuture.com/src/game/ContentTypes"
 import {
-    CardData,
-    EventCard,
+    Card,
     GameWorld,
     StatDefinition,
     CardActionData,
     WorldQuery,
-    EventCardActionData,
 } from "./index"
 
 /**
@@ -49,11 +37,10 @@ export interface ScenarioManifest {
  * @param extras Optional additional data that is seldom reused from a template
  */
 export function createCardTemplate(
-    cardData: Pick<CardData, "image" | "location" | "weight">,
-    extras: Partial<Pick<CardData, "title" | "text">> = {},
-): CardData {
+    cardData: Pick<Card, "image" | "location" | "weight">,
+    extras: Partial<Pick<Card, "title" | "text">> = {},
+): Omit<Card, "id"> {
     return {
-        type: "card",
         ...cardData,
         ...{
             title: "",
@@ -65,55 +52,24 @@ export function createCardTemplate(
             left: { modifiers: [{}] },
             right: { modifiers: [{}] },
         },
-    }
-}
-
-/**
- * Create an event card based on a template, to avoid repetition
- *
- * @param template The card template to extend
- * @param override Fields to override
- */
-export function createEventCardFromTemplate(
-    { image, title, text, location, weight }: CardData,
-    override: Partial<EventCard>,
-): EventCard {
-    const eventCard: EventCard = {
-        image,
-        title,
-        text,
-        location,
-        weight,
-        type: "event",
-        actions: {
-            left: {
-                ...action(addModifier()),
-                nextEventCardId: null,
-            },
-            right: {
-                ...action(addModifier()),
-                nextEventCardId: null,
-            },
-        },
-    }
-
-    return {
-        ...eventCard,
-        ...override,
+        priority: CardPriority.Card
     }
 }
 
 /**
  * Create a card based on a template, to avoid repetition
  *
+ * @param id The card id of the created card
  * @param template The card template to extend
  * @param override Fields to override
  */
 export function createCardFromTemplate(
-    template: CardData,
-    override: Partial<CardData>,
-): CardData {
+    id: Card["id"],
+    template: Omit<Card, "id">,
+    override: Partial<Card>,
+): Card {
     return {
+        id,
         ...template,
         ...override,
     }
@@ -167,6 +123,48 @@ export function worldQuery(
     }
 }
 
+/**
+ * Dynamic flags created by content utils to alter card behaviors.
+ */
+const dynamicFlags = {
+    showOnlyOnce: {},
+}
+
+/**
+ * Returns all dynamic flags created by content utils
+ */
+export function getDynamicFlags() {
+    return {
+        ...dynamicFlags.showOnlyOnce,
+    }
+}
+
+/**
+ * Add flags to ensure a card only will show once.
+ *
+ * @param card Card to modify
+ * @returns Updated card that only will shows once.
+ */
+export function showOnlyOnce(card: Card) {
+    const hasBeenShown = propRef("once")
+    const expectedState = { [hasBeenShown]: false }
+    const modifier = setModifier({}, { [hasBeenShown]: true })
+
+    card.isAvailableWhen = card.isAvailableWhen.map(query => ({
+        state: query.state,
+        flags: {
+            ...query.flags,
+            ...expectedState
+        }
+    }))
+    card.actions.left.modifiers.push(modifier)
+    card.actions.right.modifiers.push(modifier)
+
+    Object.assign(dynamicFlags.showOnlyOnce, expectedState)
+
+    return card
+}
+
 export type Modifier = CardActionData["modifiers"][number]
 
 /**
@@ -174,14 +172,17 @@ export type Modifier = CardActionData["modifiers"][number]
  *
  * @param description A short text to explain one of the alternatives in a swipe decision.
  * @param modifiers One or more modifiers that should be applied when the player choose this course of action.
+ * @param next Point to a specific card to show directly when an action was taken.
  */
 export function action(
     modifiers: Modifier | Modifier[],
     description?: string,
+    next?: Card["id"],
 ): CardActionData {
     return {
         description,
         modifiers: Array.isArray(modifiers) ? modifiers : [modifiers],
+        ...(next ? { next } : {}),
     }
 }
 
@@ -229,27 +230,6 @@ export function modifier(
             state,
             flags,
         }
-    }
-}
-
-/**
- * Create an EventCard action to modify the state & flags and possibly point to another EventCard.
- *
- * @param action The action is either a state modifier or a string for description.
- *               An empty state modifier will be used for a string description.
- * @param eventCardId The next EventCard to trigger, or null to stop the event.
- */
-export function eventCardAction(
-    actionOrDescription: CardActionData | string,
-    eventCardId: EventCardActionData["nextEventCardId"] = null,
-): EventCardActionData {
-    const actualAction =
-        typeof actionOrDescription === "string"
-            ? action(addModifier(), actionOrDescription)
-            : actionOrDescription
-    return {
-        ...actualAction,
-        nextEventCardId: eventCardId,
     }
 }
 

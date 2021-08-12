@@ -1,21 +1,27 @@
 import {
-    EventCards,
-    WorldEvent,
+    Card,
     cardRef,
     worldQuery,
     unsplashImage,
-    eventCardAction,
     replaceModifier,
     action,
+    CardPriority,
 } from "../../content-utils"
 import { ENVIRONMENT, PEOPLE, MONEY, POPULARITY, SECURITY } from "./stats"
 
-const endGame = cardRef("end-game")
-
-// IDEA: split end game events into multiple different ones depending on what triggers them.
-export const endGameEvents: WorldEvent[] = [
+export const endGameCards: Card[] = [
     {
-        initialEventCardId: endGame,
+        id: cardRef("end-game"),
+        image: unsplashImage("1497039465987-61d305728610"),
+        title: "The World Has Ended.",
+        location: "",
+        text:
+            "Please find a new planet to destroy, if you want to proceed. And do not try to swipe. Please.",
+        weight: 1000,
+        actions: {
+            left: action(replaceModifier({}, {})),
+            right: action(replaceModifier({}, {})),
+        },
         isAvailableWhen: [
             worldQuery({
                 [ENVIRONMENT]: [0, 0],
@@ -33,22 +39,6 @@ export const endGameEvents: WorldEvent[] = [
                 [POPULARITY]: [0, 0],
             }),
         ],
-        probability: 1,
+        priority: CardPriority.Card
     },
 ]
-
-export const endGameEventCards: EventCards = {
-    [endGame]: {
-        image: unsplashImage("1497039465987-61d305728610"),
-        title: "The World Has Ended.",
-        location: "",
-        text:
-            "Please find a new planet to destroy, if you want to proceed. And do not try to swipe. Please.",
-        weight: 1000,
-        actions: {
-            left: eventCardAction(action(replaceModifier({}, {}))),
-            right: eventCardAction(action(replaceModifier({}, {}))),
-        },
-        type: "event",
-    },
-}
