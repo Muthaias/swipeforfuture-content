@@ -8,7 +8,7 @@
         "build": "node scripts/esbuild.js",
         "start": "npm run dev",
         "dev": "node scripts/esbuild.js --watch",
-        "serve": "sirv dist -p 5000 -c",
+        "serve": "sirv dist --port 5000 --cors --dev",
         "predeploy": "npm run build",
         "deploy": "gh-pages -d dist",
         "update": "git submodule foreach git pull origin master"
