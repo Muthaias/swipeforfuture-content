@@ -132,6 +132,50 @@ export function worldQuery(
     }
 }
 
+/**
+ * Dynamic flags created by content utils to alter card behaviors.
+ */
+const dynamicFlags = {
+    showOnlyOnce: {},
+}
+
+/**
+ * Returns all dynamic flags created by content utils
+ */
+export function getDynamicFlags() {
+    return {
+        ...dynamicFlags.showOnlyOnce,
+    }
+}
+
+/**
+ * Add flags to ensure a card only will show once.
+ *
+ * @param card Card to modify
+ * @returns Updated card that only will shows once.
+ */
+export function showOnlyOnce(card: Card) {
+    const hasBeenShown = propRef("once")
+    const expectedState = { [hasBeenShown]: false }
+    const modifier = setModifier({}, { [hasBeenShown]: true })
+
+    console.log(modifier)
+
+    card.isAvailableWhen = card.isAvailableWhen.map(query => ({
+        state: query.state,
+        flags: {
+            ...query.flags,
+            ...expectedState
+        }
+    }))
+    card.actions.left.modifiers.push(modifier)
+    card.actions.right.modifiers.push(modifier)
+
+    Object.assign(dynamicFlags.showOnlyOnce, expectedState)
+
+    return card
+}
+
 export type Modifier = CardActionData["modifiers"][number]
 
 /**
