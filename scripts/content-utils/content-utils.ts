@@ -159,8 +159,6 @@ export function showOnlyOnce(card: Card) {
     const expectedState = { [hasBeenShown]: false }
     const modifier = setModifier({}, { [hasBeenShown]: true })
 
-    console.log(modifier)
-
     card.isAvailableWhen = card.isAvailableWhen.map(query => ({
         state: query.state,
         flags: {
