@@ -139,17 +139,17 @@ export type Modifier = CardActionData["modifiers"][number]
  *
  * @param description A short text to explain one of the alternatives in a swipe decision.
  * @param modifiers One or more modifiers that should be applied when the player choose this course of action.
- * @param nextCard Point to a specific card to show directly when an action was taken.
+ * @param next Point to a specific card to show directly when an action was taken.
  */
 export function action(
     modifiers: Modifier | Modifier[],
     description?: string,
-    nextCard?: Card["id"],
+    next?: Card["id"],
 ): CardActionData {
     return {
         description,
         modifiers: Array.isArray(modifiers) ? modifiers : [modifiers],
-        ...(nextCard ? { nextCard } : {}),
+        ...(next ? { next } : {}),
     }
 }
 
